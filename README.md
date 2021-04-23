@@ -3,7 +3,7 @@
 **Donate link:** https://www.paypal.me/deckerweb  
 **Tags:** elementor, polylang, multilingual, language switcher, languages, templates, widget, finder, dynamic tags, deckerweb  
 **Requires at least:** 4.7  
-**Tested up to:** 5.0  
+**Tested up to:** 5.4  
 **Requires PHP:** 5.6  
 **Stable tag:** 1.0.0  
 **License:** GPL-2.0-or-later  
@@ -238,6 +238,10 @@ There are quite a few:
 
 ## Changelog 
 
+### 1.0.1 - 2020-06-17
+
+* Stability update for edge cases were experiencing fatal errors
+* Thanks to sebastienserre for correct fatal unknow pll_the_languages();
 
 ### 1.0.0 - 2018-11-28
 * Official public release on WordPress.org

@@ -3,9 +3,9 @@ Contributors: daveshine, p4fbradjohnson, deckerweb, wpautobahn
 Donate link: https://www.paypal.me/deckerweb
 Tags: elementor, polylang, multilingual, language switcher, languages, templates, widget, finder, dynamic tags, deckerweb
 Requires at least: 4.7
-Tested up to: 5.0
+Tested up to: 5.4
 Requires PHP: 5.6
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPL-2.0-or-later
 License URI: https://opensource.org/licenses/GPL-2.0
 
@@ -25,7 +25,7 @@ https://www.youtube.com/watch?v=tMmJ6sdMdxw
   * Make a second header template in Elementor, set NO display conditions for this one (by assigning 2 of the same display conditions, you can create a conflict in Elementor), but assign to another Polylang language (Portuguese for example), meaning to link those languages/templates in Polylang.
   * Result: when viewing in frontend the proper English content appears with the English header template, translated content in Portuguese appears with the Portuguese header template.
   * Go on: The principle is always the same, now add German language, Spanish and so on ;-)
-  * [See **live demo** on co-author's own website](https://passion4fashion.pt/) // [Screenshot gallery](https://www.dropbox.com/sh/3i9tuh76etmhl1a/AADm_4L_aesp8Q9ss5NXuSiMa?dl=0)
+  * [See **live demo** on co-author's own website](https://mariselaveludo.fashion/) // [Screenshot gallery](https://www.dropbox.com/sh/3i9tuh76etmhl1a/AADm_4L_aesp8Q9ss5NXuSiMa?dl=0)
 
 = Plus: Even More Features =
 * **Polylang Language Switcher Widget**: A native Elementor Widget to easily build a nice language switcher menu and have **more styling options** for non-coders at hand
@@ -34,7 +34,14 @@ https://www.youtube.com/watch?v=tMmJ6sdMdxw
 
 = Further Plugin Info =
 * More features might be added in the future.
-* Community collaboration between David Decker and Brad Johnson, and more code coming from the Elementor/Polylang community
+* Community collaboration between David Decker and Brad Johnson, and more code coming from the Elementor/ Polylang community
+* Plugin website: [https://polyglotwp.com](https://polyglotwp.com "PolyGlotWP.com - Multilingual WordPress Websites with Polylang and Elementor") - please sign up for our newsletter
+
+= Where to Get Support? =
+* [**Polylang User Community Group at Facebook**](https://www.facebook.com/groups/polylang.users/) - highly recommended for all users of this plugin!
+* We monitor [the plugin's support forum](https://wordpress.org/support/plugin/connect-polylang-elementor) here on WordPress.org as well - but our preferred support channel is the FB community group
+* **What is covered by our support?** - All regarding THIS plugin ("Polyang Connect for Elementor"), plus the relation to *Polylang*, *Elementor* and *Elementor Pro* of course.
+* **What is NOT covered by support?** - Anything general regarding multilingual topics and WordPress. Explicitely we **DO NOT** offer any "WPML", "WPBakery" or "Visual Composer" support, and also not for your theme etc.!!!
 
 = Translations =
 * English (default, `en_US`) - always included
@@ -49,15 +56,21 @@ https://www.youtube.com/watch?v=tMmJ6sdMdxw
 
 = My Other Plugins =
 * [**Toolbar Extras for Elementor - WordPress Admin Bar Enhanced**](https://wordpress.org/plugins/connect-polylang-elementor/)
+* [**Toolbar Extras for Oxygen Builder - Add-On plugin**](https://wordpress.org/plugins/toolbar-extras-oxygen/)
+* [**Toolbar Extras for MainWP Dashboard - Add-On plugin**](https://wordpress.org/plugins/toolbar-extras-mainwp/)
+* [**Toolbar Extras for Give Donations (GiveWP) - Add-On plugin**](https://wordpress.org/plugins/toolbar-extras-givewp/)
+* [**Builder Shortcode Extras – WordPress Shortcodes Collection to Save You Time**](https://wordpress.org/plugins/builder-shortcode-extras/)
 * [**Builder Template Categories - for WordPress Page Builders**](https://wordpress.org/plugins/builder-template-categories/)
 * [**Simple Download Manager for WP Document Revisions**](https://wordpress.org/plugins/wpdr-simple-downloads/)
 * [Genesis What's New Info](https://wordpress.org/plugins/genesis-whats-new-info/)
 * [Genesis Layout Extras](https://wordpress.org/plugins/genesis-layout-extras/)
 * [Genesis Widgetized Not Found & 404](https://wordpress.org/plugins/genesis-widgetized-notfound/)
+* [Genesis Extra Settings Transporter](https://wordpress.org/plugins/genesis-extra-settings-transporter/)
 * [Genesis Widgetized Footer](https://wordpress.org/plugins/genesis-widgetized-footer/)
 * [Genesis Widgetized Archive](https://wordpress.org/plugins/genesis-widgetized-archive/)
 * [Multisite Toolbar Additions](https://wordpress.org/plugins/multisite-toolbar-additions/)
 * [Cleaner Plugin Installer](https://wordpress.org/plugins/cleaner-plugin-installer/)
+* [*My plugins newsletter*](https://eepurl.com/gbAUUn)
 
 
 == Installation ==
@@ -72,7 +85,7 @@ https://www.youtube.com/watch?v=tMmJ6sdMdxw
 
 = We Recommend Your Host Supports at least: =
 
-* PHP version 7.0 or higher
+* PHP version 7.2 or higher
 * MySQL version 5.6 or higher / or MariaDB 10 or higher
 
 = Installation =
@@ -87,30 +100,71 @@ https://www.youtube.com/watch?v=tMmJ6sdMdxw
 
 == Frequently Asked Questions ==
 
+= Where to get support? =
+At best in our [**Polylang User Community Group at Facebook**](https://www.facebook.com/groups/polylang.users/) - highly recommended for all users of this plugin!
+
+Additionally, we also monitor [the plugin's support forum](https://wordpress.org/support/plugin/connect-polylang-elementor) here on WordPress.org as well - but our preferred support channel is the FB community group.
+
+* **What is covered by our support?** - All things regarding THIS plugin ("Polyang Connect for Elementor"), plus the relation to *Polylang*, *Elementor* and *Elementor Pro* of course.
+* **What is NOT covered by support?** - Anything general regarding multilingual topics and WordPress. Explicitely we **DO NOT** offer any "WPML", "WPBakery" or "Visual Composer" support, and also not for your theme etc.!!!
+
+
 = Is there a live demo? =
 Yes, there is.
 
-[**See live demo on co-author's own website**](https://passion4fashion.pt/)
+[**See live demo on co-author's own website**](https://mariselaveludo.fashion/)
 
 [Plus: *bigger* versions of the above screenshots are in this external gallery ;-)](https://www.dropbox.com/sh/3i9tuh76etmhl1a/AADm_4L_aesp8Q9ss5NXuSiMa?dl=0)
 
 
+= Recommended Workflow? =
+
+1. Setup Polylang at first, add at least TWO languages, one of them make your default language (in Polylang)
+2. Add content to your default Polylang language - if Polylang asks you to apply existing content to it, you should most likely click "ok" and proceed - it works really fine :)
+3. After that setup an Elementor Theme Builder template - asign it to your Polylang default language, apply conditions in Elementor
+4. Next, setup a translation template for the template of 3.) -- asign your second Polylang language, DO NOT apply conditions in Elementor
+
+
+= Recommended Polylang settings? =
+
+If you have issues with proper display of your translated templates, pages, content it is recommended to check your settings:
+
+In Polylang Settings at `Languages > Settings > URL Modificatons` set to the following option: "The language is set from the directory name in pretty permalinks" ([see screenshot](https://ps.w.org/connect-polylang-elementor/assets/screenshot-10.png))
+
+And in the case, all is working well with your current settings then please do not touch them. The above recommendation can be necessary for some users/ installs but not necessarily for all.
+
+
+= Will this work with Elementor Popup Builder? =
+It most likely will work totally fine if you follow our recommended workflow (see above). If not, please ask in [our FB user group](https://www.facebook.com/groups/polylang.users/).
+
+
 = Correct Elementor template does not show up? =
-Every page/ post/ template must be assigned a language for this to work. This is standard PolyLang procedure but it should be noted in case "it doesnt work".
+Every page/ post/ template must be assigned a language for this to work. This is standard Polylang procedure but it should be noted in case "it doesnt work".
 
 Also, for Elementor Templates, the post type must be enabled for Polylang support: Go to **Polylang > Settings > Custom post types and Taxonomies**, enable the "My Templates" post type (Elementor).
 
 
-= Where is the Elementor Widget to found? =
+= Where is the Elementor Widget to be found? =
 It's in the widget category "General Elements". Plus, if Elementor Pro is active and you're editing a template, the widget additionally appears in the "Site" widget category.
 
-When searching for widgets type "polylang" or "languages" and it will show up immediately! ;-)
+*Always via search:* When searching for widgets type "polylang" or "languages" and it will show up immediately! ;-)
 
 
 = Where is the plugin's settings page? =
 This plugin has NO settings page, as it does not need one. All it does works just under the hood. Activate the plugin. Done.
 
 (If there will be settings needed in the future, we might add options in later plugin versions.)
+
+
+= Is Elementor Pro required? =
+Technically, Elementor Pro is not required - but highly recommended, though.
+
+Elementor Pro is required for these features of the plugin:
+
+* Translating Elementor Theme Builder Templates the  version is required, otherwise this will not work.
+* Dynamic Tags, additionally added by the plugin
+
+For the other features of the plugin the regular free version of Elementor is sufficient - so the native Elementor language switcher widget will work also that way already ;-)
 
 
 = Is Polylang Pro supported? =
@@ -161,23 +215,25 @@ There are quite a few:
 
 == Screenshots ==
 
-1. Ensure that my templates is ticked in PolyLang post types and Taxonomies. Although the plugin will automatically tick this for you 😊
+1. Ensure that my templates is ticked in Polylang post types and Taxonomies. Although the plugin will automatically tick this for you 😊
 
 2. Header Template in Elementor showing that they have both been translated
 
-3. PolyLang Widget in Elementor under Site
+3. Polylang Widget in Elementor under Site
 
-4. PolyLang Widget options in Elementor
+4. Polylang Widget options in Elementor
 
-5. PolyLang Widget Styling Options in Elementor
+5. Polylang Widget Styling Options in Elementor
 
 6. Set your primary language display conditions for your primary language
 
-7. DO NOT SET A DISPLAY CONDITION FOR ANY OTHER LANGUAGE ---> PolyLang will do this for you. Save without conditions
+7. DO NOT SET A DISPLAY CONDITION FOR ANY OTHER LANGUAGE ---> Polylang will do this for you. Save without conditions
 
-8. (1/2) Working language header templates on the front end. Styled by the widget. Previously this was not an option in PolyLang. (other than editing the menu options) PolyLang users could not display language codes but now they can 😉. Thanks to Polylang Connect for Elementor.
+8. (1/2) Working language header templates on the front end. Styled by the widget. Previously this was not an option in Polylang. (other than editing the menu options) Polylang users could not display language codes but now they can 😉. Thanks to Polylang Connect for Elementor.
 
-9. (2/2) Working language header templates on the front end. Styled by the widget. Previously this was not an option in PolyLang. (other than editing the menu options) PolyLang users could not display language codes but now they can 😉. Thanks to Polylang Connect for Elementor.
+9. (2/2) Working language header templates on the front end. Styled by the widget. Previously this was not an option in Polylang. (other than editing the menu options) Polylang users could not display language codes but now they can 😉. Thanks to Polylang Connect for Elementor.
+
+10. Recommended Polylang URL settings if you have issues with translated templates/ templates
 
 
 == Changelog ==
@@ -221,6 +277,9 @@ There are quite a few:
 
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+A fix for edge users were in certain cases Elementor Pro would not load. 
 
 = 1.0.0 =
 Just released into the wild.
