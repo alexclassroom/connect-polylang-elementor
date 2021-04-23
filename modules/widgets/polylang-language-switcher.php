@@ -6,8 +6,8 @@ namespace DDW_Connect_Polylang_Elementor\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
-use Elementor\Scheme_Color;
-use Elementor\Scheme_Typography;
+use Elementor\Core\Schemes\Color;
+use Elementor\Core\Schemes\Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
 use function function_exists;
@@ -319,7 +319,7 @@ class Polylang_Language_Switcher extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'typography_menu_item',
-				'scheme'   => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme'   => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .plsfe-menu .plsfe-item',
 			)
 		);
@@ -330,8 +330,8 @@ class Polylang_Language_Switcher extends Widget_Base {
 				'label'     => __( 'Text Color', 'connect-polylang-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'scheme'    => array(
-					'type'  => Scheme_Color::get_type(),
-					'value' => Scheme_Color::COLOR_3,
+					'type'  => Color::get_type(),
+					'value' => Color::COLOR_3,
 				),
 				'default'   => '',
 				'selectors' => array(
@@ -353,7 +353,7 @@ class Polylang_Language_Switcher extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'typography_menu_item_hover',
-				'scheme'   => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme'   => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .plsfe-menu .plsfe-item:hover,
 					{{WRAPPER}} .plsfe-menu .plsfe-item.plsfe-item__active,
 					{{WRAPPER}} .plsfe-menu .plsfe-item.highlighted,
@@ -367,8 +367,8 @@ class Polylang_Language_Switcher extends Widget_Base {
 				'label'     => __( 'Text Color', 'connect-polylang-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'scheme'    => array(
-					'type'  => Scheme_Color::get_type(),
-					'value' => Scheme_Color::COLOR_4,
+					'type'  => Color::get_type(),
+					'value' => Color::COLOR_4,
 				),
 				'selectors' => array(
 					'{{WRAPPER}} .plsfe-menu .plsfe-item:hover,
@@ -400,7 +400,7 @@ class Polylang_Language_Switcher extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'typography_menu_item_active',
-				'scheme'   => Scheme_Typography::TYPOGRAPHY_1,
+				'scheme'   => Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .plsfe-menu .plsfe-item.plsfe-item__active',
 			)
 		);
