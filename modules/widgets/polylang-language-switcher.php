@@ -276,8 +276,10 @@ class Polylang_Language_Switcher extends Widget_Base {
 			$languages = pll_the_languages( array( 'raw' => 1 ) );
 			$dropdown  = array();
 
-			foreach ( $languages as $language ) {
-				$dropdown[ $language['slug'] ] = $language['name'];
+			if ( is_array( $languages ) ) {
+				foreach ( $languages as $language ) {
+					$dropdown[ $language['slug'] ] = $language['name'];
+				}
 			}
 
 			$first_key['all'] = __( 'All languages', 'connect-polylang-elementor' );
