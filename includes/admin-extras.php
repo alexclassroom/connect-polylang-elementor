@@ -38,7 +38,7 @@ function ddw_cpel_custom_settings_links( $cpel_links ) {
 				esc_html__( 'Polylang Languages Setup', 'connect-polylang-elementor' ),
 				esc_attr_x( 'Languages', 'Link title attribute for Polylang settings', 'connect-polylang-elementor' )
 			);
-			
+
 		}  // end if
 
 		/** Elementor My Templates link */
@@ -53,7 +53,6 @@ function ddw_cpel_custom_settings_links( $cpel_links ) {
 			);
 
 		}  // end if
-
 	}  // end if
 
 	/** Set the order of the links */
@@ -65,8 +64,8 @@ function ddw_cpel_custom_settings_links( $cpel_links ) {
 	return apply_filters(
 		'cpel/filter/plugins_page/settings_links',
 		$cpel_links,
-		$link_polylang,		// additional param
-		$link_elementor		// additional param
+		$link_polylang,     // additional param
+		$link_elementor     // additional param
 	);
 
 }  // end function
@@ -165,13 +164,13 @@ add_action( 'in_plugin_update_message-' . CPEL_PLUGIN_BASEDIR . 'connect-polylan
  */
 function ddw_cpel_plugin_update_message( $data, $response ) {
 
-	if ( isset( $data[ 'upgrade_notice' ] ) ) {
+	if ( isset( $data['upgrade_notice'] ) ) {
 
 		ddw_cpel_plugin_update_message_style_tweak();
 
 		printf(
 			'<div class="update-message cpel-update-message">%s</div>',
-			wpautop( $data[ 'upgrade_notice' ] )
+			wpautop( $data['upgrade_notice'] )
 		);
 
 	}  // end if
@@ -194,7 +193,7 @@ add_action( 'after_plugin_row_wp-' . CPEL_PLUGIN_BASEDIR . 'connect-polylang-ele
  */
 function ddw_cpel_multisite_subsite_plugin_update_message( $file, $plugin ) {
 
-	if ( is_multisite() && version_compare( $plugin[ 'Version' ], $plugin[ 'new_version' ], '<' ) ) {
+	if ( is_multisite() && version_compare( $plugin['Version'], $plugin['new_version'], '<' ) ) {
 
 		$wp_list_table = _get_list_table( 'WP_Plugins_List_Table' );
 
@@ -203,8 +202,8 @@ function ddw_cpel_multisite_subsite_plugin_update_message( $file, $plugin ) {
 		printf(
 			'<tr class="plugin-update-tr"><td colspan="%s" class="plugin-update update-message notice inline notice-warning notice-alt"><div class="update-message cpel-update-message"><h4 style="margin: 0; font-size: 14px;">%s</h4>%s</div></td></tr>',
 			$wp_list_table->get_column_count(),
-			$plugin[ 'Name' ],
-			wpautop( $plugin[ 'upgrade_notice' ] )
+			$plugin['Name'],
+			wpautop( $plugin['upgrade_notice'] )
 		);
 
 	}  // end if

@@ -28,7 +28,7 @@ add_filter( 'pll_get_post_types', 'ddw_cpel_add_cpts_to_polylang', 10, 2 );
 function ddw_cpel_add_cpts_to_polylang( $post_types, $is_settings ) {
 
 	/** Bail early if integration not wanted */
-	if ( ! apply_filters( 'cpel/filter/polylang/posttypes_automatic', TRUE ) ) {
+	if ( ! apply_filters( 'cpel/filter/polylang/posttypes_automatic', true ) ) {
 		return;
 	}
 
@@ -36,14 +36,14 @@ function ddw_cpel_add_cpts_to_polylang( $post_types, $is_settings ) {
 	$relevant_types = apply_filters(
 		'cpel/filter/polylang/post_types',
 		array(
-			'elementor_library',		// Elementor
-			'oceanwp_library',			// OceanWP Library
-			'astra-advanced-hook',		// Astra Custom Layouts (Astra Pro)
-			'gp_elements',				// GeneratePress Elements (GP Premium)
-			'jet-theme-core',			// JetThemeCore (Kava Pro/ CrocoBlock)
-			'customify_hook',			// Customify (Customify Pro)
-			'wpbf_hooks',				// Page Builder Framework Sections (WPBF Premium)
-			'ae_global_templates',		// AnyWhere Elementor plugin
+			'elementor_library',        // Elementor
+			'oceanwp_library',          // OceanWP Library
+			'astra-advanced-hook',      // Astra Custom Layouts (Astra Pro)
+			'gp_elements',              // GeneratePress Elements (GP Premium)
+			'jet-theme-core',           // JetThemeCore (Kava Pro/ CrocoBlock)
+			'customify_hook',           // Customify (Customify Pro)
+			'wpbf_hooks',               // Page Builder Framework Sections (WPBF Premium)
+			'ae_global_templates',      // AnyWhere Elementor plugin
 		)
 	);
 
@@ -75,9 +75,9 @@ add_action( 'parse_query', 'ddw_cpel_polylang_elementor_library_conditions_parse
  */
 function ddw_cpel_polylang_elementor_library_conditions_parse_query( $query ) {
 
-	if ( is_admin() && ! empty( $query->query_vars[ 'post_type' ] ) && 'elementor_library' === $query->query_vars[ 'post_type' ]
-		 && ! empty( $query->query_vars[ 'meta_key' ] )
-		 && '_elementor_conditions' === $query->query_vars[ 'meta_key' ]
+	if ( is_admin() && ! empty( $query->query_vars['post_type'] ) && 'elementor_library' === $query->query_vars['post_type']
+		 && ! empty( $query->query_vars['meta_key'] )
+		 && '_elementor_conditions' === $query->query_vars['meta_key']
 	) {
 		$query->set( 'lang', '' );
 	}
@@ -121,7 +121,6 @@ function ddw_cpel_change_template_based_on_language( $post_id ) {
 			return $translation_post_id;
 
 		}  // end if
-
 	}  // end if
 
 	return $post_id;

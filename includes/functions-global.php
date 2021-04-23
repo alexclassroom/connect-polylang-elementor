@@ -31,7 +31,7 @@ function ddw_cpel_prepare_render_polylang_switcher() {
 }  // end function
 
 
-//add_filter( 'elementor/widget/render_content', 'ddw_cpel_render_polylang_switcher', 10, 2 );
+// add_filter( 'elementor/widget/render_content', 'ddw_cpel_render_polylang_switcher', 10, 2 );
 /**
  * Render the Polylang Switcher widget only on the frontend when the display
  *   conditions of the widget's settings are met:
@@ -98,7 +98,7 @@ function ddw_cpel_info_values() {
 		'url_wporg_review'  => 'https://wordpress.org/support/plugin/connect-polylang-elementor/reviews/?filter=5/#new-post',
 		'url_wporg_profile' => 'https://profiles.wordpress.org/daveshine/',
 		'url_fb_group'      => 'https://www.facebook.com/groups/deckerweb.wordpress.plugins/',
-		//'url_snippets'      => 'https://github.com/deckerweb/connect-polylang-elementor/wiki/Code-Snippets',
+		// 'url_snippets'      => 'https://github.com/deckerweb/connect-polylang-elementor/wiki/Code-Snippets',
 		'author'            => __( 'David Decker - DECKERWEB', 'connect-polylang-elementor' ),
 		'author_uri'        => 'https://deckerweb.de/',
 		'license'           => 'GPL-2.0-or-later',
@@ -106,8 +106,8 @@ function ddw_cpel_info_values() {
 		'first_code'        => '2018',
 		'url_donate'        => 'https://www.paypal.me/deckerweb',
 		'url_plugin'        => 'https://github.com/deckerweb/connect-polylang-elementor',
-		//'url_plugin_docs'   => 'https://github.com/deckerweb/connect-polylang-elementor/wiki',
-		//'url_plugin_faq'    => 'https://wordpress.org/plugins/connect-polylang-elementor/#faq',
+		// 'url_plugin_docs'   => 'https://github.com/deckerweb/connect-polylang-elementor/wiki',
+		// 'url_plugin_faq'    => 'https://wordpress.org/plugins/connect-polylang-elementor/#faq',
 		'url_github'        => 'https://github.com/deckerweb/connect-polylang-elementor',
 		'url_github_issues' => 'https://github.com/deckerweb/connect-polylang-elementor/issues',
 		'url_twitter'       => 'https://twitter.com/deckerweb',
@@ -131,13 +131,13 @@ function ddw_cpel_info_values() {
  * @param  bool   $raw     If raw escaping or regular escaping of URL gets used
  * @return string URL for info value.
  */
-function ddw_cpel_get_info_url( $url_key = '', $raw = FALSE ) {
+function ddw_cpel_get_info_url( $url_key = '', $raw = false ) {
 
 	$cpel_info = (array) ddw_cpel_info_values();
 
 	$output = esc_url( $cpel_info[ sanitize_key( $url_key ) ] );
 
-	if ( TRUE === $raw ) {
+	if ( true === $raw ) {
 		$output = esc_url_raw( $cpel_info[ esc_attr( $url_key ) ] );
 	}
 
@@ -162,7 +162,7 @@ function ddw_cpel_get_info_link( $url_key = '', $text = '', $class = '' ) {
 
 	$link = sprintf(
 		'<a class="%1$s" href="%2$s" target="_blank" rel="nofollow noopener noreferrer" title="%3$s">%3$s</a>',
-		strtolower( esc_attr( $class ) ),	//sanitize_html_class( $class ),
+		strtolower( esc_attr( $class ) ),   // sanitize_html_class( $class ),
 		ddw_cpel_get_info_url( $url_key ),
 		esc_html( $text )
 	);
@@ -186,7 +186,7 @@ function ddw_cpel_coding_years( $first_year = '' ) {
 
 	$cpel_info = (array) ddw_cpel_info_values();
 
-	$first_year = ( empty( $first_year ) ) ? absint( $cpel_info[ 'first_code' ] ) : absint( $first_year );
+	$first_year = ( empty( $first_year ) ) ? absint( $cpel_info['first_code'] ) : absint( $first_year );
 
 	/** Set year of first released code */
 	$code_first_year = ( date( 'Y' ) == $first_year || 0 === $first_year ) ? '' : $first_year . '&#x02013;';

@@ -48,59 +48,59 @@ class DDW_CPEL_Plugin_Finder_Category extends \Elementor\Core\Common\Modules\Fin
 	 * @param array $options
 	 * @return array $items Filterable array of additional Finder items.
 	 */
-	public function get_category_items( array $options = [] ) {
+	public function get_category_items( array $options = array() ) {
 
 		/** Set actions */
 		$action_name = 'view';
 		$action_icon = 'eye';
 
 		/** External: FAQ */
-		$items[ 'plugin-faq' ] = [
+		$items['plugin-faq'] = array(
 			'title'       => _x( 'Plugin FAQ', 'Title in Elementor Finder', 'connect-polylang-elementor' ),
 			'url'         => ddw_cpel_get_info_url( 'url_wporg_faq' ),
 			'icon'        => 'info',
-			'keywords'    => [ 'help', 'docs', 'documentation', 'faq', 'knowledge base', 'plugin' ],
+			'keywords'    => array( 'help', 'docs', 'documentation', 'faq', 'knowledge base', 'plugin' ),
 			'description' => __( 'FAQ and Documentation', 'connect-polylang-elementor' ),
-			'actions'     => [
-				[
+			'actions'     => array(
+				array(
 					'name' => $action_name,
 					'url'  => ddw_cpel_get_info_url( 'url_wporg_faq' ),
 					'icon' => $action_icon,
-				],
-			],
-		];
+				),
+			),
+		);
 
 		/** External: WordPress.org support forum */
-		$items[ 'plugin-support-forum' ] = [
+		$items['plugin-support-forum'] = array(
 			'title'       => _x( 'Plugin Support Forum', 'Title in Elementor Finder', 'connect-polylang-elementor' ),
 			'url'         => ddw_cpel_get_info_url( 'url_wporg_forum' ),
 			'icon'        => 'comments',
-			'keywords'    => [ 'support', 'forum', 'wordpress.org', 'help', 'plugin' ],
+			'keywords'    => array( 'support', 'forum', 'wordpress.org', 'help', 'plugin' ),
 			'description' => __( 'Free support on WordPress.org', 'connect-polylang-elementor' ),
-			'actions'     => [
-				[
+			'actions'     => array(
+				array(
 					'name' => $action_name,
 					'url'  => ddw_cpel_get_info_url( 'url_wporg_forum' ),
 					'icon' => $action_icon,
-				],
-			],
-		];
+				),
+			),
+		);
 
 		/** External: WordPress.org translation platform */
-		$items[ 'plugin-translations' ] = [
+		$items['plugin-translations'] = array(
 			'title'       => _x( 'Plugin Translations', 'Title in Elementor Finder', 'connect-polylang-elementor' ),
 			'url'         => ddw_cpel_get_info_url( 'url_translate' ),
 			'icon'        => 'exchange',
-			'keywords'    => [ 'translate', 'translations', 'wordpress.org', 'glotpress', 'plugin' ],
+			'keywords'    => array( 'translate', 'translations', 'wordpress.org', 'glotpress', 'plugin' ),
 			'description' => __( 'Translate this plugin on WordPress.org', 'connect-polylang-elementor' ),
-			'actions'     => [
-				[
+			'actions'     => array(
+				array(
 					'name' => $action_name,
 					'url'  => ddw_cpel_get_info_url( 'url_translate' ),
 					'icon' => $action_icon,
-				],
-			],
-		];
+				),
+			),
+		);
 
 		/** Return items array, filterable */
 		return apply_filters(

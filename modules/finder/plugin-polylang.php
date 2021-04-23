@@ -50,7 +50,7 @@ class DDW_Polylang_Plugin_Finder_Category extends \Elementor\Core\Common\Modules
 	 * @param array $options
 	 * @return array $items Filterable array of additional Finder items.
 	 */
-	public function get_category_items( array $options = [] ) {
+	public function get_category_items( array $options = array() ) {
 
 		/** Set "Polylang (Pro)" string */
 		$string_polylang = _x( 'Polylang', 'Item title part in Elementor Finder', 'connect-polylang-elementor' ) . ': ';
@@ -79,116 +79,116 @@ class DDW_Polylang_Plugin_Finder_Category extends \Elementor\Core\Common\Modules
 
 			foreach ( $languages as $lang_data ) {
 
-				$items[ 'website-language-' . $lang_data->slug ] = [
+				$items[ 'website-language-' . $lang_data->slug ] = array(
 					'title'       => $string_website_lang . $lang_data->name,
 					'url'         => esc_url( $lang_data->home_url ),
 					'icon'        => 'eye',
-					'keywords'    => [
+					'keywords'    => array(
 						'website',
 						'polylang',
 						'language',
 						$lang_data->name,
 						$lang_data->slug,
 						'country',
-						$lang_data->locale
-					],
+						$lang_data->locale,
+					),
 					'description' => __( 'View website in this language', 'connect-polylang-elementor' ),
-					'actions'     => [
-						[
+					'actions'     => array(
+						array(
 							'name' => 'edit',
 							'url'  => esc_url_raw( admin_url( 'admin.php?page=mlang&pll_action=edit&lang=' . $lang_data->term_id ) ),
 							'icon' => 'edit',
-						],
-					],
-				];
+						),
+					),
+				);
 
 			}  // end foreach
 
 			foreach ( $languages as $lang_data ) {
 
-				$items[ 'polylang-language-' . $lang_data->slug ] = [
+				$items[ 'polylang-language-' . $lang_data->slug ] = array(
 					'title'       => $string_polylang_lang . $lang_data->name,
 					'url'         => esc_url_raw( admin_url( 'admin.php?page=mlang&pll_action=edit&lang=' . $lang_data->term_id ) ),
 					'icon'        => 'edit',
-					'keywords'    => [
+					'keywords'    => array(
 						'polylang',
 						'language',
 						$lang_data->name,
 						$lang_data->slug,
 						'country',
-						$lang_data->locale
-					],
+						$lang_data->locale,
+					),
 					'description' => __( 'Edit this language', 'connect-polylang-elementor' ),
-					'actions'     => [
-						[
+					'actions'     => array(
+						array(
 							'name' => $action_name,
 							'url'  => esc_url( $lang_data->home_url ),
 							'icon' => $action_icon,
-						],
-					],
-				];
+						),
+					),
+				);
 
 			}  // end foreach
 		}
 
 		/** Settings: Languages setup */
-		$items[ 'languages' ] = [
+		$items['languages'] = array(
 			'title'       => $string_polylang . _x( 'Setup languages', 'Title in Elementor Finder', 'connect-polylang-elementor' ),
 			'url'         => admin_url( 'admin.php?page=mlang' ),
 			'icon'        => 'comments',
-			'keywords'    => [ 'polylang', 'languages', 'setup', 'flags', 'country', 'countries' ],
+			'keywords'    => array( 'polylang', 'languages', 'setup', 'flags', 'country', 'countries' ),
 			'description' => __( 'All languages your website appears in', 'connect-polylang-elementor' ),
-		];
+		);
 
 		/** Settings: String translations */
-		$items[ 'string-translations' ] = [
+		$items['string-translations'] = array(
 			'title'       => $string_polylang . _x( 'String Translations', 'Title in Elementor Finder', 'connect-polylang-elementor' ),
 			'url'         => admin_url( 'admin.php?page=mlang_strings' ),
 			'icon'        => 'exchange',
-			'keywords'    => [ 'polylang', 'translations', 'translate', 'strings' ],
+			'keywords'    => array( 'polylang', 'translations', 'translate', 'strings' ),
 			'description' => __( 'From Widgets and other website parts', 'connect-polylang-elementor' ),
-		];
+		);
 
 		/** Settings: General, for plugin */
-		$items[ 'settings' ] = [
+		$items['settings'] = array(
 			'title'       => $string_polylang . _x( 'Settings', 'Title in Elementor Finder', 'connect-polylang-elementor' ),
 			'url'         => admin_url( 'admin.php?page=mlang_settings' ),
 			'icon'        => 'settings',
-			'keywords'    => [ 'polylang', 'settings', 'options', 'modules' ],
+			'keywords'    => array( 'polylang', 'settings', 'options', 'modules' ),
 			'description' => __( 'Plugin\'s settings, enable/ disable modules', 'connect-polylang-elementor' ),
-		];
+		);
 
 		/** External: documentation */
-		$items[ 'documentation' ] = [
+		$items['documentation'] = array(
 			'title'       => $string_polylang . _x( 'Plugin Documentation', 'Title in Elementor Finder', 'connect-polylang-elementor' ),
 			'url'         => 'https://polylang.pro/doc/',
 			'icon'        => 'info',
-			'keywords'    => [ 'help', 'support', 'docs', 'documentation', 'faq', 'knowledge base' ],
+			'keywords'    => array( 'help', 'support', 'docs', 'documentation', 'faq', 'knowledge base' ),
 			'description' => __( 'FAQ, Knowledge Base and Documentation', 'connect-polylang-elementor' ),
-			'actions'     => [
-				[
+			'actions'     => array(
+				array(
 					'name' => $action_name,
 					'url'  => 'https://polylang.pro/doc/',
 					'icon' => $action_icon,
-				],
-			],
-		];
+				),
+			),
+		);
 
 		/** External: WordPress.org support forum */
-		$items[ 'support-forum' ] = [
+		$items['support-forum'] = array(
 			'title'       => $string_polylang . _x( 'Support Forum', 'Title in Elementor Finder', 'connect-polylang-elementor' ),
 			'url'         => 'https://wordpress.org/support/plugin/polylang',
 			'icon'        => 'comments',
-			'keywords'    => [ 'support', 'forum', 'wordpress.org', 'help' ],
+			'keywords'    => array( 'support', 'forum', 'wordpress.org', 'help' ),
 			'description' => __( 'Free support on WordPress.org', 'connect-polylang-elementor' ),
-			'actions'     => [
-				[
+			'actions'     => array(
+				array(
 					'name' => $action_name,
 					'url'  => 'https://wordpress.org/support/plugin/polylang',
 					'icon' => $action_icon,
-				],
-			],
-		];
+				),
+			),
+		);
 
 		/** Return items array, filterable */
 		return apply_filters(

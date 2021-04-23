@@ -1,6 +1,7 @@
-<?php # -*- coding: utf-8 -*-
+<?php // -*- coding: utf-8 -*-
 /**
  * Main plugin file.
+ *
  * @package           Polylang Connect for Elementor
  * @author            David Decker
  * @copyright         Copyright (c) 2018, David Decker - DECKERWEB
@@ -92,7 +93,7 @@ function ddw_cpel_load_translations() {
 	/** Translations: Secondly, look in 'wp-content/languages/plugins/' for the proper .mo file (= default) */
 	load_plugin_textdomain(
 		$cpel_textdomain,
-		FALSE,
+		false,
 		CPEL_PLUGIN_BASEDIR . 'languages'
 	);
 
@@ -100,10 +101,10 @@ function ddw_cpel_load_translations() {
 
 
 /** Include global functions */
-require_once( CPEL_PLUGIN_DIR . 'includes/functions-global.php' );
+require_once CPEL_PLUGIN_DIR . 'includes/functions-global.php';
 
 /** Include (global) conditionals functions */
-require_once( CPEL_PLUGIN_DIR . 'includes/functions-conditionals.php' );
+require_once CPEL_PLUGIN_DIR . 'includes/functions-conditionals.php';
 
 
 add_action( 'plugins_loaded', 'ddw_cpel_setup_plugin', 20 );
@@ -117,22 +118,21 @@ function ddw_cpel_setup_plugin() {
 	/** Load features that require Polylang & Elementor active */
 	if ( ddw_cpel_is_polylang_active() && ddw_cpel_is_elementor_active() ) {
 
-		require_once( CPEL_PLUGIN_DIR . 'modules/finder/manager.php' );
-		require_once( CPEL_PLUGIN_DIR . 'modules/widgets/register-widget.php' );
+		require_once CPEL_PLUGIN_DIR . 'modules/finder/manager.php';
+		require_once CPEL_PLUGIN_DIR . 'modules/widgets/register-widget.php';
 
 		new \DDW_Connect_Polylang_Elementor\Register_Widget();
 
 		/** Load features that require Elementor Pro */
 		if ( ddw_cpel_is_elementor_pro_active() ) {
-			require_once( CPEL_PLUGIN_DIR . 'modules/connect/tweaks-polylang-elementor.php' );
-			require_once( CPEL_PLUGIN_DIR . 'modules/dynamic-tags/manager.php' );
+			require_once CPEL_PLUGIN_DIR . 'modules/connect/tweaks-polylang-elementor.php';
+			require_once CPEL_PLUGIN_DIR . 'modules/dynamic-tags/manager.php';
 		}
-
 	}  // end if
 
 	/** Include admin helper functions */
 	if ( is_admin() ) {
-		require_once( CPEL_PLUGIN_DIR . 'includes/admin-extras.php' );
+		require_once CPEL_PLUGIN_DIR . 'includes/admin-extras.php';
 	}
 
 	/** Add links to Settings and Menu pages to Plugins page */

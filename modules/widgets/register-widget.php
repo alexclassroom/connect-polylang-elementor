@@ -48,29 +48,35 @@ class Register_Widget {
 	 */
 	private function add_actions() {
 
-		add_action( 'elementor/widgets/widgets_registered', [ $this, 'on_widgets_registered' ] );
+		add_action( 'elementor/widgets/widgets_registered', array( $this, 'on_widgets_registered' ) );
 
-		add_action( 'elementor/preview/enqueue_styles', function() {
-			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		add_action(
+			'elementor/preview/enqueue_styles',
+			function() {
+				$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-			wp_enqueue_style(
-				'plsfe-editor',
-				plugins_url( '/assets/css/plsfe-editor' . $suffix . '.css', CPEL__FILE__ ),
-				'',
-				CPEL_PLUGIN_VERSION
-			);
-		} );
+				wp_enqueue_style(
+					'plsfe-editor',
+					plugins_url( '/assets/css/plsfe-editor' . $suffix . '.css', CPEL__FILE__ ),
+					'',
+					CPEL_PLUGIN_VERSION
+				);
+			}
+		);
 
-		add_action( 'elementor/frontend/after_enqueue_styles', function() {
-			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		add_action(
+			'elementor/frontend/after_enqueue_styles',
+			function() {
+				$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-			wp_register_style(
-				'plsfe-frontend',
-				plugins_url( '/assets/css/plsfe-frontend' . $suffix . '.css', CPEL__FILE__ ),
-				'',
-				CPEL_PLUGIN_VERSION
-			);
-		} );
+				wp_register_style(
+					'plsfe-frontend',
+					plugins_url( '/assets/css/plsfe-frontend' . $suffix . '.css', CPEL__FILE__ ),
+					'',
+					CPEL_PLUGIN_VERSION
+				);
+			}
+		);
 
 	}  // end method
 
@@ -99,7 +105,7 @@ class Register_Widget {
 	 */
 	private function includes() {
 
-		require_once( CPEL_PLUGIN_DIR . 'modules/widgets/polylang-language-switcher.php' );
+		require_once CPEL_PLUGIN_DIR . 'modules/widgets/polylang-language-switcher.php';
 
 	}  // end method
 

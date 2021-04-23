@@ -30,6 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Note: Code based on Widget class of plugin "Language Switcher for Elementor",
  *       licensed under GPLv2 or later.
+ *
  * @author Solitweb
  * @link https://solitweb.be/
  *
@@ -101,7 +102,7 @@ class Polylang_Language_Switcher extends Widget_Base {
 	 */
 	public function get_categories() {
 
-		return [ 'general', 'theme-elements' ];
+		return array( 'general', 'theme-elements' );
 
 	}  // end method
 
@@ -113,7 +114,7 @@ class Polylang_Language_Switcher extends Widget_Base {
 	 */
 	public function get_keywords() {
 
-		return [ 'languages', 'switcher', 'polylang', 'multilingual', 'flags', 'countries', 'country', 'wpml' ];
+		return array( 'languages', 'switcher', 'polylang', 'multilingual', 'flags', 'countries', 'country', 'wpml' );
 
 	}  // end method
 
@@ -131,7 +132,7 @@ class Polylang_Language_Switcher extends Widget_Base {
 	 */
 	public function get_style_depends() {
 
-		return [ 'plsfe-frontend' ];
+		return array( 'plsfe-frontend' );
 
 	}  // end method
 
@@ -149,7 +150,7 @@ class Polylang_Language_Switcher extends Widget_Base {
 	 */
 	public function get_script_depends() {
 
-		return [ ];
+		return array();
 
 	}  // end method
 
@@ -171,109 +172,109 @@ class Polylang_Language_Switcher extends Widget_Base {
 		/** Content: Layout etc. */
 		$this->start_controls_section(
 			'section_content',
-			[
+			array(
 				'label' => __( 'Content', 'connect-polylang-elementor' ),
-			]
+			)
 		);
 
 		$this->add_responsive_control(
 			'layout',
-			[
+			array(
 				'label'        => __( 'Layout', 'connect-polylang-elementor' ),
 				'type'         => Controls_Manager::SELECT,
 				'default'      => 'horizontal',
-				'options'      => [
+				'options'      => array(
 					'horizontal' => __( 'Horizontal', 'connect-polylang-elementor' ),
 					'vertical'   => __( 'Vertical', 'connect-polylang-elementor' ),
-				],
+				),
 				'label_block'  => true,
 				'prefix_class' => 'plsfe%s-layout-',
-			]
+			)
 		);
 
 		$this->add_responsive_control(
 			'align_items',
-			[
+			array(
 				'label'        => __( 'Align', 'connect-polylang-elementor' ),
 				'type'         => Controls_Manager::CHOOSE,
-				'options'      => [
-					'left' => [
+				'options'      => array(
+					'left'    => array(
 						'title' => __( 'Left', 'connect-polylang-elementor' ),
 						'icon'  => 'eicon-h-align-left',
-					],
-					'center'   => [
+					),
+					'center'  => array(
 						'title' => __( 'Center', 'connect-polylang-elementor' ),
 						'icon'  => 'eicon-h-align-center',
-					],
-					'right'    => [
+					),
+					'right'   => array(
 						'title' => __( 'Right', 'connect-polylang-elementor' ),
 						'icon'  => 'eicon-h-align-right',
-					],
-					'justify'  => [
+					),
+					'justify' => array(
 						'title' => __( 'Stretch', 'connect-polylang-elementor' ),
 						'icon'  => 'eicon-h-align-stretch',
-					],
-				],
+					),
+				),
 				'label_block'  => true,
 				'prefix_class' => 'plsfe%s-align-',
-			]
+			)
 		);
 
 		$this->add_control(
 			'hide_current',
-			[
+			array(
 				'label'        => __( 'Hide the current language', 'connect-polylang-elementor' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default'      => '',
 				'separator'    => 'before',
-			]
+			)
 		);
 
 		$this->add_control(
 			'hide_missing',
-			[
+			array(
 				'label'        => __( 'Hide languages with no translation', 'connect-polylang-elementor' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default'      => '',
-			]
+			)
 		);
 
 		$this->add_control(
 			'show_country_flag',
-			[
+			array(
 				'label'        => __( 'Show Country Flag', 'connect-polylang-elementor' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default'      => 'yes',
-			]
+			)
 		);
 
 		$this->add_control(
 			'show_language_name',
-			[
+			array(
 				'label'        => __( 'Show Language Name', 'connect-polylang-elementor' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default'      => 'yes',
-			]
+			)
 		);
 
 		$this->add_control(
 			'show_language_code',
-			[
+			array(
 				'label'        => __( 'Show Language Code', 'connect-polylang-elementor' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default'      => '',
-			]
+			)
 		);
 
 			/** Create language drop-down for the select control */
 		if ( function_exists( 'pll_the_languages' ) ) {
 			$languages = pll_the_languages( array( 'raw' => 1 ) );
-			$dropdown  = [];
+			$dropdown  = array();
 
 			foreach ( $languages as $language ) {
 				$dropdown[ $language['slug'] ] = $language['name'];
@@ -285,148 +286,147 @@ class Polylang_Language_Switcher extends Widget_Base {
 
 			$this->add_control(
 				'plsfe_widget_display',
-				[
+				array(
 					'label'   => __( 'Display widget for:', 'connect-polylang-elementor' ),
 					'type'    => Controls_Manager::SELECT,
 					'default' => 'all',
 					'options' => $dropdown,
-				]
+				)
 			);
 		}
 
 		$this->end_controls_section();
 
-
 		/** Style: Main menu */
 		$this->start_controls_section(
 			'main_section',
-			[
+			array(
 				'label' => __( 'Main Menu', 'connect-polylang-elementor' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
-			]
+			)
 		);
 
 		$this->start_controls_tabs( 'tabs_menu_item_style' );
 
 		$this->start_controls_tab(
 			'tab_menu_item_normal',
-			[
+			array(
 				'label' => __( 'Normal', 'connect-polylang-elementor' ),
-			]
+			)
 		);
 
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
-			[
+			array(
 				'name'     => 'typography_menu_item',
 				'scheme'   => Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .plsfe-menu .plsfe-item',
-			]
+			)
 		);
 
 		$this->add_control(
 			'color_menu_item',
-			[
+			array(
 				'label'     => __( 'Text Color', 'connect-polylang-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => [
+				'scheme'    => array(
 					'type'  => Scheme_Color::get_type(),
 					'value' => Scheme_Color::COLOR_3,
-				],
+				),
 				'default'   => '',
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .plsfe-menu .plsfe-item' => 'color: {{VALUE}}',
-				],
-			]
+				),
+			)
 		);
 
 		$this->end_controls_tab();
 
 		$this->start_controls_tab(
 			'tab_menu_item_hover',
-			[
+			array(
 				'label' => __( 'Hover', 'connect-polylang-elementor' ),
-			]
+			)
 		);
 
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
-			[
+			array(
 				'name'     => 'typography_menu_item_hover',
 				'scheme'   => Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .plsfe-menu .plsfe-item:hover,
 					{{WRAPPER}} .plsfe-menu .plsfe-item.plsfe-item__active,
 					{{WRAPPER}} .plsfe-menu .plsfe-item.highlighted,
 					{{WRAPPER}} .plsfe-menu .plsfe-item:focus',
-			]
+			)
 		);
 
 		$this->add_control(
 			'color_menu_item_hover',
-			[
+			array(
 				'label'     => __( 'Text Color', 'connect-polylang-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => [
+				'scheme'    => array(
 					'type'  => Scheme_Color::get_type(),
 					'value' => Scheme_Color::COLOR_4,
-				],
-				'selectors' => [
+				),
+				'selectors' => array(
 					'{{WRAPPER}} .plsfe-menu .plsfe-item:hover,
 					{{WRAPPER}} .plsfe-menu .plsfe-item.highlighted,
 					{{WRAPPER}} .plsfe-menu .plsfe-item:focus' => 'color: {{VALUE}}',
-				],
-			]
+				),
+			)
 		);
 
 		$this->end_controls_tab();
 
 		$this->start_controls_tab(
 			'tab_menu_item_active',
-			[
+			array(
 				'label' => __( 'Active', 'connect-polylang-elementor' ),
-			]
+			)
 		);
 
 		$this->add_control(
 			'info_menu_item_active',
-			[
+			array(
 				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => __( 'This controls the item in the Switcher for the current active language', 'connect-polylang-elementor' ),
 				'content_classes' => 'elementor-control-field-description cpel-info-menu-item-active',
-			]
+			)
 		);
 
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
-			[
+			array(
 				'name'     => 'typography_menu_item_active',
 				'scheme'   => Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .plsfe-menu .plsfe-item.plsfe-item__active',
-			]
+			)
 		);
 
 		$this->add_control(
 			'color_menu_item_active',
-			[
+			array(
 				'label'     => __( 'Text Color', 'connect-polylang-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .plsfe-menu .plsfe-item.plsfe-item__active' => 'color: {{VALUE}}',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'color_menu_item_active_hover',
-			[
+			array(
 				'label'     => __( 'Text Hover Color', 'connect-polylang-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .plsfe-menu .plsfe-item.plsfe-item__active:hover' => 'color: {{VALUE}}',
-				],
-			]
+				),
+			)
 		);
 
 		$this->end_controls_tab();
@@ -435,193 +435,189 @@ class Polylang_Language_Switcher extends Widget_Base {
 
 		$this->add_responsive_control(
 			'padding_horizontal_menu_item',
-			[
+			array(
 				'label'     => __( 'Horizontal Padding', 'connect-polylang-elementor' ),
 				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-					'px' => [
+				'range'     => array(
+					'px' => array(
 						'max' => 50,
-					],
-				],
+					),
+				),
 				'separator' => 'before',
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .plsfe-switcher .plsfe-item' => 'padding-left: {{SIZE}}{{UNIT}}; padding-right: {{SIZE}}{{UNIT}}',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'padding_vertical_menu_item',
-			[
+			array(
 				'label'     => __( 'Vertical Padding', 'connect-polylang-elementor' ),
 				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-					'px' => [
+				'range'     => array(
+					'px' => array(
 						'max' => 50,
-					],
-				],
-				'selectors' => [
+					),
+				),
+				'selectors' => array(
 					'{{WRAPPER}} .plsfe-switcher .plsfe-item' => 'padding-top: {{SIZE}}{{UNIT}}; padding-bottom: {{SIZE}}{{UNIT}}',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'menu_space_between',
-			[
+			array(
 				'label'     => __( 'Space Between', 'connect-polylang-elementor' ),
 				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-					'px' => [
+				'range'     => array(
+					'px' => array(
 						'max' => 100,
-					],
-				],
-				'selectors' => [
+					),
+				),
+				'selectors' => array(
 					'body:not(.rtl) {{WRAPPER}}.plsfe-layout-horizontal:not(.plsfe-layout-vertical) .plsfe-menu > li:not(:last-child)' => 'margin-right: {{SIZE}}{{UNIT}}',
 					'body.rtl {{WRAPPER}}.plsfe-layout-horizontal:not(.plsfe-layout-vertical) .plsfe-menu > li:not(:last-child)' => 'margin-left: {{SIZE}}{{UNIT}}',
 					'{{WRAPPER}}.plsfe-layout-vertical:not(.plsfe-layout-horizontal) .plsfe-menu > li:not(:last-child)' => 'margin-bottom: {{SIZE}}{{UNIT}}',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
-			[
+			array(
 				'name'      => 'menu_item_border',
 				'selector'  => '{{WRAPPER}} .plsfe-menu > li',
 				'separator' => 'before',
-			]
+			)
 		);
 
 		$this->end_controls_section();
-
 
 		/** Style: Language flag */
 		$this->start_controls_section(
 			'country_flag_section',
-			[
+			array(
 				'label'     => __( 'Country Flag', 'connect-polylang-elementor' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => [
-					'show_country_flag' => [ 'yes' ],
-				],
-			]
+				'condition' => array(
+					'show_country_flag' => array( 'yes' ),
+				),
+			)
 		);
 
 		$this->add_control(
 			'margin_country_flag',
-			[
+			array(
 				'label'      => __( 'Margin', 'connect-polylang-elementor' ),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em' ],
-				'selectors'  => [
+				'size_units' => array( 'px', '%', 'em' ),
+				'selectors'  => array(
 					'{{WRAPPER}} .plsfe-switcher .plsfe-country-flag' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->end_controls_section();
-
 
 		/** Style: Language name */
 		$this->start_controls_section(
 			'language_name_section',
-			[
+			array(
 				'label'     => __( 'Language Name', 'connect-polylang-elementor' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => [
-					'show_language_name' => [ 'yes' ],
-				],
-			]
+				'condition' => array(
+					'show_language_name' => array( 'yes' ),
+				),
+			)
 		);
 
 		$this->add_control(
 			'uppercase_language_name',
-			[
+			array(
 				'label'        => __( 'Uppercase', 'connect-polylang-elementor' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default'      => '',
-			]
+			)
 		);
 
 		$this->add_control(
 			'margin_language_name',
-			[
+			array(
 				'label'      => __( 'Margin', 'connect-polylang-elementor' ),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em' ],
-				'selectors'  => [
+				'size_units' => array( 'px', '%', 'em' ),
+				'selectors'  => array(
 					'{{WRAPPER}} .plsfe-switcher .plsfe-language-name' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->end_controls_section();
-
 
 		/** Style: Language code */
 		$this->start_controls_section(
 			'language_code_section',
-			[
+			array(
 				'label'     => __( 'Language Code', 'connect-polylang-elementor' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => [
-					'show_language_code' => [ 'yes' ],
-				],
-			]
+				'condition' => array(
+					'show_language_code' => array( 'yes' ),
+				),
+			)
 		);
 
 		$this->add_control(
 			'uppercase_language_code',
-			[
+			array(
 				'label'        => __( 'Uppercase', 'connect-polylang-elementor' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default'      => 'yes',
-			]
+			)
 		);
 
 		$this->add_control(
 			'margin_language_code',
-			[
+			array(
 				'label'      => __( 'Margin', 'connect-polylang-elementor' ),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em' ],
-				'selectors'  => [
+				'size_units' => array( 'px', '%', 'em' ),
+				'selectors'  => array(
 					'{{WRAPPER}} .plsfe-switcher .plsfe-language-code' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'before_language_code',
-			[
-				'label'   => __( 'Text before', 'connect-polylang-elementor' ),
-				'type'    => Controls_Manager::TEXT,
-			]
+			array(
+				'label' => __( 'Text before', 'connect-polylang-elementor' ),
+				'type'  => Controls_Manager::TEXT,
+			)
 		);
 
 		$this->add_control(
 			'after_language_code',
-			[
-				'label'   => __( 'Text after', 'connect-polylang-elementor' ),
-				'type'    => Controls_Manager::TEXT,
-			]
+			array(
+				'label' => __( 'Text after', 'connect-polylang-elementor' ),
+				'type'  => Controls_Manager::TEXT,
+			)
 		);
 
 		$this->end_controls_section();
 
-
 		/** Help information - user guidance */
 		$this->start_controls_section(
 			'section_helpful_info',
-			[
+			array(
 				'label' => __( 'Helpful Information', 'connect-polylang-elementor' ),
-			]
+			)
 		);
 
-		$output = '<div style="line-height: 1.2;">';
+		$output  = '<div style="line-height: 1.2;">';
 		$output .= sprintf(
 			'<p style="margin-bottom: 15px;"><strong>%1$s:</strong><br />%2$s</p>',
 			__( 'Country Flags', 'connect-polylang-elementor' ),
@@ -643,11 +639,11 @@ class Polylang_Language_Switcher extends Widget_Base {
 
 		$this->add_control(
 			'plsfe_help_info',
-			[
+			array(
 				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => $output,
 				'content_classes' => 'cpel-help-info',
-			]
+			)
 		);
 
 		$this->end_controls_section();
@@ -672,9 +668,13 @@ class Polylang_Language_Switcher extends Widget_Base {
 		$settings = $this->get_active_settings();
 
 		/** Add render attributes for Elementor */
-		$this->add_render_attribute( 'main-menu', 'class', [
-			'plsfe-switcher',
-		] );
+		$this->add_render_attribute(
+			'main-menu',
+			'class',
+			array(
+				'plsfe-switcher',
+			)
+		);
 
 		/** Get the available languages for a switcher */
 		$languages = '';
@@ -691,33 +691,33 @@ class Polylang_Language_Switcher extends Widget_Base {
 			foreach ( $languages as $language ) {
 
 				/** Optional: Hide the current language */
-				if ( 'yes' === $settings[ 'hide_current' ] && $language[ 'current_lang' ] ) {
+				if ( 'yes' === $settings['hide_current'] && $language['current_lang'] ) {
 					continue;
 				}
 
 				/** Optional: Hide languages that have no translations available */
-				if ( 'yes' === $settings[ 'hide_missing' ] && $language[ 'no_translation' ] ) {
+				if ( 'yes' === $settings['hide_missing'] && $language['no_translation'] ) {
 					continue;
 				}
 
 				/** Language code: uppercase/ lowercase logic */
-				$language_code = ( 'yes' === $settings[ 'uppercase_language_code' ] ) ? strtoupper( $language[ 'slug' ] ) : strtolower( $language[ 'slug' ] );
+				$language_code = ( 'yes' === $settings['uppercase_language_code'] ) ? strtoupper( $language['slug'] ) : strtolower( $language['slug'] );
 
 				/** Language name: uppercase/ lowercase logic */
-				$language_name = ( 'yes' === $settings[ 'uppercase_language_name' ] ) ? strtoupper( $language[ 'name' ] ) : $language[ 'name' ];
+				$language_name = ( 'yes' === $settings['uppercase_language_name'] ) ? strtoupper( $language['name'] ) : $language['name'];
 
 				/** Build the language switcher menu output */
 				echo '<li class="plsfe-menu-item">';
 
-					echo ( $language[ 'current_lang' ] ) ? '<a href="' . $language[ 'url' ] . '" class="plsfe-item plsfe-item__active">' : '<a href="' . $language[ 'url' ] . '" class="plsfe-item">';
+					echo ( $language['current_lang'] ) ? '<a href="' . $language['url'] . '" class="plsfe-item plsfe-item__active">' : '<a href="' . $language['url'] . '" class="plsfe-item">';
 
-						echo $settings[ 'show_country_flag' ] ? '<span class="plsfe-country-flag"><img src="' . $language[ 'flag' ] . '" alt="' . $language_code . '" width="16" height="11" /></span>' : '';
+						echo $settings['show_country_flag'] ? '<span class="plsfe-country-flag"><img src="' . $language['flag'] . '" alt="' . $language_code . '" width="16" height="11" /></span>' : '';
 
-						echo $settings[ 'show_language_name' ] ? '<span class="plsfe-language-name">' . $language_name . '</span>' : '';
+						echo $settings['show_language_name'] ? '<span class="plsfe-language-name">' . $language_name . '</span>' : '';
 
-						echo $settings[ 'before_language_code' ] ?: '';
-						echo $settings[ 'show_language_code' ] ? '<span class="plsfe-language-code">' . $language_code . '</span>' : '';
-						echo $settings[ 'after_language_code' ] ?: '';
+						echo $settings['before_language_code'] ?: '';
+						echo $settings['show_language_code'] ? '<span class="plsfe-language-code">' . $language_code . '</span>' : '';
+						echo $settings['after_language_code'] ?: '';
 
 					echo '</a>';
 
