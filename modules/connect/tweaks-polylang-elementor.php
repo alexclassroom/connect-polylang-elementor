@@ -134,7 +134,7 @@ add_filter( 'posts_request', 'ddw_cpel_elementor_generate_conditions_on_default_
  *
  * @link   https://github.com/pojome/elementor/issues/4839
  *
- * @since  1.0.0
+ * @since  1.0.2
  *
  * @uses   pll_current_language()
  * @since  pll_default_language()
