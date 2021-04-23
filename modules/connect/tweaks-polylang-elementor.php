@@ -126,3 +126,33 @@ function ddw_cpel_change_template_based_on_language( $post_id ) {
 	return $post_id;
 
 }  // end function
+
+
+add_filter( 'posts_request', 'ddw_cpel_elementor_generate_conditions_on_default_language', 10, 2 );
+/**
+ * Ensure Elementor Theme Builder conditions are generated with main language
+ *
+ * @link   https://github.com/pojome/elementor/issues/4839
+ *
+ * @since  1.0.0
+ *
+ * @uses   pll_current_language()
+ * @since  pll_default_language()
+ *
+ * @param  string   $request SQL select query
+ * @param  WP_Query $wp_query Current query
+ * @return string updated SQL query
+ */
+function ddw_cpel_elementor_generate_conditions_on_default_language( $request, $wp_query ) {
+
+	if ( function_exists( 'pll_current_language' ) && isset( $wp_query->query['meta_key'] ) && '_elementor_conditions' == $wp_query->query['meta_key'] ) {
+
+		$current_lang = 'term_taxonomy_id IN (' . pll_current_language( 'term_taxonomy_id' ) . ')';
+		$default_lang = 'term_taxonomy_id IN (' . pll_default_language( 'term_taxonomy_id' ) . ')';
+
+		$request = str_replace( $current_lang, $default_lang, $request );
+	}
+
+	return $request;
+
+}
