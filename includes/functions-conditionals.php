@@ -23,7 +23,7 @@ function ddw_cpel_is_elementor_active() {
 
 	return defined( 'ELEMENTOR_VERSION' );
 
-}  // end function
+}
 
 
 /**
@@ -37,7 +37,7 @@ function ddw_cpel_is_elementor_pro_active() {
 
 	return defined( 'ELEMENTOR_PRO_VERSION' );
 
-}  // end function
+}
 
 
 /**
@@ -53,7 +53,7 @@ function ddw_cpel_is_polylang_active() {
 
 	return defined( 'POLYLANG_BASENAME' );
 
-}  // end function
+}
 
 
 /**
@@ -67,7 +67,7 @@ function ddw_cpel_is_polylang_pro_active() {
 
 	return defined( 'POLYLANG_PRO' );
 
-}  // end function
+}
 
 
 /**
@@ -81,4 +81,4 @@ function ddw_cpel_is_polylang_free_active() {
 
 	return ddw_cpel_is_polylang_active() && ! ddw_cpel_is_polylang_pro_active();
 
-}  // end function
+}

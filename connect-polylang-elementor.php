@@ -1,4 +1,4 @@
-<?php // -*- coding: utf-8 -*-
+<?php
 /**
  * Main plugin file.
  *
@@ -97,7 +97,7 @@ function ddw_cpel_load_translations() {
 		CPEL_PLUGIN_BASEDIR . 'languages'
 	);
 
-}  // end function
+}
 
 
 /** Include global functions */
@@ -128,7 +128,7 @@ function ddw_cpel_setup_plugin() {
 			require_once CPEL_PLUGIN_DIR . 'modules/connect/tweaks-polylang-elementor.php';
 			require_once CPEL_PLUGIN_DIR . 'modules/dynamic-tags/manager.php';
 		}
-	}  // end if
+	}
 
 	/** Include admin helper functions */
 	if ( is_admin() ) {
@@ -148,6 +148,6 @@ function ddw_cpel_setup_plugin() {
 			'ddw_cpel_custom_settings_links'
 		);
 
-	}  // end if
+	}
 
-}  // end function
+}

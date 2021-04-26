@@ -28,7 +28,7 @@ class DDW_Polylang_Current_Language_Flag_Elementor_Dynamic_Tag extends \Elemento
 
 		return 'current-language-flag';
 
-	}  // end method
+	}
 
 
 	/**
@@ -45,7 +45,7 @@ class DDW_Polylang_Current_Language_Flag_Elementor_Dynamic_Tag extends \Elemento
 
 		return _x( 'Current Language Flag', 'Elementor Dynamic Tag title', 'connect-polylang-elementor' );
 
-	}  // end method
+	}
 
 
 	/**
@@ -62,7 +62,7 @@ class DDW_Polylang_Current_Language_Flag_Elementor_Dynamic_Tag extends \Elemento
 
 		return 'polylang-languages';
 
-	}  // end method
+	}
 
 
 	/**
@@ -79,7 +79,7 @@ class DDW_Polylang_Current_Language_Flag_Elementor_Dynamic_Tag extends \Elemento
 
 		return array( \Elementor\Modules\DynamicTags\Module::IMAGE_CATEGORY );
 
-	}  // end method
+	}
 
 
 	/**
@@ -103,6 +103,6 @@ class DDW_Polylang_Current_Language_Flag_Elementor_Dynamic_Tag extends \Elemento
 
 		return $image_data;
 
-	}  // end method
+	}
 
-}  // end of class
+}

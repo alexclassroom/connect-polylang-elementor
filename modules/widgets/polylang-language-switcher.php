@@ -51,7 +51,7 @@ class Polylang_Language_Switcher extends Widget_Base {
 
 		return 'polylang-language-switcher';
 
-	}  // end method
+	}
 
 
 	/**
@@ -67,7 +67,7 @@ class Polylang_Language_Switcher extends Widget_Base {
 
 		return _x( 'Polylang Switcher', 'Elementor widget title', 'connect-polylang-elementor' );
 
-	}  // end method
+	}
 
 
 	/**
@@ -83,7 +83,7 @@ class Polylang_Language_Switcher extends Widget_Base {
 
 		return 'fa fa-language';
 
-	}  // end method
+	}
 
 
 	/**
@@ -104,7 +104,7 @@ class Polylang_Language_Switcher extends Widget_Base {
 
 		return array( 'general', 'theme-elements' );
 
-	}  // end method
+	}
 
 
 	/**
@@ -116,7 +116,7 @@ class Polylang_Language_Switcher extends Widget_Base {
 
 		return array( 'languages', 'switcher', 'polylang', 'multilingual', 'flags', 'countries', 'country', 'wpml' );
 
-	}  // end method
+	}
 
 
 	/**
@@ -134,7 +134,7 @@ class Polylang_Language_Switcher extends Widget_Base {
 
 		return array( 'plsfe-frontend' );
 
-	}  // end method
+	}
 
 
 	/**
@@ -152,7 +152,7 @@ class Polylang_Language_Switcher extends Widget_Base {
 
 		return array();
 
-	}  // end method
+	}
 
 
 	/**
@@ -650,7 +650,7 @@ class Polylang_Language_Switcher extends Widget_Base {
 
 		$this->end_controls_section();
 
-	}  // end method
+	}
 
 
 	/**
@@ -725,13 +725,13 @@ class Polylang_Language_Switcher extends Widget_Base {
 
 				echo '</li>';
 
-			}  // end if
+			}
 
 			echo '</ul></nav>';
 
-		}  // end if
+		}
 
-	}  // end method
+	}
 
 
 	/**
@@ -744,6 +744,6 @@ class Polylang_Language_Switcher extends Widget_Base {
 	 *
 	 * @access protected
 	 */
-	protected function _content_template() { }  // end method
+	protected function _content_template() { }
 
-}  // end of class
+}

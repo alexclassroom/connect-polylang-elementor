@@ -28,7 +28,7 @@ class DDW_Polylang_Current_Language_Name_Elementor_Dynamic_Tag extends \Elemento
 
 		return 'current-language-name';
 
-	}  // end method
+	}
 
 
 	/**
@@ -45,7 +45,7 @@ class DDW_Polylang_Current_Language_Name_Elementor_Dynamic_Tag extends \Elemento
 
 		return _x( 'Current Language Name', 'Elementor Dynamic Tag title', 'connect-polylang-elementor' );
 
-	}  // end method
+	}
 
 
 	/**
@@ -62,7 +62,7 @@ class DDW_Polylang_Current_Language_Name_Elementor_Dynamic_Tag extends \Elemento
 
 		return 'polylang-languages';
 
-	}  // end method
+	}
 
 
 	/**
@@ -79,7 +79,7 @@ class DDW_Polylang_Current_Language_Name_Elementor_Dynamic_Tag extends \Elemento
 
 		return array( \Elementor\Modules\DynamicTags\Module::TEXT_CATEGORY );
 
-	}  // end method
+	}
 
 
 	/**
@@ -98,6 +98,6 @@ class DDW_Polylang_Current_Language_Name_Elementor_Dynamic_Tag extends \Elemento
 
 		echo wp_kses_post( pll_current_language( $field = 'name' ) );
 
-	}  // end method
+	}
 
-}  // end of class
+}

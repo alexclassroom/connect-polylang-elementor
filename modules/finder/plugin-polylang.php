@@ -34,7 +34,7 @@ class DDW_Polylang_Plugin_Finder_Category extends \Elementor\Core\Common\Modules
 
 		return _x( 'Polylang - Multilingual Plugin', 'Category title in Elementor Finder', 'connect-polylang-elementor' );
 
-	}  // end method
+	}
 
 
 	/**
@@ -196,6 +196,6 @@ class DDW_Polylang_Plugin_Finder_Category extends \Elementor\Core\Common\Modules
 			$items
 		);
 
-	}  // end method
+	}
 
-}  // end of class
+}

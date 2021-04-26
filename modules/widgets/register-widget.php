@@ -36,7 +36,7 @@ class Register_Widget {
 
 		$this->add_actions();
 
-	}  // end method
+	}
 
 
 	/**
@@ -78,7 +78,7 @@ class Register_Widget {
 			}
 		);
 
-	}  // end method
+	}
 
 
 	/**
@@ -93,7 +93,7 @@ class Register_Widget {
 		$this->includes();
 		$this->register_widget();
 
-	}  // end method
+	}
 
 
 	/**
@@ -107,7 +107,7 @@ class Register_Widget {
 
 		require_once CPEL_PLUGIN_DIR . 'modules/widgets/polylang-language-switcher.php';
 
-	}  // end method
+	}
 
 
 	/**
@@ -121,6 +121,6 @@ class Register_Widget {
 
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Polylang_Language_Switcher() );
 
-	}  // end method
+	}
 
-}  // end of class
+}

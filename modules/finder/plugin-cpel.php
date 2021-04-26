@@ -33,7 +33,7 @@ class DDW_CPEL_Plugin_Finder_Category extends \Elementor\Core\Common\Modules\Fin
 
 		return _x( 'Add-On: Polylang Connect for Elementor', 'Category title in Elementor Finder', 'connect-polylang-elementor' );
 
-	}  // end method
+	}
 
 
 	/**
@@ -108,6 +108,6 @@ class DDW_CPEL_Plugin_Finder_Category extends \Elementor\Core\Common\Modules\Fin
 			$items
 		);
 
-	}  // end method
+	}
 
-}  // end of class
+}

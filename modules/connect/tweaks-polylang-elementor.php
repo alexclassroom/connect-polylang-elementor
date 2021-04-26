@@ -82,7 +82,7 @@ function ddw_cpel_polylang_elementor_library_conditions_parse_query( $query ) {
 		$query->set( 'lang', '' );
 	}
 
-}  // end function
+}
 
 
 add_filter( 'elementor/theme/get_location_templates/template_id', 'ddw_cpel_change_template_based_on_language' );

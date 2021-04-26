@@ -34,4 +34,4 @@ function ddw_cpel_elementor_finder_add_items( $categories_manager ) {
 	/** Add the our own CPEL Plugin category */
 	$categories_manager->add_category( 'connect-polylang-elementor', new DDW_CPEL_Plugin_Finder_Category() );
 
-}  // end function
+}

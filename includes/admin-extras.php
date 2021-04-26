@@ -39,7 +39,7 @@ function ddw_cpel_custom_settings_links( $cpel_links ) {
 				esc_attr_x( 'Languages', 'Link title attribute for Polylang settings', 'connect-polylang-elementor' )
 			);
 
-		}  // end if
+		}
 
 		/** Elementor My Templates link */
 		if ( ddw_cpel_is_elementor_active() ) {
@@ -52,8 +52,8 @@ function ddw_cpel_custom_settings_links( $cpel_links ) {
 				esc_attr_x( 'Templates', 'Link title attribute for Elementor My Templates', 'connect-polylang-elementor' )
 			);
 
-		}  // end if
-	}  // end if
+		}
+	}
 
 	/** Set the order of the links */
 	if ( ! empty( $link_polylang ) && ! empty( $link_elementor ) ) {
@@ -68,7 +68,7 @@ function ddw_cpel_custom_settings_links( $cpel_links ) {
 		$link_elementor     // additional param
 	);
 
-}  // end function
+}
 
 
 add_filter( 'plugin_row_meta', 'ddw_cpel_plugin_links', 10, 2 );
@@ -116,7 +116,7 @@ function ddw_cpel_plugin_links( $cpel_links, $cpel_file ) {
 		/* translators: Plugins page listing */
 		$cpel_links[] = ddw_cpel_get_info_link( 'url_donate', esc_html_x( 'Donate', 'Plugins page listing', 'connect-polylang-elementor' ), 'button-primary dashicons-before dashicons-thumbs-up' );
 
-	}  // end if plugin links
+	}
 
 	/** Output the links */
 	return apply_filters(
@@ -124,7 +124,7 @@ function ddw_cpel_plugin_links( $cpel_links, $cpel_file ) {
 		$cpel_links
 	);
 
-}  // end function
+}
 
 
 /**
@@ -146,7 +146,7 @@ function ddw_cpel_plugin_update_message_style_tweak() {
 		</style>
 	<?php
 
-}  // end function
+}
 
 
 add_action( 'in_plugin_update_message-' . CPEL_PLUGIN_BASEDIR . 'connect-polylang-elementor.php', 'ddw_cpel_plugin_update_message', 10, 2 );
@@ -173,9 +173,9 @@ function ddw_cpel_plugin_update_message( $data, $response ) {
 			wpautop( $data['upgrade_notice'] )
 		);
 
-	}  // end if
+	}
 
-}  // end function
+}
 
 
 add_action( 'after_plugin_row_wp-' . CPEL_PLUGIN_BASEDIR . 'connect-polylang-elementor.php', 'ddw_cpel_multisite_subsite_plugin_update_message', 10, 2 );
@@ -206,6 +206,6 @@ function ddw_cpel_multisite_subsite_plugin_update_message( $file, $plugin ) {
 			wpautop( $plugin['upgrade_notice'] )
 		);
 
-	}  // end if
+	}
 
-}  // end function
+}

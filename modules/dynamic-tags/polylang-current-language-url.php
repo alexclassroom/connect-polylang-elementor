@@ -28,7 +28,7 @@ class DDW_Polylang_Current_Language_URL_Elementor_Dynamic_Tag extends \Elementor
 
 		return 'current-language-url';
 
-	}  // end method
+	}
 
 
 	/**
@@ -45,7 +45,7 @@ class DDW_Polylang_Current_Language_URL_Elementor_Dynamic_Tag extends \Elementor
 
 		return _x( 'Current Language URL', 'Elementor Dynamic Tag title', 'connect-polylang-elementor' );
 
-	}  // end method
+	}
 
 
 	/**
@@ -62,7 +62,7 @@ class DDW_Polylang_Current_Language_URL_Elementor_Dynamic_Tag extends \Elementor
 
 		return 'polylang-languages';
 
-	}  // end method
+	}
 
 
 	/**
@@ -79,7 +79,7 @@ class DDW_Polylang_Current_Language_URL_Elementor_Dynamic_Tag extends \Elementor
 
 		return array( \Elementor\Modules\DynamicTags\Module::URL_CATEGORY );
 
-	}  // end method
+	}
 
 
 	/**
@@ -108,10 +108,10 @@ class DDW_Polylang_Current_Language_URL_Elementor_Dynamic_Tag extends \Elementor
 					break;
 				}
 			}  // end foreach
-		}  // end if
+		}
 
 		return esc_url_raw( $language['url'] );
 
-	}  // end method
+	}
 
-}  // end of class
+}

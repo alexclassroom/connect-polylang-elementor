@@ -28,7 +28,7 @@ class DDW_Polylang_Language_Names_Elementor_Dynamic_Tag extends \Elementor\Core\
 
 		return 'language-names';
 
-	}  // end method
+	}
 
 
 	/**
@@ -45,7 +45,7 @@ class DDW_Polylang_Language_Names_Elementor_Dynamic_Tag extends \Elementor\Core\
 
 		return _x( 'Language Names', 'Elementor Dynamic Tag title', 'connect-polylang-elementor' );
 
-	}  // end method
+	}
 
 
 	/**
@@ -62,7 +62,7 @@ class DDW_Polylang_Language_Names_Elementor_Dynamic_Tag extends \Elementor\Core\
 
 		return 'polylang-languages';
 
-	}  // end method
+	}
 
 
 	/**
@@ -79,7 +79,7 @@ class DDW_Polylang_Language_Names_Elementor_Dynamic_Tag extends \Elementor\Core\
 
 		return array( \Elementor\Modules\DynamicTags\Module::TEXT_CATEGORY );
 
-	}  // end method
+	}
 
 
 	/**
@@ -113,7 +113,7 @@ class DDW_Polylang_Language_Names_Elementor_Dynamic_Tag extends \Elementor\Core\
 			)
 		);
 
-	}  // end method
+	}
 
 
 	/**
@@ -136,6 +136,6 @@ class DDW_Polylang_Language_Names_Elementor_Dynamic_Tag extends \Elementor\Core\
 
 		echo esc_attr( $lang_name );
 
-	}  // end method
+	}
 
-}  // end of class
+}

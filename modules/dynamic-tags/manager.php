@@ -44,4 +44,4 @@ function ddw_cpel_register_dynamic_tags_polylang_languages( $dynamic_tags ) {
 	$dynamic_tags->register_tag( 'DDW_Polylang_Current_Language_URL_Elementor_Dynamic_Tag' );
 	$dynamic_tags->register_tag( 'DDW_Polylang_Current_Language_Flag_Elementor_Dynamic_Tag' );
 
-}  // end function
+}

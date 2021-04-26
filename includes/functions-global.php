@@ -28,7 +28,7 @@ function ddw_cpel_prepare_render_polylang_switcher() {
 		add_filter( 'elementor/widget/render_content', 'ddw_cpel_render_polylang_switcher', 10, 2 );
 	}
 
-}  // end function
+}
 
 
 // add_filter( 'elementor/widget/render_content', 'ddw_cpel_render_polylang_switcher', 10, 2 );
@@ -76,9 +76,9 @@ function ddw_cpel_render_polylang_switcher( $widget_content, $widget_instance ) 
 
 		return '<!-- hidden widget -->';
 
-	}  // end if
+	}
 
-}  // end function
+}
 
 
 /**
@@ -117,7 +117,7 @@ function ddw_cpel_info_values() {
 
 	return $cpel_info;
 
-}  // end function
+}
 
 
 /**
@@ -143,7 +143,7 @@ function ddw_cpel_get_info_url( $url_key = '', $raw = false ) {
 
 	return $output;
 
-}  // end function
+}
 
 
 /**
@@ -169,7 +169,7 @@ function ddw_cpel_get_info_link( $url_key = '', $text = '', $class = '' ) {
 
 	return $link;
 
-}  // end function
+}
 
 
 /**
@@ -193,4 +193,4 @@ function ddw_cpel_coding_years( $first_year = '' ) {
 
 	return $code_first_year . date( 'Y' );
 
-}  // end function
+}
