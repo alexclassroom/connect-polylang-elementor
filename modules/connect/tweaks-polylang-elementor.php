@@ -36,26 +36,22 @@ function ddw_cpel_add_cpts_to_polylang( $post_types, $is_settings ) {
 	$relevant_types = apply_filters(
 		'cpel/filter/polylang/post_types',
 		array(
-			'elementor_library',        // Elementor
-			'oceanwp_library',          // OceanWP Library
-			'astra-advanced-hook',      // Astra Custom Layouts (Astra Pro)
-			'gp_elements',              // GeneratePress Elements (GP Premium)
-			'jet-theme-core',           // JetThemeCore (Kava Pro/ CrocoBlock)
-			'customify_hook',           // Customify (Customify Pro)
-			'wpbf_hooks',               // Page Builder Framework Sections (WPBF Premium)
-			'ae_global_templates',      // AnyWhere Elementor plugin
+			'elementor_library',   // Elementor
+			'e-landing-page',      // Elementor Landing pages
+			'oceanwp_library',     // OceanWP Library
+			'astra-advanced-hook', // Astra Custom Layouts (Astra Pro)
+			'gp_elements',         // GeneratePress Elements (GP Premium)
+			'jet-theme-core',      // JetThemeCore (Kava Pro/ CrocoBlock)
+			'jet-engine',          // JetEngine Listing Item (CrocoBlock)
+			'customify_hook',      // Customify (Customify Pro)
+			'wpbf_hooks',          // Page Builder Framework Sections (WPBF Premium)
+			'ae_global_templates', // AnyWhere Elementor plugin
 		)
 	);
 
-	/** Add all post types to Polylang */
-	foreach ( $relevant_types as $relevant_type ) {
-		$post_types[ $relevant_type ] = $relevant_type;
-	}
+	return array_merge( $post_types, array_combine( $relevant_types, $relevant_types ) );
 
-	/** Return modified post types list for Polylang */
-	return $post_types;
-
-}  // end function
+}
 
 
 add_action( 'parse_query', 'ddw_cpel_polylang_elementor_library_conditions_parse_query', 1 );
