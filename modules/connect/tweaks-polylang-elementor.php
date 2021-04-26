@@ -99,41 +99,23 @@ function ddw_cpel_change_template_based_on_language( $post_id ) {
 
 	if ( function_exists( 'pll_get_post' ) ) {
 
-		$translation_post_id = pll_get_post( $post_id );
+		return pll_get_post( $post_id ) ?: $post_id;
 
-		if ( null === $translation_post_id ) {
-
-			/** The current language is not defined yet */
-			return $post_id;
-
-		} elseif ( false === $translation_post_id ) {
-
-			/** No translation yet */
-			return $post_id;
-
-		} elseif ( $translation_post_id > 0 ) {
-
-			/** Return translated post ID */
-			return $translation_post_id;
-
-		}  // end if
-	}  // end if
+	}
 
 	return $post_id;
 
-}  // end function
+}
 
 
 add_filter( 'posts_request', 'ddw_cpel_elementor_generate_conditions_on_default_language', 10, 2 );
 /**
  * Ensure Elementor Theme Builder conditions are generated with main language
  *
- * @link   https://github.com/pojome/elementor/issues/4839
- *
  * @since  1.0.2
  *
  * @uses   pll_current_language()
- * @since  pll_default_language()
+ * @uses   pll_default_language()
  *
  * @param  string   $request SQL select query
  * @param  WP_Query $wp_query Current query
