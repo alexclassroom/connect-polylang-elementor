@@ -1,11 +1,11 @@
 === Polylang Connect for Elementor - Language Switcher & Template Tweaks ===
-Contributors: daveshine, p4fbradjohnson, deckerweb, wpautobahn
+Contributors: daveshine, p4fbradjohnson, deckerweb, wpautobahn, pacotole, creapuntome
 Donate link: https://www.paypal.me/deckerweb
 Tags: elementor, polylang, multilingual, language switcher, languages, templates, widget, finder, dynamic tags, deckerweb
 Requires at least: 4.7
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPL-2.0-or-later
 License URI: https://opensource.org/licenses/GPL-2.0
 
@@ -54,24 +54,6 @@ https://www.youtube.com/watch?v=tMmJ6sdMdxw
 * I am open for your suggestions and feedback - Thank you for using or trying out one of my plugins!
 * Join our [**Facebook User Community Support Group**](https://www.facebook.com/groups/deckerweb.wordpress.plugins/)
 
-= My Other Plugins =
-* [**Toolbar Extras for Elementor - WordPress Admin Bar Enhanced**](https://wordpress.org/plugins/connect-polylang-elementor/)
-* [**Toolbar Extras for Oxygen Builder - Add-On plugin**](https://wordpress.org/plugins/toolbar-extras-oxygen/)
-* [**Toolbar Extras for MainWP Dashboard - Add-On plugin**](https://wordpress.org/plugins/toolbar-extras-mainwp/)
-* [**Toolbar Extras for Give Donations (GiveWP) - Add-On plugin**](https://wordpress.org/plugins/toolbar-extras-givewp/)
-* [**Builder Shortcode Extras – WordPress Shortcodes Collection to Save You Time**](https://wordpress.org/plugins/builder-shortcode-extras/)
-* [**Builder Template Categories - for WordPress Page Builders**](https://wordpress.org/plugins/builder-template-categories/)
-* [**Simple Download Manager for WP Document Revisions**](https://wordpress.org/plugins/wpdr-simple-downloads/)
-* [Genesis What's New Info](https://wordpress.org/plugins/genesis-whats-new-info/)
-* [Genesis Layout Extras](https://wordpress.org/plugins/genesis-layout-extras/)
-* [Genesis Widgetized Not Found & 404](https://wordpress.org/plugins/genesis-widgetized-notfound/)
-* [Genesis Extra Settings Transporter](https://wordpress.org/plugins/genesis-extra-settings-transporter/)
-* [Genesis Widgetized Footer](https://wordpress.org/plugins/genesis-widgetized-footer/)
-* [Genesis Widgetized Archive](https://wordpress.org/plugins/genesis-widgetized-archive/)
-* [Multisite Toolbar Additions](https://wordpress.org/plugins/multisite-toolbar-additions/)
-* [Cleaner Plugin Installer](https://wordpress.org/plugins/cleaner-plugin-installer/)
-* [*My plugins newsletter*](https://eepurl.com/gbAUUn)
-
 
 == Installation ==
 
@@ -85,7 +67,7 @@ https://www.youtube.com/watch?v=tMmJ6sdMdxw
 
 = We Recommend Your Host Supports at least: =
 
-* PHP version 7.2 or higher
+* PHP version 7.3 or higher
 * MySQL version 5.6 or higher / or MariaDB 10 or higher
 
 = Installation =
@@ -161,7 +143,7 @@ Technically, Elementor Pro is not required - but highly recommended, though.
 
 Elementor Pro is required for these features of the plugin:
 
-* Translating Elementor Theme Builder Templates the  version is required, otherwise this will not work.
+* Translating Elementor Theme Builder Templates the version is required, otherwise this will not work.
 * Dynamic Tags, additionally added by the plugin
 
 For the other features of the plugin the regular free version of Elementor is sufficient - so the native Elementor language switcher widget will work also that way already ;-)
@@ -238,9 +220,24 @@ There are quite a few:
 
 == Changelog ==
 
+= 1.0.3 - 2021-04-27 =
+* Ensure Theme Builder conditions for all languages (prev. version only saves main language conditions)
+* When a template is a translation override with empty conditions
+
+= 1.0.2 - 2021-04-26 =
+* Fix Elementor template display conditions reset
+* Fix wp-cli error languages undefined
+* Fix Elementor deprecations
+* Added Elementor Landing Pages CPT translatable
+* Added JetEngine Listing CPT translatable
+* WordPress PHP Coding Standards
+
+= 1.0.1 - 2020-06-17 =
+* Stability update for edge cases were experiencing fatal errors
+* Thanks to sebastienserre for correct fatal unknow pll_the_languages();
+
 = 1.0.0 - 2018-11-28 =
 * Official public release on WordPress.org
-
 
 = 0.9.1 - 2018-11-27 =
 * *First Release Candidate (RC) version*
@@ -248,19 +245,16 @@ There are quite a few:
 * Tweak: Code improvements throughout
 * Tweak: Inline documentation and PHP doc improvements
 
-
 = 0.9.0 - 2018-11-26 =
 * *Second beta version*
 * New: More settings for Polylang Switcher widget
 * Tweak: Improved Dynamic Tags additions
 * Tweak: Improved Elementor Finder integration
 
-
 = 0.8.0 - 2018-11-25 =
 * *First beta version*
 * New: Added native Elementor Widget - Polylang Language Switcher
 * New: Added Dynamic Tags for Polylang (requires Elementor Pro)
-
 
 = 0.7.0 - 2018-11-24 =
 * *Second alpha version*
@@ -268,7 +262,6 @@ There are quite a few:
 * New: Make plugin translateable - added German translations
 * New: Added Readme file, plus `composer.json`
 * New: First public alpha release on GitHub
-
 
 = 0.5.0 - 2018-10-30 =
 * *Plugin idea by Brad*
@@ -303,3 +296,4 @@ Credit where credit is due. The following code/ classes, all licensed under the 
 * [User support forums](https://wordpress.org/support/plugin/connect-polylang-elementor)
 * [Polylang Users Facebook Group](https://www.facebook.com/groups/polylang.users/)
 * [DECKERWEB WordPress Plugins Facebook Group](https://www.facebook.com/groups/deckerweb.wordpress.plugins/)
+* [**Creame** We are a digital design company](https://crea.me/)

@@ -82,3 +82,19 @@ function ddw_cpel_is_polylang_free_active() {
 	return ddw_cpel_is_polylang_active() && ! ddw_cpel_is_polylang_pro_active();
 
 }
+
+
+/**
+ * Is post a translation in secondary language
+ *
+ * @since  1.0.3
+ *
+ * @return bool TRUE if is a translation, FALSE otherwise.
+ */
+function ddw_cpel_is_translation( $post_id ) {
+
+	$default_lang = pll_default_language();
+
+	return $default_lang !== pll_get_post_language( $post_id ) && pll_get_post( $post_id, $default_lang );
+
+}

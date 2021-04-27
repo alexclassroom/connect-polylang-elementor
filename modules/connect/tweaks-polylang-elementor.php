@@ -66,16 +66,14 @@ add_action( 'parse_query', 'ddw_cpel_polylang_elementor_library_conditions_parse
  * @link  https://github.com/pojome/elementor/issues/4839
  *
  * @since 1.0.0
+ * @since 1.0.3 only check meta_key is '_elementor_conditions' & set lang 'all'
  *
  * @param WP_Query $query
  */
 function ddw_cpel_polylang_elementor_library_conditions_parse_query( $query ) {
 
-	if ( is_admin() && ! empty( $query->query_vars['post_type'] ) && 'elementor_library' === $query->query_vars['post_type']
-		 && ! empty( $query->query_vars['meta_key'] )
-		 && '_elementor_conditions' === $query->query_vars['meta_key']
-	) {
-		$query->set( 'lang', '' );
+	if ( is_admin() && ddw_cpel_is_polylang_active() && '_elementor_conditions' === $query->query_vars['meta_key'] ) {
+		$query->set( 'lang', 'all' );
 	}
 
 }
@@ -108,29 +106,47 @@ function ddw_cpel_change_template_based_on_language( $post_id ) {
 }
 
 
-add_filter( 'posts_request', 'ddw_cpel_elementor_generate_conditions_on_default_language', 10, 2 );
+add_filter( 'get_post_metadata', 'ddw_cpel_empty_elementor_conditions_on_translations', 10, 3 );
 /**
- * Ensure Elementor Theme Builder conditions are generated with main language
+ * Return empty conditions on secondary translations
  *
- * @since  1.0.2
+ * @since  1.0.3
  *
- * @uses   pll_current_language()
- * @uses   pll_default_language()
- *
- * @param  string   $request SQL select query
- * @param  WP_Query $wp_query Current query
- * @return string updated SQL query
+ * @param  mixed  $null null value
+ * @param  int    $post_id post ID
+ * @param  string $meta_key Post meta key name
+ * @return mixed null or empty array
  */
-function ddw_cpel_elementor_generate_conditions_on_default_language( $request, $wp_query ) {
+function ddw_cpel_empty_elementor_conditions_on_translations( $null, $post_id, $meta_key ) {
 
-	if ( function_exists( 'pll_current_language' ) && isset( $wp_query->query['meta_key'] ) && '_elementor_conditions' == $wp_query->query['meta_key'] ) {
+	if ( is_admin() && ddw_cpel_is_polylang_active() && '_elementor_conditions' === $meta_key ) {
 
-		$current_lang = 'term_taxonomy_id IN (' . pll_current_language( 'term_taxonomy_id' ) . ')';
-		$default_lang = 'term_taxonomy_id IN (' . pll_default_language( 'term_taxonomy_id' ) . ')';
+		return ddw_cpel_is_translation( $post_id ) ? array( array() ) : $null;
 
-		$request = str_replace( $current_lang, $default_lang, $request );
 	}
 
-	return $request;
+	return $null;
+
+}
+
+
+add_filter( 'pre_update_option_elementor_pro_theme_builder_conditions', 'ddw_cpel_theme_builder_conditions_clear_empty' );
+/**
+ * Clear empty conditions before save 'elementor_pro_theme_builder_conditions' option
+ *
+ * @since  1.0.3
+ *
+ * @param  array $value array of theme builder conditions
+ * @return array  filtered array
+ */
+function ddw_cpel_theme_builder_conditions_clear_empty( $value ) {
+
+	foreach ( $value as $location => $items ) {
+		$value[ $location ] = array_filter( $items );
+	}
+
+	$value = array_filter( $value );
+
+	return $value;
 
 }

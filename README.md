@@ -5,7 +5,7 @@
 **Requires at least:** 4.7
 **Tested up to:** 5.7
 **Requires PHP:** 5.6
-**Stable tag:** 1.0.2
+**Stable tag:** 1.0.3
 **License:** GPL-2.0-or-later
 **License URI:** https://opensource.org/licenses/GPL-2.0
 
@@ -238,11 +238,17 @@ There are quite a few:
 
 ## Changelog
 
-### 1.0.2 - 2021-04-23
+### 1.0.3 - 2021-04-27
+* Ensure Theme Builder conditions for all languages (prev. version only saves main language conditions)
+* When a template is a translation override with empty conditions
+
+### 1.0.2 - 2021-04-26
 
 * Fix Elementor template display conditions reset
 * Fix wp-cli error languages undefined
 * Fix Elementor deprecations
+* Added Elementor Landing Pages CPT translatable
+* Added JetEngine Listing CPT translatable
 * WordPress PHP Coding Standards
 
 ### 1.0.1 - 2020-06-17
