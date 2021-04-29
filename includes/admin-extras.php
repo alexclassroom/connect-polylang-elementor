@@ -23,6 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function ddw_cpel_custom_settings_links( $cpel_links ) {
 
 	$link_polylang  = '';
+	$link_elementor = '';
 	$templates_link = '';
 
 	/** Add settings link only if user has permission */
