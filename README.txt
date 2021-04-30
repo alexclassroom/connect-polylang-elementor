@@ -5,7 +5,7 @@ Tags: elementor, polylang, multilingual, language switcher, languages, templates
 Requires at least: 4.7
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPL-2.0-or-later
 License URI: https://opensource.org/licenses/GPL-2.0
 
@@ -219,6 +219,10 @@ There are quite a few:
 
 
 == Changelog ==
+
+= 1.0.4 - 2021-04-30 =
+* Translated templates with conditions for categories/tags also works with translated categories/tags.
+* Fixed PHP notice on activation
 
 = 1.0.3 - 2021-04-27 =
 * Ensure Theme Builder conditions for all languages (prev. version only saves main language conditions)

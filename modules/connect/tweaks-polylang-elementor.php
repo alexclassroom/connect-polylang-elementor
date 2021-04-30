@@ -87,21 +87,62 @@ add_filter( 'elementor/theme/get_location_templates/template_id', 'ddw_cpel_chan
  * @link   https://github.com/pojome/elementor/issues/4839
  *
  * @since  1.0.0
+ * @since  1.0.4 save global $ddw_cpel_template_id
  *
  * @uses   pll_get_post()
  *
+ * @global int $ddw_cpel_template_id used to save current template ID
  * @param  int $post_id ID of the current post.
  * @return string Based translation, the translation ID, or the original Post ID.
  */
 function ddw_cpel_change_template_based_on_language( $post_id ) {
+	global $ddw_cpel_template_id;
 
-	if ( function_exists( 'pll_get_post' ) ) {
+	if ( ddw_cpel_is_polylang_active() ) {
 
-		return pll_get_post( $post_id ) ?: $post_id;
+		$post_id = pll_get_post( $post_id ) ?: $post_id;
 
 	}
 
+	$ddw_cpel_template_id = $post_id;
+
 	return $post_id;
+
+}
+
+
+add_filter( 'elementor/theme/get_location_templates/condition_sub_id', 'ddw_cpel_change_condition_sub_id_based_on_language', 10, 2 );
+/**
+ * Filter Elementor sub_conditions system: If is translated condition that is based
+ *   on term or post return the translation ID of term or post.
+ *
+ * @since  1.0.4
+ *
+ * @uses   pll_get_post()
+ * @uses   pll_get_term()
+ *
+ * @global int   $ddw_cpel_template_id used to get current template ID
+ * @param  int   $sub_id ID of the object in subcondition.
+ * @param  array $parsed_condition condition parts
+ * @return int original sub ID or translated ID
+ */
+function ddw_cpel_change_condition_sub_id_based_on_language( $sub_id, $parsed_condition ) {
+	global $ddw_cpel_template_id;
+
+	if ( $sub_id && ddw_cpel_is_polylang_active() && ddw_cpel_is_translation( $ddw_cpel_template_id ) ) {
+
+		if ( in_array( $parsed_condition['sub_name'], get_post_types() ) ) {
+
+			$sub_id = pll_get_post( $sub_id ) ?: $sub_id;
+
+		} else {
+
+			$sub_id = pll_get_term( $sub_id ) ?: $sub_id;
+
+		}
+	}
+
+	return $sub_id;
 
 }
 
