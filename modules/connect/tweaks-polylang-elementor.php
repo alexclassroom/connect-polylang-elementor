@@ -67,13 +67,30 @@ add_action( 'parse_query', 'ddw_cpel_polylang_elementor_library_conditions_parse
  *
  * @since 1.0.0
  * @since 1.0.3 only check meta_key is '_elementor_conditions' & set lang 'all'
+ * @since 1.0.5 also filter for Global Widgets & set lang ''
  *
  * @param WP_Query $query
  */
 function ddw_cpel_polylang_elementor_library_conditions_parse_query( $query ) {
 
-	if ( is_admin() && ddw_cpel_is_polylang_active() && '_elementor_conditions' === $query->query_vars['meta_key'] ) {
-		$query->set( 'lang', 'all' );
+	if ( ! is_admin() ) {
+		return;
+	}
+
+	$global_widget_meta_query = array(
+		'key'   => '_elementor_template_type',
+		'value' => 'widget',
+	);
+
+	$is_elementor_conditions = isset( $query->query_vars['meta_key'] )
+		&& '_elementor_conditions' === $query->query_vars['meta_key'];
+
+	$is_global_widget = 'elementor_library' === $query->query_vars['post_type']
+		&& isset( $query->query_vars['meta_query'] )
+		&& in_array( $global_widget_meta_query, $query->query_vars['meta_query'] );
+
+	if ( $is_elementor_conditions || $is_global_widget ) {
+		$query->set( 'lang', '' );
 	}
 
 }

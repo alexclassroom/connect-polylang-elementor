@@ -5,7 +5,7 @@
 **Requires at least:** 4.7
 **Tested up to:** 5.7
 **Requires PHP:** 5.6
-**Stable tag:** 1.0.4
+**Stable tag:** 1.0.5
 **License:** GPL-2.0-or-later
 **License URI:** https://opensource.org/licenses/GPL-2.0
 
@@ -237,6 +237,9 @@ There are quite a few:
 
 
 ## Changelog
+
+### 1.0.5 - 2021-05-17
+* Fixed Elementor editor don't load with Global Widgets in secondary language.
 
 ### 1.0.4 - 2021-04-30
 * Translated templates with conditions for categories/tags also works with translated categories/tags.
