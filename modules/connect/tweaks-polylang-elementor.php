@@ -85,7 +85,8 @@ function ddw_cpel_polylang_elementor_library_conditions_parse_query( $query ) {
 	$is_elementor_conditions = isset( $query->query_vars['meta_key'] )
 		&& '_elementor_conditions' === $query->query_vars['meta_key'];
 
-	$is_global_widget = 'elementor_library' === $query->query_vars['post_type']
+	$is_global_widget = isset( $query->query_vars['post_type'] )
+		&& 'elementor_library' === $query->query_vars['post_type']
 		&& isset( $query->query_vars['meta_query'] )
 		&& in_array( $global_widget_meta_query, $query->query_vars['meta_query'] );
 
