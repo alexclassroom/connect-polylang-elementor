@@ -5,7 +5,7 @@ Tags: elementor, polylang, multilingual, language switcher, languages, templates
 Requires at least: 4.7
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GPL-2.0-or-later
 License URI: https://opensource.org/licenses/GPL-2.0
 
@@ -219,6 +219,9 @@ There are quite a few:
 
 
 == Changelog ==
+
+= 1.0.6 - 2021-06-05 =
+* Fixed PHP notice undefined 'post_type'.
 
 = 1.0.5 - 2021-05-17 =
 * Fixed Elementor editor don't load with Global Widgets in secondary language.
