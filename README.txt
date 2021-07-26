@@ -1,9 +1,9 @@
 === Polylang Connect for Elementor - Language Switcher & Template Tweaks ===
 Contributors: daveshine, p4fbradjohnson, deckerweb, wpautobahn, pacotole, creapuntome
-Donate link: https://www.paypal.me/deckerweb
-Tags: elementor, polylang, multilingual, language switcher, languages, templates, widget, finder, dynamic tags, deckerweb
+Donate link: https://www.paypal.me/pacotole
+Tags: elementor, polylang, multilingual, language switcher, languages, templates, widget, finder, dynamic tags
 Requires at least: 4.7
-Tested up to: 5.7
+Tested up to: 5.8
 Requires PHP: 5.6
 Stable tag: 1.0.5
 License: GPL-2.0-or-later
