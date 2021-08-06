@@ -8,8 +8,8 @@ use Elementor\Core\Schemes\Color;
 use Elementor\Core\Schemes\Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
+use Elementor\Icons_Manager;
 use Elementor\Widget_Base;
-use function function_exists;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -169,26 +169,26 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		/** Content: Layout etc. */
 		$this->start_controls_section(
 			'section_content',
-			array(
-				'label' => __( 'Content', 'elementor' ),
-			)
+			array( 'label' => __( 'Content', 'elementor' ) )
 		);
 
-		$this->add_responsive_control(
+		$this->add_control(
 			'layout',
 			array(
 				'label'        => __( 'Layout', 'elementor' ),
 				'type'         => Controls_Manager::SELECT,
-				'default'      => 'horizontal',
 				'options'      => array(
 					'horizontal' => __( 'Horizontal', 'elementor' ),
 					'vertical'   => __( 'Vertical', 'elementor' ),
+					'dropdown'   => __( 'Dropdown', 'elementor' ),
 				),
-				'prefix_class' => 'cpel-switcher-%s-layout-',
+				'default'      => 'horizontal',
+				'prefix_class' => 'cpel-switcher--layout-',
+				'render_type'  => 'template',
 			)
 		);
 
-		$this->add_responsive_control(
+		$this->add_control(
 			'align_items',
 			array(
 				'label'        => __( 'Alignment', 'elementor' ),
@@ -211,7 +211,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 						'icon'  => 'eicon-h-align-stretch',
 					),
 				),
-				'prefix_class' => 'cpel-switcher-%s-align-',
+				'prefix_class' => 'cpel-switcher--align-',
 			)
 		);
 
@@ -281,18 +281,14 @@ class PolylangLanguageSwitcher extends Widget_Base {
 
 		$this->start_controls_tab(
 			'tab_menu_item_normal',
-			array(
-				'label' => __( 'Normal', 'elementor' ),
-			)
+			array( 'label' => __( 'Normal', 'elementor' ) )
 		);
 
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'typography_menu_item',
-				'global'   => array(
-					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-				),
+				'global'   => array( 'default' => Global_Typography::TYPOGRAPHY_PRIMARY ),
 				'selector' => '{{WRAPPER}} .cpel-switcher__lang a',
 			)
 		);
@@ -302,13 +298,25 @@ class PolylangLanguageSwitcher extends Widget_Base {
 			array(
 				'label'     => __( 'Text Color', 'elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => array(
-					'default' => Global_Colors::COLOR_TEXT,
-				),
+				'global'    => array( 'default' => Global_Colors::COLOR_TEXT ),
 				'default'   => '',
 				'selectors' => array(
 					'{{WRAPPER}} .cpel-switcher__lang a' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .cpel-switcher__icon'   => 'color: {{VALUE}}',
 				),
+			)
+		);
+
+		$this->add_control(
+			'bg_dropdown_item',
+			array(
+				'label'     => __( 'Background Color', 'elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#FFFFFF',
+				'selectors' => array(
+					'{{WRAPPER}}.cpel-switcher--layout-dropdown .cpel-switcher__lang a' => 'background-color: {{VALUE}};',
+				),
+				'condition' => array( 'layout' => 'dropdown' ),
 			)
 		);
 
@@ -316,9 +324,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 
 		$this->start_controls_tab(
 			'tab_menu_item_hover',
-			array(
-				'label' => __( 'Hover', '__elementor' ),
-			)
+			array( 'label' => __( 'Hover', '__elementor' ) )
 		);
 
 		$this->add_group_control(
@@ -335,12 +341,23 @@ class PolylangLanguageSwitcher extends Widget_Base {
 			array(
 				'label'     => __( 'Text Color', 'elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => array(
-					'default' => Global_Colors::COLOR_ACCENT,
-				),
+				'global'    => array( 'default' => Global_Colors::COLOR_ACCENT ),
 				'selectors' => array(
 					'{{WRAPPER}} .cpel-switcher__lang a:hover, {{WRAPPER}} .cpel-switcher__lang a:focus' => 'color: {{VALUE}}',
 				),
+			)
+		);
+
+		$this->add_control(
+			'bg_dropdown_hover',
+			array(
+				'label'     => __( 'Background Color', 'elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#D9D9D9',
+				'selectors' => array(
+					'{{WRAPPER}}.cpel-switcher--layout-dropdown .cpel-switcher__lang a:hover, {{WRAPPER}}.cpel-switcher--layout-dropdown .cpel-switcher__lang a:focus' => 'background-color: {{VALUE}};',
+				),
+				'condition' => array( 'layout' => 'dropdown' ),
 			)
 		);
 
@@ -352,6 +369,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 				'label'     => __( 'Active', 'elementor' ),
 				'condition' => array(
 					'hide_current!' => 'yes',
+					'layout!'       => 'dropdown',
 				),
 			)
 		);
@@ -371,9 +389,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 				'label'     => __( 'Text Color', 'elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
-				'selectors' => array(
-					'{{WRAPPER}} .cpel-switcher__lang.cpel-switcher__lang--active a' => 'color: {{VALUE}}',
-				),
+				'selectors' => array( '{{WRAPPER}} .cpel-switcher__lang--active a' => 'color: {{VALUE}}' ),
 			)
 		);
 
@@ -418,8 +434,62 @@ class PolylangLanguageSwitcher extends Widget_Base {
 				'range'     => array(
 					'px' => array( 'max' => 100 ),
 				),
+				'default'   => array( 'size' => 15 ),
 				'selectors' => array(
-					'{{WRAPPER}} .cpel-switcher__switcher' => '--cpel-switcher-espace: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .cpel-switcher__nav' => '--cpel-switcher-space: {{SIZE}}{{UNIT}};',
+				),
+				'condition' => array( 'layout!' => 'dropdown' ),
+			)
+		);
+
+		$this->add_control(
+			'heading_dropdown',
+			array(
+				'label'     => __( 'Dropdown', 'elementor-pro' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+				'condition' => array( 'layout' => 'dropdown' ),
+			)
+		);
+
+		$this->add_control(
+			'dropdown_icon',
+			array(
+				'label'                  => __( 'Icon', 'elementor' ),
+				'type'                   => Controls_Manager::ICONS,
+				'fa4compatibility'       => 'icon',
+				'recommended'            => array(
+					'fa-solid' => array(
+						'chevron-down',
+						'angle-down',
+						'caret-down',
+						'plus',
+					),
+				),
+				'label_block'            => false,
+				'skin'                   => 'inline',
+				'exclude_inline_options' => 'svg',
+				'default'                => array(
+					'value'   => 'fas fa-caret-down',
+					'library' => 'fa-solid',
+				),
+				'condition'              => array( 'layout' => 'dropdown' ),
+			)
+		);
+
+		$this->add_control(
+			'dropdown_icon_indent',
+			array(
+				'label'     => __( 'Icon Spacing', 'elementor' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => array(
+					'px' => array( 'max' => 50 ),
+				),
+				'default'   => array( 'size' => '10' ),
+				'selectors' => array( '{{WRAPPER}} .cpel-switcher__icon' => 'padding-left: {{SIZE}}{{UNIT}};' ),
+				'condition' => array(
+					'layout'                => 'dropdown',
+					'dropdown_icon[value]!' => '',
 				),
 			)
 		);
@@ -435,9 +505,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 			array(
 				'label'     => __( 'Flag', 'polylang' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => array(
-					'show_country_flag' => array( 'yes' ),
-				),
+				'condition' => array( 'show_country_flag' => 'yes' ),
 			)
 		);
 
@@ -471,12 +539,13 @@ class PolylangLanguageSwitcher extends Widget_Base {
 			array(
 				'label'     => __( 'Size', 'elementor' ),
 				'type'      => Controls_Manager::SLIDER,
-				'default'   => array( 'size' => 20 ),
 				'range'     => array(
 					'px' => array( 'min' => 16 ),
 				),
+				'default'   => array( 'size' => 20 ),
 				'selectors' => array(
-					'{{WRAPPER}} .cpel-switcher__switcher .cpel-switcher__flag' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.cpel-switcher--aspect-ratio-11 .cpel-switcher__flag' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}}.cpel-switcher--aspect-ratio-43 .cpel-switcher__flag' => 'width: {{SIZE}}{{UNIT}}; height: calc({{SIZE}}{{UNIT}} * 0.75);',
 				),
 				'condition' => array( 'svg_flag' => 'yes' ),
 			)
@@ -491,9 +560,8 @@ class PolylangLanguageSwitcher extends Widget_Base {
 				'range'      => array(
 					'%' => array( 'max' => 50 ),
 				),
-				'selectors'  => array(
-					'{{WRAPPER}} .cpel-switcher__switcher .cpel-switcher__flag img' => 'border-radius: {{SIZE}}{{UNIT}}',
-				),
+				'default'    => array( 'size' => 0 ),
+				'selectors'  => array( '{{WRAPPER}} .cpel-switcher__flag img' => 'border-radius: {{SIZE}}{{UNIT}}' ),
 				'condition'  => array( 'svg_flag' => 'yes' ),
 			)
 		);
@@ -509,13 +577,11 @@ class PolylangLanguageSwitcher extends Widget_Base {
 			array(
 				'label'     => __( 'Language Name', 'connect-polylang-elementor' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => array(
-					'show_language_name' => array( 'yes' ),
-				),
+				'condition' => array( 'show_language_name' => 'yes' ),
 			)
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'text_indent_language_name',
 			array(
 				'label'     => __( 'Text Indent', 'elementor' ),
@@ -523,6 +589,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 				'range'     => array(
 					'px' => array( 'max' => 50 ),
 				),
+				'default'   => array( 'size' => '10' ),
 				'selectors' => array(
 					'{{WRAPPER}} .cpel-switcher__name' => is_rtl() ? 'padding-right: {{SIZE}}{{UNIT}};' : 'padding-left: {{SIZE}}{{UNIT}};',
 				),
@@ -540,9 +607,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 			array(
 				'label'     => __( 'Language Code', 'connect-polylang-elementor' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => array(
-					'show_language_code' => array( 'yes' ),
-				),
+				'condition' => array( 'show_language_code' => 'yes' ),
 			)
 		);
 
@@ -556,16 +621,15 @@ class PolylangLanguageSwitcher extends Widget_Base {
 			)
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'text_indent_language_code',
 			array(
 				'label'     => __( 'Text Indent', 'elementor' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => array(
-					'px' => array(
-						'max' => 50,
-					),
+					'px' => array( 'max' => 50 ),
 				),
+				'default'   => array( 'size' => '10' ),
 				'selectors' => array(
 					'{{WRAPPER}} .cpel-switcher__code' => is_rtl() ? 'padding-right: {{SIZE}}{{UNIT}};' : 'padding-left: {{SIZE}}{{UNIT}};',
 				),
@@ -598,11 +662,13 @@ class PolylangLanguageSwitcher extends Widget_Base {
 	 *
 	 * Written in PHP and used to generate the final HTML.
 	 *
-	 * @since 1.0.0
+	 * @since 2.0.0
 	 *
 	 * @access protected
 	 *
 	 * @uses pll_the_languages() Holds Polylang languages for switcher.
+	 * @uses pll_current_language() Get the current language.
+	 * @return void
 	 */
 	protected function render() {
 
@@ -610,16 +676,33 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$settings = $this->get_active_settings();
 
 		// Add render attributes for Elementor.
-		$this->add_render_attribute( 'main-menu', 'class', array( 'cpel-switcher__switcher' ) );
+		$this->add_render_attribute(
+			array(
+				'_wrapper' => array(
+					'class' => 'cpel-switcher--layout-' . $settings['layout'],
+				),
+				'nav'      => array(
+					'class' => 'cpel-switcher__nav',
+				),
+				'icon'     => array(
+					'class'       => array(
+						'cpel-switcher__icon',
+						empty( $settings['dropdown_icon']['value'] ) ? '' : $settings['dropdown_icon']['value'],
+					),
+					'aria-hidden' => 'true',
+				),
+			)
+		);
 
 		// Get the available languages for switcher.
 		$languages = pll_the_languages( array( 'raw' => 1 ) );
+		$lang_curr = strtolower( pll_current_language() );
 
 		if ( ! empty( $languages ) ) {
 
-			$output = '<nav ' . $this->get_render_attribute_string( 'main-menu' ) . '><ul class="cpel-switcher__list">';
+			$lang_links = array();
 
-			foreach ( $languages as $language ) {
+			foreach ( $languages as $lang_code => $language ) {
 
 				// Hide the current language.
 				if ( 'yes' === $settings['hide_current'] && $language['current_lang'] ) {
@@ -631,6 +714,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 					continue;
 				}
 
+				// Language code.
 				$language_code = sprintf(
 					'%s%s%s',
 					$settings['before_language_code'] ?: '',
@@ -638,7 +722,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 					$settings['after_language_code'] ?: ''
 				);
 
-				// Flag image.
+				// Language flag.
 				$language_flag = '';
 				if ( $settings['show_country_flag'] ) {
 					$flag_code = cpel_flag_code( $language['flag'] );
@@ -666,10 +750,9 @@ class PolylangLanguageSwitcher extends Widget_Base {
 					}
 				}
 
-				// Build the language switcher menu item.
-				$output .= sprintf(
-					'<li class="%1$s"><a lang="%2$s" hreflang="%2$s" href="%3$s">%4$s%5$s%6$s</a></li>',
-					$language['current_lang'] ? 'cpel-switcher__lang cpel-switcher__lang--active' : 'cpel-switcher__lang',
+				// Language link.
+				$lang_links[ strtolower( $lang_code ) ] = sprintf(
+					'<a lang="%1$s" hreflang="%1$s" href="%2$s">%3$s%4$s%5$s</a>',
 					esc_attr( $language['locale'] ),
 					esc_url( $language['url'] ),
 					$language_flag,
@@ -678,25 +761,40 @@ class PolylangLanguageSwitcher extends Widget_Base {
 				);
 			}
 
-			$output .= '</ul></nav>';
+			$output = '<nav ' . $this->get_render_attribute_string( 'nav' ) . '>';
+
+			// Dropdown toggle link
+			if ( count( $lang_links ) && 'dropdown' === $settings['layout'] ) {
+				$lang_code = array_key_exists( $lang_curr, $lang_links ) ? $lang_curr : array_key_first( $lang_links );
+				$lang_link = $lang_links[ $lang_code ];
+
+				unset( $lang_links[ $lang_code ] );
+
+				if ( ! empty( $settings['dropdown_icon']['value'] ) && count( $lang_links ) ) {
+					$lang_link = str_replace( '</a>', '<i ' . $this->get_render_attribute_string( 'icon' ) . '></i></a>', $lang_link );
+				}
+
+				$output .= '<div class="cpel-switcher__toggle cpel-switcher__lang">' . $lang_link . '</div>';
+			}
+
+			// Languages list
+			if ( count( $lang_links ) ) {
+
+				$output .= '<ul class="cpel-switcher__list">';
+
+				foreach ( $lang_links as $lang_code => $lang_link ) {
+					$output .= '<li class="cpel-switcher__lang' . ( $lang_code === $lang_curr ? ' cpel-switcher__lang--active' : '' ) . '">' . $lang_link . '</li>';
+				}
+
+				$output .= '</ul>';
+			}
+
+			$output .= '</nav>';
 
 			echo $output;
 
 		}
 
 	}
-
-
-	/**
-	 * Render the widget output in the editor.
-	 *
-	 * Written as a Backbone JavaScript template and used to generate the live
-	 *   preview.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @access protected
-	 */
-	protected function _content_template() { }
 
 }
