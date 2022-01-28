@@ -1,6 +1,9 @@
 <?php
 namespace ConnectPolylangElementor;
 
+use Elementor\Controls_Manager;
+
+
 defined( 'ABSPATH' ) || exit;
 
 
@@ -53,6 +56,9 @@ class ConnectPlugins {
 			add_filter( 'update_post_metadata', array( $this, 'prevent_elementor_css_meta' ), 10, 3 );
 
 		}
+
+		// Elementor editor menu lins to translations
+		add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'elementor_editor_script' ) );
 
 	}
 
@@ -335,6 +341,85 @@ class ConnectPlugins {
 	function home_url_language_dir_slash( $url, $path ) {
 
 		return empty( $path ) && 1 === PLL()->options['force_lang'] ? trailingslashit( $url ) : $url;
+
+	}
+
+	/**
+	 * Elementor editor script
+	 *
+	 * Add script with links to translations on Elementor editor panel.
+	 *
+	 * @since  2.0.0
+	 *
+	 * @return void
+	 */
+	function elementor_editor_script() {
+
+		global $typenow, $post;
+
+		// If is post type translatable
+		if ( pll_is_translated_post_type( $typenow ) ) {
+
+			$languages    = pll_languages_list( array( 'fields' => '' ) );
+			$translations = pll_get_post_translations( $post->ID );
+			$current      = pll_get_post_language( $post->ID, 'name' );
+
+			$items = array();
+			foreach ( $languages as $language ) {
+				if ( $language->name !== $current ) {
+					if ( isset( $translations[ $language->slug ] ) ) {
+						$translation_id = $translations[ $language->slug ];
+						$link           = get_edit_post_link( $translation_id, 'edit' );
+
+						if ( get_post_meta( $translation_id, '_elementor_edit_mode', true ) ) {
+							$link = add_query_arg( 'action', 'elementor', $link );
+						}
+
+						$items[] = array(
+							'name'  => "cpel-{$language->slug}",
+							'icon'  => 'eicon-globe',
+							'title' => sprintf( '%s (%s)', get_the_title( $translation_id ), $language->slug ),
+							'type'  => 'link',
+							'link'  => $link,
+						);
+					} else {
+
+						$args = array(
+							'post_type' => $typenow,
+							'from_post' => $post->ID,
+							'new_lang'  => $language->slug,
+						);
+
+						$link = add_query_arg( $args, admin_url( 'post-new.php' ) );
+						$link = add_query_arg( '_wpnonce', wp_create_nonce( 'new-post-translation' ), $link );
+
+						$items[] = array(
+							'name'  => "cpel-{$language->slug}",
+							'icon'  => 'eicon-plus',
+							'title' => sprintf( __( 'Add translation (%s)', 'connect-polylang-elementor' ), strtolower( $language->slug ) ),
+							'type'  => 'link',
+							'link'  => $link,
+						);
+					}
+				}
+			}
+
+			$group = array(
+				'name'  => 'cpel',
+				'title' => sprintf( __( 'Template Language %s', 'connect-polylang-elementor' ), $current ),
+				'items' => $items,
+			);
+
+			$script = 'jQuery(window).on("elementor:init", () => {
+				window.elementor.on("panel:init", () => {
+					setTimeout(() => { window.elementor.modules.layouts.panel.pages.menu.Menu.groups.add(' . json_encode( $group ) . '); });
+				});
+			});';
+
+			// Add after Elementor editor script.
+			wp_add_inline_script( 'elementor-editor', $script );
+
+		}
 
 	}
 
