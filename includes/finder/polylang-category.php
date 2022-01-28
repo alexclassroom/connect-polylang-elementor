@@ -31,6 +31,21 @@ class PolylangCategory extends Base_Category {
 	}
 
 	/**
+	 * Get a unique category ID.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @access public
+	 *
+	 * @return string
+	 */
+	public function get_id() {
+
+		return 'cpel';
+
+	}
+
+	/**
 	 * Get category items.
 	 *
 	 * @since 1.0.0
@@ -48,7 +63,7 @@ class PolylangCategory extends Base_Category {
 			'title'       => _x( 'Setup Languages', 'Title in Elementor Finder', 'connect-polylang-elementor' ),
 			'url'         => admin_url( 'admin.php?page=mlang' ),
 			'icon'        => 'comments',
-			'keywords'    => array( 'polylang', 'languages', 'setup', 'flags', 'country', 'countries' ),
+			'keywords'    => explode( ',', _x( 'polylang,languages,setup,flags,country,countries', 'Tags in Elementor Finder', 'connect-polylang-elementor' ) ),
 			'description' => __( 'All languages of your website', 'connect-polylang-elementor' ),
 		);
 
@@ -56,7 +71,7 @@ class PolylangCategory extends Base_Category {
 			'title'       => _x( 'String Translations', 'Title in Elementor Finder', 'connect-polylang-elementor' ),
 			'url'         => admin_url( 'admin.php?page=mlang_strings' ),
 			'icon'        => 'exchange',
-			'keywords'    => array( 'polylang', 'translations', 'translate', 'strings' ),
+			'keywords'    => explode( ',', _x( 'polylang,translations,translate,strings', 'Tags in Elementor Finder', 'connect-polylang-elementor' ) ),
 			'description' => __( 'From Widgets and other website parts', 'connect-polylang-elementor' ),
 		);
 
@@ -64,7 +79,7 @@ class PolylangCategory extends Base_Category {
 			'title'       => _x( 'Settings', 'Title in Elementor Finder', 'connect-polylang-elementor' ),
 			'url'         => admin_url( 'admin.php?page=mlang_settings' ),
 			'icon'        => 'settings',
-			'keywords'    => array( 'polylang', 'settings', 'options', 'modules' ),
+			'keywords'    => explode( ',', _x( 'polylang,settings,options,modules', 'Tags in Elementor Finder', 'connect-polylang-elementor' ) ),
 			'description' => __( "Plugin's settings, enable/disable modules", 'connect-polylang-elementor' ),
 		);
 

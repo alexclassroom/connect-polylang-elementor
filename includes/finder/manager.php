@@ -29,7 +29,11 @@ class Manager {
 	 */
 	function elementor_finder_add_items( $categories_manager ) {
 
-		$categories_manager->add_category( 'polylang-plugin', new PolylangCategory() );
+		if ( version_compare( ELEMENTOR_VERSION, '3.5.0', '>=' ) ) {
+			$categories_manager->register( new PolylangCategory() );
+		} else {
+			$categories_manager->add_category( 'cpel', new PolylangCategory() );
+		}
 
 	}
 
