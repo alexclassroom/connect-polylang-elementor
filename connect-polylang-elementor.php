@@ -81,7 +81,7 @@ add_action( 'init', 'ConnectPolylangElementor\\load_textdomain' );
  */
 function setup() {
 
-	require CPEL_DIR . 'includes/conditional-functions.php';
+	require CPEL_DIR . 'includes/functions.php';
 
 	if ( cpel_is_polylang_active() && cpel_is_elementor_active() ) {
 
@@ -93,7 +93,7 @@ function setup() {
 
 	}
 
-	if ( ( is_admin() || is_network_admin() ) ) {
+	if ( is_admin() || is_network_admin() ) {
 
 		AdminExtras::instance();
 
@@ -109,7 +109,7 @@ function setup() {
  */
 function load_textdomain() {
 
-	load_plugin_textdomain( 'connect-polylang-elementor', false, dirname( CPEL_BASENAME ) . '/languages' );
+	load_plugin_textdomain( 'connect-polylang-elementor', false, CPEL_DIR . 'languages' );
 
 }
 

@@ -16,7 +16,6 @@ function cpel_is_elementor_active() {
 
 }
 
-
 /**
  * Is Elementor Pro plugin active or not?
  *
@@ -29,7 +28,6 @@ function cpel_is_elementor_pro_active() {
 	return defined( 'ELEMENTOR_PRO_VERSION' );
 
 }
-
 
 /**
  * Is Polylang (free) OR Polylang Pro (Premium) plugin active or not?
@@ -46,7 +44,6 @@ function cpel_is_polylang_active() {
 
 }
 
-
 /**
  * Is Polylang Pro (Premium) plugin active or not?
  *
@@ -60,7 +57,6 @@ function cpel_is_polylang_pro_active() {
 
 }
 
-
 /**
  * Is Polylang (free) plugin active or not?
  *
@@ -73,7 +69,6 @@ function cpel_is_polylang_free_active() {
 	return cpel_is_polylang_active() && ! cpel_is_polylang_pro_active();
 
 }
-
 
 /**
  * Is post a translation in secondary language
@@ -91,7 +86,6 @@ function cpel_is_translation( $post_id = null ) {
 
 }
 
-
 /**
  * Flag code
  *
@@ -105,7 +99,6 @@ function cpel_flag_code( $flag_url ) {
 	return preg_match( '/polylang(?:\/flags)?\/(\w+).(?:jpg|png|svg)$/i', $flag_url, $matchs ) ? $matchs[1] : false;
 
 }
-
 
 /**
  * SVG flag info
