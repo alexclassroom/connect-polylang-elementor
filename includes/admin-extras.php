@@ -103,31 +103,14 @@ class AdminExtras {
 	 */
 	function plugin_links( $cpel_links, $cpel_file ) {
 
-		/** Capability check */
-		if ( ! current_user_can( 'install_plugins' ) ) {
-			return $cpel_links;
-		}
-
-		/** List additional links only for this plugin */
 		if ( $cpel_file === CPEL_BASENAME ) {
-
-			?>
-				<style type="text/css">
-					tr[data-plugin="<?php echo $cpel_file; ?>"] .plugin-version-author-uri a.dashicons-before:before { font-size: 15px; opacity: .85; vertical-align: middle; }
-				</style>
-			<?php
-
-			// $cpel_links[] = Info::link( 'url_wporg_forum', esc_html_x( 'Support', 'Plugins page listing', 'connect-polylang-elementor' ), 'dashicons-before dashicons-sos' );
-			// $cpel_links[] = Info::link( 'url_fb_group', esc_html_x( 'Facebook Group', 'Plugins page listing', 'connect-polylang-elementor' ), 'dashicons-before dashicons-facebook' );
-			// $cpel_links[] = Info::link( 'url_translate', esc_html_x( 'Translations', 'Plugins page listing', 'connect-polylang-elementor' ), 'dashicons-before dashicons-translation' );
-			// $cpel_links[] = Info::link( 'url_donate', esc_html_x( 'Donate', 'Plugins page listing', 'connect-polylang-elementor' ), 'button-primary dashicons-before dashicons-thumbs-up' );
 
 			$cpel_links[] = '<a href="https://paypal.me/pacotole" title="Support this plugin\'s development">Donate</a>';
 			$cpel_links[] = '<a href="mailto:wespeakcomputer@gmail.com" title="Request personal one on one training on using Polylang + Elementor">Personal one-on-one training</a>';
 
 		}
 
-		/** Output the links */
+		// Output the links.
 		return apply_filters( 'cpel/filter/plugins_page/more_links', $cpel_links );
 
 	}
