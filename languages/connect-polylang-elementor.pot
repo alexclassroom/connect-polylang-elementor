@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Connect Polylang to Elementor\n"
-"POT-Creation-Date: 2021-05-20 10:48+0000\n"
+"POT-Creation-Date: 2022-01-29 08:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: David Decker DECKERWEB.de -- https://deckerweb.de/\n"
 "Language-Team: David Decker DECKERWEB.de -- https://deckerweb.de/\n"
@@ -22,7 +22,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "Language: "
 
-#: includes/finder/polylang-category.php:52
+#: includes/finder/polylang-category.php:67
 msgid "All languages of your website"
 msgstr ""
 
@@ -36,6 +36,10 @@ msgid ""
 "Connect Polylang with Elementor Page Builder. Display templates in the "
 "correct language, language switcher widget, widget language visibility "
 "settings and language dynamic tags."
+msgstr ""
+
+#. Author of the plugin
+msgid "Creame"
 msgstr ""
 
 #: includes/dynamic-tags/tag-trait.php:18
@@ -81,11 +85,11 @@ msgctxt "Elementor widget title"
 msgid "Polylang Switcher"
 msgstr ""
 
-#: includes/finder/polylang-category.php:60
+#: includes/finder/polylang-category.php:75
 msgid "From Widgets and other website parts"
 msgstr ""
 
-#: includes/widgets/polylang-language-switcher.php:389
+#: includes/widgets/polylang-language-switcher.php:403
 msgid "Horizontal Padding"
 msgstr ""
 
@@ -97,11 +101,11 @@ msgstr ""
 msgid "https://github.com/creame/connect-polylang-elementor"
 msgstr ""
 
-#: includes/widgets/polylang-language-switcher.php:545
+#: includes/widgets/polylang-language-switcher.php:608
 msgid "Language Code"
 msgstr ""
 
-#: includes/widgets/polylang-language-switcher.php:514
+#: includes/widgets/polylang-language-switcher.php:578
 msgid "Language Name"
 msgstr ""
 
@@ -123,11 +127,7 @@ msgstr ""
 msgid "Main Menu"
 msgstr ""
 
-#. Author of the plugin
-msgid "Pacotole @ CREAME"
-msgstr ""
-
-#: includes/finder/polylang-category.php:68
+#: includes/finder/polylang-category.php:83
 msgid "Plugin's settings, enable/disable modules"
 msgstr ""
 
@@ -141,30 +141,45 @@ msgid "Polylang Languages Setup"
 msgstr ""
 
 #: includes/dynamic-tags/language-flag.php:51
-#: includes/widgets/polylang-language-switcher.php:451
+#: includes/widgets/polylang-language-switcher.php:515
 msgid "Scalable Image"
 msgstr ""
 
-#: includes/finder/polylang-category.php:64
+#: includes/finder/polylang-category.php:66
+msgctxt "Tags in Elementor Finder"
+msgid "polylang,languages,setup,flags,country,countries"
+msgstr ""
+
+#: includes/finder/polylang-category.php:82
+msgctxt "Tags in Elementor Finder"
+msgid "polylang,settings,options,modules"
+msgstr ""
+
+#: includes/finder/polylang-category.php:74
+msgctxt "Tags in Elementor Finder"
+msgid "polylang,translations,translate,strings"
+msgstr ""
+
+#: includes/finder/polylang-category.php:79
 msgctxt "Title in Elementor Finder"
 msgid "Settings"
 msgstr ""
 
-#: includes/finder/polylang-category.php:48
+#: includes/finder/polylang-category.php:63
 msgctxt "Title in Elementor Finder"
 msgid "Setup Languages"
 msgstr ""
 
-#: includes/finder/polylang-category.php:56
+#: includes/finder/polylang-category.php:71
 msgctxt "Title in Elementor Finder"
 msgid "String Translations"
 msgstr ""
 
-#: includes/widgets/polylang-language-switcher.php:404
+#: includes/widgets/polylang-language-switcher.php:418
 msgid "Vertical Padding"
 msgstr ""
 
-#: includes/finder/polylang-category.php:89
+#: includes/finder/polylang-category.php:104
 msgid "View website in this language"
 msgstr ""
 

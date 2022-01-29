@@ -109,7 +109,7 @@ function setup() {
  */
 function load_textdomain() {
 
-	load_plugin_textdomain( 'connect-polylang-elementor', false, CPEL_DIR . 'languages' );
+	load_plugin_textdomain( 'connect-polylang-elementor', false, dirname( CPEL_BASENAME ) . '/languages' );
 
 }
 

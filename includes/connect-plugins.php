@@ -368,6 +368,7 @@ class ConnectPlugins {
 			foreach ( $languages as $language ) {
 				if ( $language->name !== $current ) {
 					if ( isset( $translations[ $language->slug ] ) ) {
+
 						$translation_id = $translations[ $language->slug ];
 						$link           = get_edit_post_link( $translation_id, 'edit' );
 
@@ -388,15 +389,15 @@ class ConnectPlugins {
 							'post_type' => $typenow,
 							'from_post' => $post->ID,
 							'new_lang'  => $language->slug,
+							'_wpnonce'  => wp_create_nonce( 'new-post-translation' ),
 						);
 
 						$link = add_query_arg( $args, admin_url( 'post-new.php' ) );
-						$link = add_query_arg( '_wpnonce', wp_create_nonce( 'new-post-translation' ), $link );
 
 						$items[] = array(
 							'name'  => "cpel-{$language->slug}",
 							'icon'  => 'eicon-plus',
-							'title' => sprintf( __( 'Add translation (%s)', 'connect-polylang-elementor' ), strtolower( $language->slug ) ),
+							'title' => sprintf( __( 'Add a translation in %s', 'polylang' ), $language->name ),
 							'type'  => 'link',
 							'link'  => $link,
 						);
@@ -406,7 +407,7 @@ class ConnectPlugins {
 
 			$group = array(
 				'name'  => 'cpel',
-				'title' => sprintf( __( 'Template Language %s', 'connect-polylang-elementor' ), $current ),
+				'title' => sprintf( __( 'This item is in %s', 'polylang' ), $current ),
 				'items' => $items,
 			);
 
