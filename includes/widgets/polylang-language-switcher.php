@@ -56,7 +56,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 	 */
 	public function get_title() {
 
-		return _x( 'Polylang Switcher', 'Elementor widget title', 'connect-polylang-elementor' );
+		return __( 'Language switcher', 'polylang' );
 
 	}
 
@@ -72,7 +72,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 	 */
 	public function get_icon() {
 
-		return 'fa fa-language';
+		return 'eicon-global-settings';
 
 	}
 
