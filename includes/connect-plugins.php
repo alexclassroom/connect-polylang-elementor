@@ -60,6 +60,9 @@ class ConnectPlugins {
 		// Elementor editor menu lins to translations
 		add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'elementor_editor_script' ) );
 
+		// Elementor Theme Editor show template language
+		add_filter( 'elementor-pro/site-editor/data/template', array( $this, 'elementor_theme_editor_title' ) );
+
 	}
 
 	/**
@@ -421,6 +424,22 @@ class ConnectPlugins {
 			wp_add_inline_script( 'elementor-editor', $script );
 
 		}
+
+	}
+
+	/**
+	 * Elementor Theme Editor language on template title
+	 *
+	 * @since  2.0.0
+	 *
+	 * @param  array $data
+	 * @return array
+	 */
+	function elementor_theme_editor_title( $data ) {
+
+		$data['title'] = sprintf( '%s (%s)', $data['title'], pll_get_post_language( $data['id'], 'slug' ) );
+
+		return $data;
 
 	}
 
