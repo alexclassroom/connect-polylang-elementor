@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Connect Polylang to Elementor\n"
-"POT-Creation-Date: 2022-01-29 08:50+0000\n"
+"POT-Creation-Date: 2022-01-31 17:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: David Decker DECKERWEB.de -- https://deckerweb.de/\n"
 "Language-Team: David Decker DECKERWEB.de -- https://deckerweb.de/\n"
@@ -78,11 +78,6 @@ msgstr ""
 #. Title attribute for Elementor My Templates link
 #: includes/admin-extras.php:70
 msgid "Elementor My Templates"
-msgstr ""
-
-#: includes/widgets/polylang-language-switcher.php:59
-msgctxt "Elementor widget title"
-msgid "Polylang Switcher"
 msgstr ""
 
 #: includes/finder/polylang-category.php:75
