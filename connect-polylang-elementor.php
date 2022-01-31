@@ -1,153 +1,115 @@
 <?php
 /**
- * Main plugin file.
- *
- * @package           Polylang Connect for Elementor
- * @author            David Decker
- * @copyright         Copyright (c) 2018, David Decker - DECKERWEB
+ * @package           ConnectPolylangElementor
  * @license           GPL-2.0-or-later
- * @link              https://deckerweb.de/twitter
+ * @link              https://wordpress.org/plugins/connect-polylang-elementor/
  *
  * @wordpress-plugin
  * Plugin Name:       Polylang Connect for Elementor
- * Plugin URI:        https://github.com/deckerweb/connect-polylang-elementor
- * Description:       Connect the Polylang multilingual plugin with Elementor Page Builder: This plugin will make Elementor and Polylang show the correct language templates, especially with Elementor Pro Theme Builder. Plus: native Polylang Language Switcher Elementor widget, new Dynamic Tags, and Polylang links added to the Elementor Finder feature.
- * Version:           1.0.6
- * Author:            David Decker - DECKERWEB
- * Author URI:        https://deckerweb.de/
+ * Plugin URI:        https://github.com/creame/connect-polylang-elementor
+ * Description:       Connect Polylang with Elementor Page Builder. Display templates in the correct language, language switcher widget, widget language visibility settings and language dynamic tags.
+ * Version:           2.0.0
+ * Author:            Creame
+ * Author URI:        https://crea.me/
  * License:           GPL-2.0-or-later
  * License URI:       https://opensource.org/licenses/GPL-2.0
  * Text Domain:       connect-polylang-elementor
  * Domain Path:       /languages/
- * Requires WP:       4.7
+ * Requires WP:       5.0
  * Requires PHP:      5.6
- * GitHub Plugin URI: https://github.com/deckerweb/connect-polylang-elementor
- * GitHub Branch:     master
  *
- * Copyright (c) 2018 David Decker - DECKERWEB
+ * Copyright (c) 2021 Paco Toledo - CREAME
+ * Copyright (c) 2018-2021 David Decker - DECKERWEB
  */
+namespace ConnectPolylangElementor;
 
-/**
- * Exit if called directly.
- */
-if ( ! defined( 'ABSPATH' ) ) {
-	exit( 'Sorry, you are not allowed to access this file directly.' );
-}
+defined( 'ABSPATH' ) || exit;
 
 
 /**
  * Setting constants.
  *
- * @since 1.0.0
+ * @since 2.0.0
  */
-/** Plugin version */
-define( 'CPEL_PLUGIN_VERSION', '1.0.6' );
-
-/** File */
-define( 'CPEL__FILE__', __FILE__ );
-
-/** Plugin directory */
-define( 'CPEL_PLUGIN_DIR', trailingslashit( dirname( __FILE__ ) ) );
-
-/** Plugin base directory */
-define( 'CPEL_PLUGIN_BASEDIR', trailingslashit( dirname( plugin_basename( __FILE__ ) ) ) );
+define( 'CPEL_PLUGIN_VERSION', '2.0.0' );
+define( 'CPEL_FILE', __FILE__ );
+define( 'CPEL_DIR', plugin_dir_path( CPEL_FILE ) );
+define( 'CPEL_BASENAME', plugin_basename( CPEL_FILE ) );
 
 
-add_action( 'plugins_loaded', 'ddw_cpel_load_translations', 10 );
 /**
- * Load the text domain for translation of the plugin.
+ * Dynamically loads the class attempting to be instantiated elsewhere in the plugin.
  *
- * @since 1.0.0
- *
- * @uses  get_user_locale()
- * @uses  load_textdomain() Load translations first from WP_LANG_DIR sub folder.
- * @uses  load_plugin_textdomain() Additionally load default translations from
- *                                 plugin folder (default).
+ * @since 2.0.0
  */
-function ddw_cpel_load_translations() {
+spl_autoload_register(
+	function ( $class ) {
+		$prefix   = __NAMESPACE__; // project-specific namespace prefix
+		$base_dir = __DIR__ . '/includes'; // base directory for the namespace prefix
 
-	/** Set unique textdomain string */
-	$cpel_textdomain = 'connect-polylang-elementor';
+		$len = strlen( $prefix );
+		if ( strncmp( $prefix, $class, $len ) !== 0 ) { // does the class use the namespace prefix?
+			return; // no, move to the next registered autoloader
+		}
 
-	/** The 'plugin_locale' filter is also used by default in load_plugin_textdomain() */
-	$locale = esc_attr(
-		apply_filters(
-			'plugin_locale',
-			get_user_locale(),
-			$cpel_textdomain
-		)
-	);
+		$relative_class_name = substr( $class, $len );
 
-	/**
-	 * WordPress languages directory
-	 *   Will default to: wp-content/languages/connect-polylang-elementor/connect-polylang-elementor-{locale}.mo
-	 */
-	$cpel_wp_lang_dir = trailingslashit( WP_LANG_DIR ) . trailingslashit( $cpel_textdomain ) . $cpel_textdomain . '-' . $locale . '.mo';
+		// Replace the namespace prefix with the base directory, replace namespace
+		// separators with directory separators in the relative class name, append
+		// with .php and transform CamelCase to lower-dashed
+		$file = $base_dir . str_replace( '\\', '/', $relative_class_name ) . '.php';
+		$file = strtolower( preg_replace( '/([a-zA-Z])(?=[A-Z])/', '$1-', $file ) );
 
-	/** Translations: First, look in WordPress' "languages" folder = custom & update-safe! */
-	load_textdomain(
-		$cpel_textdomain,
-		$cpel_wp_lang_dir
-	);
-
-	/** Translations: Secondly, look in 'wp-content/languages/plugins/' for the proper .mo file (= default) */
-	load_plugin_textdomain(
-		$cpel_textdomain,
-		false,
-		CPEL_PLUGIN_BASEDIR . 'languages'
-	);
-
-}
-
-
-/** Include global functions */
-require_once CPEL_PLUGIN_DIR . 'includes/functions-global.php';
-
-/** Include (global) conditionals functions */
-require_once CPEL_PLUGIN_DIR . 'includes/functions-conditionals.php';
-
-
-add_action( 'plugins_loaded', 'ddw_cpel_setup_plugin', 20 );
-/**
- * Finally setup the plugin for the main tasks.
- *
- * @since 1.0.0
- */
-function ddw_cpel_setup_plugin() {
-
-	/** Load features that require Polylang & Elementor active */
-	if ( ddw_cpel_is_polylang_active() && ddw_cpel_is_elementor_active() ) {
-
-		require_once CPEL_PLUGIN_DIR . 'modules/finder/manager.php';
-		require_once CPEL_PLUGIN_DIR . 'modules/widgets/register-widget.php';
-
-		new \DDW_Connect_Polylang_Elementor\Register_Widget();
-
-		/** Load features that require Elementor Pro */
-		if ( ddw_cpel_is_elementor_pro_active() ) {
-			require_once CPEL_PLUGIN_DIR . 'modules/connect/tweaks-polylang-elementor.php';
-			require_once CPEL_PLUGIN_DIR . 'modules/dynamic-tags/manager.php';
+		if ( file_exists( $file ) ) {
+			require $file;
 		}
 	}
+);
 
-	/** Include admin helper functions */
-	if ( is_admin() ) {
-		require_once CPEL_PLUGIN_DIR . 'includes/admin-extras.php';
+
+// Initialize plugin
+add_action( 'plugins_loaded', 'ConnectPolylangElementor\\setup', 20 );
+add_action( 'init', 'ConnectPolylangElementor\\load_textdomain' );
+
+
+/**
+ * Plugin setup.
+ *
+ * @since 2.0.0
+ *
+ * @return void
+ */
+function setup() {
+
+	require CPEL_DIR . 'includes/functions.php';
+
+	if ( cpel_is_polylang_active() && cpel_is_elementor_active() ) {
+
+		ConnectPlugins::instance();
+		LanguageVisibility::instance();
+		DynamicTags\Manager::instance();
+		Finder\Manager::instance();
+		Widgets\Manager::instance();
+
 	}
 
-	/** Add links to Settings and Menu pages to Plugins page */
-	if ( ( is_admin() || is_network_admin() ) ) {
+	if ( is_admin() || is_network_admin() ) {
 
-		add_filter(
-			'plugin_action_links_' . plugin_basename( __FILE__ ),
-			'ddw_cpel_custom_settings_links'
-		);
-
-		add_filter(
-			'network_admin_plugin_action_links_' . plugin_basename( __FILE__ ),
-			'ddw_cpel_custom_settings_links'
-		);
+		AdminExtras::instance();
 
 	}
+}
+
+/**
+ * Load textdomain.
+ *
+ * @since 2.0.0
+ *
+ * @return void
+ */
+function load_textdomain() {
+
+	load_plugin_textdomain( 'connect-polylang-elementor', false, dirname( CPEL_BASENAME ) . '/languages' );
 
 }
+
