@@ -7,15 +7,15 @@
  * @wordpress-plugin
  * Plugin Name:       Polylang Connect for Elementor
  * Plugin URI:        https://github.com/creame/connect-polylang-elementor
- * Description:       Connect Polylang with Elementor Page Builder. Display templates in the correct language, language switcher widget, widget language visibility settings and language dynamic tags.
- * Version:           2.0.0
+ * Description:       Connect Polylang with Elementor. Display templates in the correct language, language switcher widget, language visibility conditions and dynamic tags.
+ * Version:           2.0.1
  * Author:            Creame
  * Author URI:        https://crea.me/
  * License:           GPL-2.0-or-later
  * License URI:       https://opensource.org/licenses/GPL-2.0
  * Text Domain:       connect-polylang-elementor
  * Domain Path:       /languages/
- * Requires WP:       5.0
+ * Requires WP:       5.4
  * Requires PHP:      5.6
  *
  * Copyright (c) 2021 Paco Toledo - CREAME
@@ -31,7 +31,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 2.0.0
  */
-define( 'CPEL_PLUGIN_VERSION', '2.0.0' );
+define( 'CPEL_PLUGIN_VERSION', '2.0.1' );
 define( 'CPEL_FILE', __FILE__ );
 define( 'CPEL_DIR', plugin_dir_path( CPEL_FILE ) );
 define( 'CPEL_BASENAME', plugin_basename( CPEL_FILE ) );
@@ -57,8 +57,9 @@ spl_autoload_register(
 		// Replace the namespace prefix with the base directory, replace namespace
 		// separators with directory separators in the relative class name, append
 		// with .php and transform CamelCase to lower-dashed
-		$file = $base_dir . str_replace( '\\', '/', $relative_class_name ) . '.php';
+		$file = str_replace( '\\', '/', $relative_class_name ) . '.php';
 		$file = strtolower( preg_replace( '/([a-zA-Z])(?=[A-Z])/', '$1-', $file ) );
+		$file = $base_dir . $file;
 
 		if ( file_exists( $file ) ) {
 			require $file;
