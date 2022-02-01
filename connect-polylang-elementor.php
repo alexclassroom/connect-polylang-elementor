@@ -57,8 +57,9 @@ spl_autoload_register(
 		// Replace the namespace prefix with the base directory, replace namespace
 		// separators with directory separators in the relative class name, append
 		// with .php and transform CamelCase to lower-dashed
-		$file = $base_dir . str_replace( '\\', '/', $relative_class_name ) . '.php';
+		$file = str_replace( '\\', '/', $relative_class_name ) . '.php';
 		$file = strtolower( preg_replace( '/([a-zA-Z])(?=[A-Z])/', '$1-', $file ) );
+		$file = $base_dir . $file;
 
 		if ( file_exists( $file ) ) {
 			require $file;
