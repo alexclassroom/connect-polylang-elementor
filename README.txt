@@ -2,7 +2,7 @@
 Contributors: daveshine, p4fbradjohnson, deckerweb, wpautobahn, pacotole, creapuntome
 Donate link: https://www.paypal.me/pacotole
 Tags: elementor, polylang, multilingual, language switcher, languages, templates, widget, finder, dynamic tags
-Requires at least: 4.7
+Requires at least: 5.4
 Tested up to: 5.9
 Requires PHP: 5.6
 Stable tag: 2.0.0
@@ -19,20 +19,20 @@ Connect Polylang multilingual plugin with Elementor Page Builder: **Translate yo
 
 ### What the Plugin Does
 
-#### Template translation and show in the correct language
+#### 📍 Template translation and show in the correct language
 Create translations for your Elementor templates especially for (Elementor Pro) Theme Builder.
 
-#### Language Switcher
+#### 🔄 Language Switcher
 A native Elementor Widget to easily build a nice and fully customizable language switcher:
 
 * Show or hide flags, language name, language code.
 * Vertical list, Horizontal list or **styled dropdown**.
 * **SVG scalable flags**.
 
-#### Language Visibility Conditions
+#### 👁️ Language Visibility Conditions
 Allow to **show or hide every widget**, section or column **by language**.
 
-#### Language Dynamic Tags
+#### 🏷️ Language Dynamic Tags
 Use language dynamic tags (on Elementor Pro) that you can set with an specific language or the "current" one. Available tags are:
 
 * **Language Code** tag type text
@@ -40,13 +40,13 @@ Use language dynamic tags (on Elementor Pro) that you can set with an specific l
 * **Language Url** tag type url
 * **Language Flag** tag type image
 
-#### Elementor Editor integration
+#### ✏️ Elementor Editor integration
 Now you can view the language of the current template and change to its translations or create them **from the Elementor editor**.
 
-#### Elementor Finder integration
+#### 🔍 Elementor Finder integration
 From Elementor Finder you can access to Polylang settings pages and go the site in the selected language.
 
-#### Plugins integration fixes and tweaks
+#### 🔨 Plugins integration fixes and tweaks
 
 * Automatically generate display conditions on new template translation.
 * Automatically generate Elementor CSS styles on create new template translation.
@@ -75,9 +75,9 @@ Site languages:
 ╚═ Archive Template A (IT) -> none (in front checks if category is IT translation of "Red (EN)")
 
 - Option 2 (not linked translations, all languages has display conditions):
- ═ Archive Template B (EN) -> condition category is "Red (EN)"
- ═ Archive Template B (ES) -> condition category is "Rojo (ES)"
- ═ Archive Template B (IT) -> condition category is "Rosso (IT)"
+══ Archive Template B (EN) -> condition category is "Red (EN)"
+══ Archive Template B (ES) -> condition category is "Rojo (ES)"
+══ Archive Template B (IT) -> condition category is "Rosso (IT)"
 `
 
 ### Support
@@ -202,6 +202,9 @@ There are quite a few:
 
 == Changelog ==
 
+= 2.0.1 =
+Fixed critical error loading plugin classes when there are uppercase letters in the path.
+
 = 2.0.0 =
 **Fully rewrited and upgraded!!**
 
@@ -214,6 +217,9 @@ There are quite a few:
   * Update display conditios un change template language.
   * Fix home and search links to point to the current language.
   * Hide langue on wp-admin for global widgets.
+
+= 1.0.6 - 2021-06-05 =
+* Fixed PHP notice undefined 'post_type'.
 
 = 1.0.5 - 2021-05-17 =
 * Fixed Elementor editor don't load with Global Widgets in secondary language.
@@ -273,6 +279,9 @@ There are quite a few:
 
 
 == Upgrade Notice ==
+
+= 2.0.1 =
+**Warning** breaking changes with v1. Language Switcher and Dynamic Tags has been renamed and neeed to re-added again in your templates.
 
 = 2.0.0 =
 **Warning** breaking changes with v1. Language Switcher and Dynamic Tags has been renamed and neeed to re-added again in your templates.
