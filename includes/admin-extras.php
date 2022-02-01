@@ -1,21 +1,12 @@
 <?php
 namespace ConnectPolylangElementor;
 
-use \ConnectPolylangElementor\Util\Info;
-
 defined( 'ABSPATH' ) || exit;
 
 
 class AdminExtras {
 
 	use \ConnectPolylangElementor\Util\Singleton;
-
-	/**
-	 * Current template ID.
-	 *
-	 * @var int|null
-	 */
-	private $template_id = null;
 
 	/**
 	 * __construct
@@ -94,8 +85,6 @@ class AdminExtras {
 	 * Add various support links to Plugins page.
 	 *
 	 * @since  1.0.0
-	 *
-	 * @uses   Info::link()
 	 *
 	 * @param  array  $cpel_links (Default) Array of plugin meta links
 	 * @param  string $cpel_file  Path of base plugin file
