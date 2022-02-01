@@ -765,7 +765,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 
 			// Dropdown toggle link
 			if ( count( $lang_links ) && 'dropdown' === $settings['layout'] ) {
-				$lang_code = array_key_exists( $lang_curr, $lang_links ) ? $lang_curr : array_key_first( $lang_links );
+				$lang_code = array_key_exists( $lang_curr, $lang_links ) ? $lang_curr : current( array_keys( $lang_links ) );
 				$lang_link = $lang_links[ $lang_code ];
 
 				unset( $lang_links[ $lang_code ] );
