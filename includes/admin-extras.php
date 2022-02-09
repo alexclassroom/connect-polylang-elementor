@@ -20,6 +20,8 @@ class AdminExtras {
 
 		add_filter( 'plugin_row_meta', array( $this, 'plugin_links' ), 10, 2 );
 
+		add_filter( 'display_post_states', array( $this, 'elementor_post_state_icon' ), 100 );
+
 	}
 
 	/**
@@ -80,7 +82,6 @@ class AdminExtras {
 
 	}
 
-
 	/**
 	 * Add various support links to Plugins page.
 	 *
@@ -101,6 +102,23 @@ class AdminExtras {
 
 		// Output the links.
 		return apply_filters( 'cpel/filter/plugins_page/more_links', $cpel_links );
+
+	}
+
+	/**
+	 * Replace "Elementor" post state with icon
+	 *
+	 * @param  array $states
+	 * @return array
+	 */
+	function elementor_post_state_icon( $states ) {
+
+		if ( isset( $states['elementor'] ) && apply_filters( 'cpel/filter/elementor_icon', true ) ) {
+			unset( $states['elementor'] );
+			return array( 'elementor' => '<i class="eicon-elementor-square" title="Elementor" style="color:#93003c;"></i>' ) + $states;
+		}
+
+		return $states;
 
 	}
 
