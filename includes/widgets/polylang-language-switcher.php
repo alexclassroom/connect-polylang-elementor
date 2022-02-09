@@ -734,6 +734,8 @@ class PolylangLanguageSwitcher extends Widget_Base {
 						if ( ! defined( 'PLL_ENCODED_FLAGS' ) || PLL_ENCODED_FLAGS ) {
 							$file_contents   = file_get_contents( CPEL_DIR . $flag_svg['path'] ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 							$flag_svg['src'] = 'data:image/svg+xml;utf8,' . str_replace( array( '#', '"' ), array( '%23', "'" ), $file_contents );
+						} else {
+							$flag_svg['src'] = $flag_svg['url'];
 						}
 
 						$language_flag = \PLL_Language::get_flag_html( $flag_svg, '', $language['name'] );
