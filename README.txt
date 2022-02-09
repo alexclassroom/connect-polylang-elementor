@@ -5,7 +5,7 @@ Tags: elementor, polylang, multilingual, language switcher, languages, templates
 Requires at least: 5.4
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 2.0.0
+Stable tag: 2.0.2
 License: GPL-2.0-or-later
 License URI: https://opensource.org/licenses/GPL-2.0
 
@@ -202,6 +202,9 @@ There are quite a few:
 
 == Changelog ==
 
+= 2.0.2 =
+Fixed fatal error if call home_url() before initialize Polylang.
+
 = 2.0.1 =
 Fixed critical error loading plugin classes when there are uppercase letters in the path.
 
@@ -280,10 +283,7 @@ Fixed critical error loading plugin classes when there are uppercase letters in 
 
 == Upgrade Notice ==
 
-= 2.0.1 =
-**Warning** breaking changes with v1. Language Switcher and Dynamic Tags has been renamed and neeed to re-added again in your templates.
-
-= 2.0.0 =
+= 2.0.2 =
 **Warning** breaking changes with v1. Language Switcher and Dynamic Tags has been renamed and neeed to re-added again in your templates.
 
 = 1.0.2 =
