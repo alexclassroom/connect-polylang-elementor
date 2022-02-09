@@ -343,7 +343,7 @@ class ConnectPlugins {
 	 */
 	function home_url_language_dir_slash( $url, $path ) {
 
-		return empty( $path ) && 1 === PLL()->options['force_lang'] ? trailingslashit( $url ) : $url;
+		return empty( $path ) && function_exists( 'PLL' ) && 1 === PLL()->options['force_lang'] ? trailingslashit( $url ) : $url;
 
 	}
 
