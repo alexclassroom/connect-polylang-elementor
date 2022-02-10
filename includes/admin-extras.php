@@ -108,6 +108,8 @@ class AdminExtras {
 	/**
 	 * Replace "Elementor" post state with icon
 	 *
+	 * @since  2.0.3
+	 *
 	 * @param  array $states
 	 * @return array
 	 */

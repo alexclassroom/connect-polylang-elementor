@@ -5,7 +5,7 @@ Tags: elementor, polylang, multilingual, language switcher, languages, templates
 Requires at least: 5.4
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 License: GPL-2.0-or-later
 License URI: https://opensource.org/licenses/GPL-2.0
 
@@ -202,6 +202,13 @@ There are quite a few:
 
 == Changelog ==
 
+= 2.0.3 =
+* Updated language switcher dropdown animated & toogle on mobile.
+* Added Elementor icon in posts list status.
+* Fixed language switcher underline style.
+* Fixed SVG flags if encoded is disabled.
+* SVG flags data URIs don't need base64 and save some bytes.
+
 = 2.0.2 =
 Fixed fatal error if call home_url() before initialize Polylang.
 
@@ -283,7 +290,7 @@ Fixed critical error loading plugin classes when there are uppercase letters in 
 
 == Upgrade Notice ==
 
-= 2.0.2 =
+= 2.0.3 =
 **Warning** breaking changes with v1. Language Switcher and Dynamic Tags has been renamed and neeed to re-added again in your templates.
 
 = 1.0.2 =
