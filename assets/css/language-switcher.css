@@ -29,10 +29,38 @@
 
 /* Dropdown layout */
 .cpel-switcher--layout-dropdown .cpel-switcher__nav {
-    display: inline-flex;
-    flex-direction: column;
+    display: inline-block;
+    position: relative;
+    user-select: none;
+}
+
+.cpel-switcher--layout-dropdown .cpel-switcher__toggle {
     position: relative;
 }
+
+.cpel-switcher--layout-dropdown .cpel-switcher__toggle::after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    cursor: pointer;
+}
+
+.cpel-switcher--layout-dropdown .cpel-switcher__toggle a i {
+    transition: transform 200ms ease-in-out;
+}
+
+.cpel-switcher--layout-dropdown .cpel-switcher__toggle.cpel-switcher__toggle--on::after {
+    width: min(33%, 2.5em);
+}
+
+.cpel-switcher--layout-dropdown .cpel-switcher__toggle.cpel-switcher__toggle--on a i {
+    transform: rotateX(180deg);
+}
+
 
 .cpel-switcher--layout-dropdown.cpel-switcher--align-left .elementor-widget-container {
     text-align: left;
@@ -52,22 +80,26 @@
 
 .cpel-switcher--layout-dropdown .cpel-switcher__list {
     position: absolute;
-    z-index: 2;
+    z-index: 10;
     top: 100%;
-    left: 0;
-    min-width: 100%;
-    display: none;
-    flex-direction: column;
-}
-
-.cpel-switcher--layout-dropdown .cpel-switcher__nav:hover .cpel-switcher__list,
-.cpel-switcher--layout-dropdown .cpel-switcher__nav:focus-within .cpel-switcher__list {
     display: flex;
+    flex-direction: column;
+    min-width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 200ms ease-in-out;
 }
 
-.cpel-switcher--layout-dropdown .cpel-switcher__lang,
-.cpel-switcher--layout-dropdown .cpel-switcher__lang a {
+.cpel-switcher--layout-dropdown .cpel-switcher__toggle--on+.cpel-switcher__list {
+    max-height: 300px;
+}
+
+.cpel-switcher--layout-dropdown .cpel-switcher__lang {
     width: 100%;
+}
+
+.cpel-switcher--layout-dropdown .cpel-switcher__lang a {
+    display: block;
     text-align: left;
 }
 
@@ -153,6 +185,11 @@ body.rtl .cpel-switcher--layout-horizontal .cpel-switcher__lang:not(:last-child)
 .cpel-switcher__flag {
     display: inline-block;
     vertical-align: middle;
+}
+
+.cpel-switcher__name,
+.cpel-switcher__code {
+    text-decoration: inherit;
 }
 
 .cpel-switcher__flag {

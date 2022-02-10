@@ -730,10 +730,12 @@ class PolylangLanguageSwitcher extends Widget_Base {
 
 					if ( 'yes' === $settings['svg_flag'] && $flag_svg ) {
 
-						// If base64 encoded flags are preferred.
+						// If data uri encoded flags are preferred.
 						if ( ! defined( 'PLL_ENCODED_FLAGS' ) || PLL_ENCODED_FLAGS ) {
 							$file_contents   = file_get_contents( CPEL_DIR . $flag_svg['path'] ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-							$flag_svg['src'] = 'data:image/svg+xml;base64,' . base64_encode( $file_contents ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode
+							$flag_svg['src'] = 'data:image/svg+xml;utf8,' . str_replace( array( '#', '"' ), array( '%23', "'" ), $file_contents );
+						} else {
+							$flag_svg['src'] = $flag_svg['url'];
 						}
 
 						$language_flag = \PLL_Language::get_flag_html( $flag_svg, '', $language['name'] );
@@ -774,7 +776,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 					$lang_link = str_replace( '</a>', '<i ' . $this->get_render_attribute_string( 'icon' ) . '></i></a>', $lang_link );
 				}
 
-				$output .= '<div class="cpel-switcher__toggle cpel-switcher__lang">' . $lang_link . '</div>';
+				$output .= '<div class="cpel-switcher__toggle cpel-switcher__lang" onclick="this.classList.toggle(\'cpel-switcher__toggle--on\')">' . $lang_link . '</div>';
 			}
 
 			// Languages list
