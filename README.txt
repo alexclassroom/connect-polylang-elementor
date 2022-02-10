@@ -20,7 +20,7 @@ Connect Polylang multilingual plugin with Elementor Page Builder: **Translate yo
 ### What the Plugin Does
 
 #### 📍 Template translation and show in the correct language
-Create translations for your Elementor templates especially for (Elementor Pro) Theme Builder.
+Create translations for your Elementor templates especially for header, footer or archive templates with [**Elementor Pro Theme Builder**](https://trk.elementor.com/5l8mc0eyt38p-theme-builder) *(affiliated link)*.
 
 #### 🔄 Language Switcher
 A native Elementor Widget to easily build a nice and fully customizable language switcher:
@@ -84,13 +84,13 @@ Site languages:
 * [**Plugin's support forum**](https://wordpress.org/support/plugin/connect-polylang-elementor) here on WordPress.org
 * [Github plugin repo](https://github.com/creame/connect-polylang-elementor)
 * [Polylang User Community Group at Facebook](https://www.facebook.com/groups/polylang.users/)
-* **What is covered by our support?** - All regarding **THIS plugin** ("Polyang Connect for Elementor"), plus the relation to *Polylang*, *Polylang Pro*, *Elementor* and *Elementor Pro* of course.
+* **What is covered by our support?** - All regarding **THIS plugin** ("Polylang Connect for Elementor"), plus the relation to *Polylang*, *Polylang Pro*, *Elementor* and *Elementor Pro* of course.
 * **What is NOT covered by support?** - Anything general regarding multilingual topics and WordPress. Explicitely we **DO NOT** offer any "WPML", "WPBakery" or "Visual Composer" support, and also not for your theme etc.!!!
 
 ### Translations
 We have used the strings of Elementor and Polylang whenever possible to take advantage of the fact that they are translated into many languages. For the other strings a `.pot` file (`connect-polylang-elementor.pot`) for translators is also always included :)
 
-You can collaborate with your language transitions in Translating WordPress: [Translate "Polylang Connect for Elementor"](https://translate.wordpress.org/projects/wp-plugins/connect-polylang-elementor)
+You can collaborate with your language translations in [Translating WordPress](https://translate.wordpress.org/projects/wp-plugins/connect-polylang-elementor)
 
 ### Credits
 The following code/classes are licensed under the GPL.
@@ -100,8 +100,6 @@ The following code/classes are licensed under the GPL.
 * v1. released by [David Decker](https://profiles.wordpress.org/daveshine/)
 * v1. Polylang Switcher class (Elementor Widget) and its CSS based on widget from plugin "Language Switcher for Elementor" by Solitweb (GPLv2 or later)
 * SVG flags from [FlagKit](https://github.com/madebybowtie/FlagKit) and [Wikipedia](https://wikipedia.org/)
-
-Enjoy using *Polylang Connect for Elementor*? [**Please consider making a donation**](https://www.paypal.me/pacotole) to support the project's continued development.
 
 Please, send your suggestions and feedback - Thank you for using or trying out this plugin!
 
@@ -113,7 +111,7 @@ Please, send your suggestions and feedback - Thank you for using or trying out t
 
 * WordPress version 4.7 or higher
 * [Elementor](https://wordpress.org/plugins/elementor/) and [Polylang](https://wordpress.org/plugins/polylang/) plugins - free versions from WordPress.org Plugin Directory
-* **Optional:** *Elementor Pro* which is needed for Theme Building possibilities (Header templates etc.). This is a paid premium product by Elementor LTD, [available via elementor.com](https://toolbarextras.com/go/elementor-pro/)
+* **Recommended:** [**Elementor Pro**](https://trk.elementor.com/5l8mc0eyt38p) *(affiliate link)* which is needed for Theme Building possibilities (header, footer, 404, archive templates, etc.) and Dynamic Tags.
 
 = Installation =
 
@@ -121,7 +119,7 @@ Please, send your suggestions and feedback - Thank you for using or trying out t
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 4. Assign languages to your pages/posts/Elementor templates
 5. For Elementor templates: set display conditions in Elementor for the main language template only, templates in the other languages will then get loaded via this plugin magically! :)
-6. Additionally use the native Elementor Widget: Polylang Switcher
+6. Additionally use the native Elementor Widget: Language Switcher
 
 
 
@@ -146,19 +144,21 @@ This plugin has NO settings page, as it does not need one. All it does works jus
 
 
 = Is Elementor Pro required? =
-Technically, Elementor Pro is not required - but highly recommended, though.
+Technically, Elementor Pro is not required **but highly recommended**.
 
-Elementor Pro is required for these features of the plugin:
+[**Elementor Pro**](https://trk.elementor.com/5l8mc0eyt38p-pro) *(affiliate link)* is required for these features of the plugin:
 
-* Translating Elementor Theme Builder Templates the version is required, otherwise this will not work.
-* Dynamic Tags, additionally added by the plugin
+* Translate Elementor Theme Builder Templates (header, footer, 404, page, archives).
+* Translate Elementor Popups.
+* Dynamic Tags, additionally added by the plugin.
 
-For the other features of the plugin the regular free version of Elementor is sufficient - so the native Elementor language switcher widget will work also that way already ;-)
+For the other features of the plugin the free version of Elementor is sufficient - so the native Elementor language switcher widget will work ;-)
 
 
-= Is Polylang Pro supported? =
-Yes, it is! :)
-All features of "Polylang Connect for Elementor" work with both, *Polylang* (free) AND *Polylang Pro* (Premium).
+= Is Polylang Pro required? =
+Polylang Pro is not required.
+
+All features of "Polylang Connect for Elementor" work with both, *Polylang* and *Polylang Pro*.
 
 
 = Are custom flags supported? =
@@ -172,21 +172,13 @@ To use a different size for custom flags we are trying to find ways to implement
 In the Polylang Switcher Elementor widget there are typography settings available for the Switcher menu items. These settings are CSS based of course, and applied "globally" to the various states they are for: normal, hover, active (current language). The available toggles for uppercase are done code-wise and therefore have a lower priority - this means the CSS always takes over, if wanted. That way you are most flexible with quick settings (toggles) but have all styling options at hand if needed.
 
 
-= Is Elementor plugin needed? =
-Yes, it is. Otherwise this connect plugin won't do anything. Elementor is available for free on WordPress.org.
-
-The Elementor Pro Add-On plugin is needed for the Theme Builder capabilities (for example Header templates), plus the feature of "Dynamic Tags". So it is highly recommended. But if it is not installed/ activated, the depending features from the connect plugin won't even load. So it is all optional.
-
-The language switcher widget only needs Elementor base plugin to work ;-)
-
-
 = Other recommended plugins for multilingual websites? =
 There are quite a few:
 
 * [**Polylang Pro** (Premium)](https://polylang.pro/downloads/polylang-pro/) - The official premium version with more features, plus premium support
 * [**Polylang for WooCommerce** (Premium)](https://polylang.pro/downloads/polylang-for-woocommerce/) - Makes WooCommerce multilingual - official Polylang Add-On
 * [**Lingotek Translation**](https://wordpress.org/plugins/lingotek-translation/) - Native Polylang integration - Lingotek brings convenient cloud-based localization and translation for WordPress
-* [**WPML to Polylang**](https://wordpress.org/plugins/wpml-to-polylang/) - From the Polylang developer himself
+* [**Elementor Datepicker Localization**](https://github.com/creame/elementor-datepicker-localization) - Allow form datetime fields in your site language
 * [**Country Flags for Elementor**](https://wordpress.org/plugins/country-flags-for-elementor/) - Native Elementor widget
 
 
