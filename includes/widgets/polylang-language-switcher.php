@@ -776,7 +776,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 					$lang_link = str_replace( '</a>', '<i ' . $this->get_render_attribute_string( 'icon' ) . '></i></a>', $lang_link );
 				}
 
-				$output .= '<div class="cpel-switcher__toggle cpel-switcher__lang">' . $lang_link . '</div>';
+				$output .= '<div class="cpel-switcher__toggle cpel-switcher__lang" onclick="this.classList.toggle(\'cpel-switcher__toggle--on\')">' . $lang_link . '</div>';
 			}
 
 			// Languages list
