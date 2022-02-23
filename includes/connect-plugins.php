@@ -63,11 +63,11 @@ class ConnectPlugins {
 
 		}
 
-		// Elementor editor menu lins to translations
+		// Elementor editor menu links to translations
 		add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'elementor_editor_script' ) );
 
-		// Elementor Theme Editor show template language
-		add_filter( 'elementor-pro/site-editor/data/template', array( $this, 'elementor_theme_editor_title' ) );
+		// Elementor Site Editor template tweaks
+		add_filter( 'elementor-pro/site-editor/data/template', array( $this, 'elementor_site_editor_template' ) );
 
 	}
 
@@ -289,7 +289,7 @@ class ConnectPlugins {
 	}
 
 	/**
-	 * Show default language conditions in translations
+	 * Show default language instances in translations
 	 *
 	 * (Also wrap "None" with a hidden div)
 	 *
@@ -313,7 +313,7 @@ class ConnectPlugins {
 	}
 
 	/**
-	 * Show default language conditions in translations (close)
+	 * Show default language instances in translations (close)
 	 *
 	 * @since  2.0.4
 	 *
@@ -466,16 +466,40 @@ class ConnectPlugins {
 	}
 
 	/**
-	 * Elementor Theme Editor language on template title
+	 * Elementor Site Editor template changes
 	 *
-	 * @since  2.0.0
+	 * at 2.0.0 named "elementor_theme_editor_title"
+	 *
+	 * @since  2.0.4
 	 *
 	 * @param  array $data
 	 * @return array
 	 */
-	function elementor_theme_editor_title( $data ) {
+	function elementor_site_editor_template( $data ) {
 
-		$data['title'] = sprintf( '%s (%s)', $data['title'], pll_get_post_language( $data['id'], 'slug' ) );
+		$post_id = $data['id'];
+
+		// Add lang info to title.
+		$data['title'] = sprintf( '%s / %s', $data['title'], strtoupper( pll_get_post_language( $post_id ) ) );
+
+		// Show default language instances in translations (and recalc isActive).
+		if ( cpel_is_translation( $post_id ) ) {
+
+			$language = pll_default_language();
+
+			$conditions_manager = \ElementorPro\Plugin::instance()->modules_manager->get_modules( 'theme-builder' )->get_conditions_manager();
+			$instances          = $conditions_manager->get_document_instances( pll_get_post( $post_id, $language ) );
+
+			if ( empty( $instances ) ) {
+				$instances = array( 'no_instances' => esc_html__( 'No instances', 'elementor-pro' ) );
+				$is_active = false;
+			} else {
+				$is_active = 'publish' === $data['status'];
+			}
+
+			$data['instances'] = array( 'cpel' => sprintf( esc_html__( '(from %s)', 'connect-polylang-elementor' ), strtoupper( $language ) ) ) + $instances;
+			$data['isActive']  = $is_active;
+		}
 
 		return $data;
 
