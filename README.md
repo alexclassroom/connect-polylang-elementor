@@ -193,6 +193,13 @@ There are quite a few:
 
 ## Changelog
 
+### 2.0.5
+* Use Polylang custom flags.
+
+### 2.0.4
+* Added better info of template instances for translations on Theme Editor and WP admin list.
+* Minor tweaks on Language Switcher dropdown styles.
+
 ### 2.0.3
 * Updated language switcher dropdown animated & toogle on mobile.
 * Added Elementor icon in posts list status.

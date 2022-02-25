@@ -5,7 +5,7 @@ Tags: elementor, polylang, multilingual, language switcher, languages, templates
 Requires at least: 5.4
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 2.0.4
+Stable tag: 2.0.5
 License: GPL-2.0-or-later
 License URI: https://opensource.org/licenses/GPL-2.0
 
@@ -193,6 +193,9 @@ There are quite a few:
 
 
 == Changelog ==
+
+= 2.0.5 =
+* Use Polylang custom flags.
 
 = 2.0.4 =
 * Added better info of template instances for translations on Theme Editor and WP admin list.
