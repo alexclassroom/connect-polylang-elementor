@@ -193,6 +193,9 @@ There are quite a few:
 
 ## Changelog
 
+### 2.0.6
+* Fixed Elementor Search Form url with correct language.
+
 ### 2.0.5
 * Use Polylang custom flags.
 

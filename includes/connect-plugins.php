@@ -36,6 +36,10 @@ class ConnectPlugins {
 		add_filter( 'pll_home_url_white_list', array( $this, 'elementor_home_url_white_list' ) );
 		add_filter( 'home_url', array( $this, 'home_url_language_dir_slash' ), 11, 2 );
 
+		// Fix search url for Search Form widget.
+		add_action( 'elementor/frontend/widget/before_render', array( $this, 'add_search_form_home_url_filter' ) );
+		add_action( 'elementor/frontend/widget/after_render', array( $this, 'remove_search_form_home_url_filter' ) );
+
 		if ( is_admin() ) {
 
 			// All langs for template conditions & global widgets.
@@ -382,6 +386,55 @@ class ConnectPlugins {
 	function home_url_language_dir_slash( $url, $path ) {
 
 		return empty( $path ) && function_exists( 'PLL' ) && 1 === PLL()->options['force_lang'] ? trailingslashit( $url ) : $url;
+
+	}
+
+	/**
+	 * Replace home_url with correct language search url
+	 *
+	 * Only for Elementor Search Form that uses home_url() in form action.
+	 *
+	 * @since 2.0.6
+	 *
+	 * @param  string $url
+	 * @param  string $path
+	 * @return string
+	 */
+	function search_form_home_url_filter( $url, $path ) {
+
+		return function_exists( 'PLL' ) ? PLL()->curlang->search_url : $url;
+
+	}
+
+	/**
+	 * Add home_url() filter before render Search Form
+	 *
+	 * @since 2.0.6
+	 *
+	 * @param  Element_Base $element
+	 * @return void
+	 */
+	function add_search_form_home_url_filter( $element ) {
+
+		if ( 'search-form' === $element->get_name() ) {
+			add_filter( 'home_url', array( $this, 'search_form_home_url_filter' ), 10, 2 );
+		}
+
+	}
+
+	/**
+	 * Remove home_url() filter after render Search Form
+	 *
+	 * @since 2.0.6
+	 *
+	 * @param  Element_Base $element
+	 * @return void
+	 */
+	function remove_search_form_home_url_filter( $element ) {
+
+		if ( 'search-form' === $element->get_name() ) {
+			remove_filter( 'home_url', array( $this, 'search_form_home_url_filter' ) );
+		}
 
 	}
 

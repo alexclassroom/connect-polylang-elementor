@@ -5,7 +5,7 @@ Tags: elementor, polylang, multilingual, language switcher, languages, templates
 Requires at least: 5.4
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 2.0.5
+Stable tag: 2.0.6
 License: GPL-2.0-or-later
 License URI: https://opensource.org/licenses/GPL-2.0
 
@@ -193,6 +193,9 @@ There are quite a few:
 
 
 == Changelog ==
+
+= 2.0.6 =
+* Fixed Elementor Search Form url with correct language.
 
 = 2.0.5 =
 * Use Polylang custom flags.
