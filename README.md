@@ -195,6 +195,7 @@ There are quite a few:
 
 ### 2.0.7
 * Fixed deprecated message with Elementor 3.6.
+* More restricted filter for lang home urls with trailing slash.
 
 ### 2.0.6
 * Fixed Elementor Search Form url with correct language.
