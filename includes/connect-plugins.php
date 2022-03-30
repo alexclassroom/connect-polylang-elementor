@@ -367,7 +367,6 @@ class ConnectPlugins {
 	 */
 	function elementor_home_url_white_list( $white_list ) {
 
-		$white_list[] = array( 'file' => 'search-form.php' );
 		$white_list[] = array( 'file' => 'site-url.php' );
 
 		return $white_list;
