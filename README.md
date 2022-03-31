@@ -193,6 +193,9 @@ There are quite a few:
 
 ## Changelog
 
+### 2.0.8
+* Don't load integrations if Polylang languages are not defined.
+
 ### 2.0.7
 * Fixed deprecated message with Elementor 3.6.
 * More restricted filter for lang home urls with trailing slash.
