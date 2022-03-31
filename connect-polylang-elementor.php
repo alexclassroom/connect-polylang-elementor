@@ -85,7 +85,7 @@ function setup() {
 
 	require CPEL_DIR . 'includes/functions.php';
 
-	if ( cpel_is_polylang_active() && cpel_is_elementor_active() ) {
+	if ( cpel_is_polylang_api_active() && cpel_is_elementor_active() ) {
 
 		ConnectPlugins::instance();
 		LanguageVisibility::instance();
