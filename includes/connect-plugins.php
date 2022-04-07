@@ -65,6 +65,14 @@ class ConnectPlugins {
 			// Don't add "_elementor_css" meta.
 			add_filter( 'update_post_metadata', array( $this, 'prevent_elementor_css_meta' ), 10, 3 );
 
+			// Edit links for each language domain.
+			if ( ! empty( PLL()->options['domains'] ) ) {
+
+				add_filter( 'post_row_actions', array( $this, 'edit_links_domain' ), 12, 2 );
+				add_filter( 'page_row_actions', array( $this, 'edit_links_domain' ), 12, 2 );
+
+				add_filter( 'elementor/document/urls/edit', array( $this, 'elementor_edit_link_domain' ), 10, 2 );
+			}
 		}
 
 		// Elementor editor menu links to translations
@@ -464,7 +472,7 @@ class ConnectPlugins {
 					if ( isset( $translations[ $language->slug ] ) ) {
 
 						$translation_id = $translations[ $language->slug ];
-						$link           = get_edit_post_link( $translation_id, 'edit' );
+						$link           = $this->fix_edit_domain( get_edit_post_link( $translation_id, 'edit' ), $translation_id );
 
 						if ( get_post_meta( $translation_id, '_elementor_edit_mode', true ) ) {
 							$link = add_query_arg( 'action', 'elementor', $link );
@@ -556,6 +564,36 @@ class ConnectPlugins {
 
 		return $data;
 
+	}
+
+
+	function fix_edit_domain( $url, $post_id ) {
+
+		$current_host = parse_url( pll_current_language( 'home_url' ) ?: trailingslashit( "//{$_SERVER['HTTP_HOST']}" ), PHP_URL_HOST );
+		$post_host    = parse_url( pll_get_post_language( $post_id, 'home_url' ), PHP_URL_HOST );
+
+		if ( $current_host !== $post_host ) {
+			$url = str_replace( $current_host, $post_host, $url );
+		}
+
+		return $url;
+
+	}
+
+	// change the edit and elementor-edit links in post table
+	function edit_links_domain( $actions, $post ) {
+
+		if ( ! empty( $actions['edit_with_elementor'] ) ) {
+			$actions['edit']                = $this->fix_edit_domain( $actions['edit'], $post->ID );
+			$actions['edit_with_elementor'] = $this->fix_edit_domain( $actions['edit_with_elementor'], $post->ID );
+		}
+
+		return $actions;
+
+	}
+
+	function elementor_edit_link_domain( $url, $document ) {
+		return $this->fix_edit_domain( $url, $document->get_main_id() );
 	}
 
 }

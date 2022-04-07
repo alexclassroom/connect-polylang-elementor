@@ -73,6 +73,9 @@ spl_autoload_register(
 add_action( 'plugins_loaded', 'ConnectPolylangElementor\\setup', 20 );
 add_action( 'init', 'ConnectPolylangElementor\\load_textdomain' );
 
+add_filter( 'plugins_url', 'ConnectPolylangElementor\\fix_cross_domain_assets' );
+add_filter( 'pll_context', 'ConnectPolylangElementor\\fix_elementor_editor_context' );
+
 
 /**
  * Plugin setup.
@@ -88,6 +91,7 @@ function setup() {
 	if ( cpel_is_polylang_api_active() && cpel_is_elementor_active() ) {
 
 		ConnectPlugins::instance();
+		PolylangElementorAssets::instance();
 		LanguageVisibility::instance();
 		DynamicTags\Manager::instance();
 		Finder\Manager::instance();
@@ -113,5 +117,57 @@ function load_textdomain() {
 
 	load_plugin_textdomain( 'connect-polylang-elementor', false, dirname( CPEL_BASENAME ) . '/languages' );
 
+}
+
+/**
+ * Fixes cross origin domain issues with Elementor and Polylang
+ *
+ * Must be run before loading Elementor.
+ *
+ * View https://github.com/polylang/polylang/issues/590
+ * View https://gist.github.com/JoryHogeveen/1a9f41406f2e1f1b542d725a1954f774
+ *
+ * @param  string $url
+ * @return string
+ */
+function fix_cross_domain_assets( $url ) {
+
+	if ( false === strpos( $url, 'elementor' ) ) {
+		return $url;
+	}
+
+	// Not a multidomain configuration.
+	$pll_options = get_option( 'polylang' );
+	if ( ! isset( $pll_options['domains'] ) ) {
+		return $url;
+	}
+
+	$domains  = $pll_options['domains'];
+	$srv_host = $_SERVER['HTTP_HOST'];
+	$url_host = parse_url( $url, PHP_URL_HOST );
+
+	if ( $url_host ) {
+		foreach ( $domains as $domain ) {
+			if ( false !== strpos( $domain, $srv_host ) ) {
+				$url = str_replace( $url_host, $srv_host, $url );
+				break;
+			}
+		}
+	}
+
+	return $url;
+
+}
+
+/**
+ * Fix Elementor editor context
+ *
+ * Load PLL_Admin class for Elementor editor.
+ *
+ * @param  string $class
+ * @return string
+ */
+function fix_elementor_editor_context( $class ) {
+	return 'PLL_Frontend' === $class && is_admin() && isset( $_GET['action'] ) && 'elementor' === $_GET['action'] ? 'PLL_Admin' : $class;
 }
 
