@@ -1,22 +1,14 @@
 <?php
-/*
- * Non-MU plugin. Need to be used together with MU plugin.
- *
- * Based on code from @nicmare: https://github.com/polylang/polylang/issues/590#issuecomment-721782112
- *
- * Plugin Name: Polylang Elementor Cross Domain Assets
- * Description: Fixes cross origin domain issues with Elementor and Polylang
- * Version: 1.0
- * Author: Jory Hogeveen
- * Author URI: http://www.keraweb.nl/
-*/
-
 namespace ConnectPolylangElementor;
 
 defined( 'ABSPATH' ) || exit;
 
-
-class PolylangElementorAssets {
+/**
+ * Fixes cross origin domain issues with Elementor and Polylang
+ *
+ * Based on code from JoryHogeveen: https://gist.github.com/JoryHogeveen/1a9f41406f2e1f1b542d725a1954f774
+ */
+class ElementorAssets {
 
 	use \ConnectPolylangElementor\Util\Singleton;
 
@@ -27,11 +19,21 @@ class PolylangElementorAssets {
 	protected $all_domains      = array();
 
 	protected function __construct() {
+
 		add_action( 'init', array( $this, 'init' ) );
+		add_action( 'admin_init', array( $this, 'editor_domain_redirect' ) );
+
 	}
 
+	/**
+	 * Initialize
+	 *
+	 * @since 2.1.0
+	 * @return void
+	 */
 	public function init() {
 
+		// Prepare domains info.
 		$return           = OBJECT;
 		$current_language = pll_current_language( $return );
 		$default_language = pll_default_language( $return );
@@ -62,66 +64,121 @@ class PolylangElementorAssets {
 		$this->current_language = $current_language->slug;
 		$this->default_language = $default_language->slug;
 
+		// Add filters.
 		add_filter( 'script_loader_src', array( $this, 'translate_url' ) );
 		add_filter( 'style_loader_src', array( $this, 'translate_url' ) );
 
 		add_filter( 'allowed_http_origins', array( $this, 'add_allowed_origins' ) );
 
-		add_filter( 'wp_get_attachment_image_attributes', array( $this, 'check_for_src' ), 10, 2 );
-		add_filter( 'admin_url', array( $this, 'modify_adminy_url_for_ajax' ), 10, 3 );
-
-		add_filter( 'post_row_actions', array( $this, 'elementor_links_fix' ), 12, 2 );
-		add_filter( 'page_row_actions', array( $this, 'elementor_links_fix' ), 12, 2 );
+		add_filter( 'admin_url', array( $this, 'replace_ajax_url' ), 10, 3 );
+		add_filter( 'wp_get_attachment_image_attributes', array( $this, 'replace_src' ), 10, 2 );
 
 		add_filter( 'elementor/editor/localize_settings', array( $this, 'translate_url_recursive' ) );
+
 	}
 
+	/**
+	 * Translate URL domain
+	 *
+	 * @since 2.1.0
+	 * @param  string $url
+	 * @return string
+	 */
 	public function translate_url( $url ) {
+
 		return str_replace( $this->default_domain, $this->current_domain, $url );
+
 	}
 
+	/**
+	 * Translate URL domain recursive
+	 *
+	 * @since 2.1.0
+	 * @param  mixed $data
+	 * @return mixed
+	 */
 	public function translate_url_recursive( $data ) {
+
 		if ( is_string( $data ) ) {
 			$data = $this->translate_url( $data );
 		} elseif ( is_array( $data ) ) {
 			$data = array_map( array( $this, 'translate_url_recursive' ), $data );
 		}
+
 		return $data;
+
 	}
 
+	/**
+	 * Add all domains to allowed origins
+	 *
+	 * @since 2.1.0
+	 * @param  array $origins
+	 * @return array
+	 */
 	public function add_allowed_origins( $origins ) {
+
 		$origins[] = $this->current_domain;
 		$origins   = array_merge( $origins, $this->all_domains );
+
 		return $origins;
+
 	}
 
-	public function modify_adminy_url_for_ajax( $url, $path, $blog_id ) {
-		if ( 'admin-ajax.php' == $path ) {
-			return $this->translate_url( $url );
-		}
-		return $url;
+	/**
+	 * Replace domain for admin-ajax.php
+	 *
+	 * @since 2.1.0
+	 * @param  string $url
+	 * @param  string $path
+	 * @param  int    $blog_id
+	 * @return string
+	 */
+	public function replace_ajax_url( $url, $path, $blog_id ) {
+
+		return 'admin-ajax.php' === $path ? $this->translate_url( $url ) : $url;
+
 	}
 
-	public function check_for_src( $attr, $attachment ) {
+	/**
+	 * Replace domain for image src
+	 *
+	 * @since 2.1.0
+	 * @param  mixed $attr
+	 * @param  mixed $attachment
+	 * @return void
+	 */
+	public function replace_src( $attr, $attachment ) {
+
 		$attr['src']    = $this->translate_url( $attr['src'] );
 		$attr['srcset'] = $this->translate_url( $attr['srcset'] );
+
 		return $attr;
+
 	}
 
-	// change the edit and elementor-edit links in post table
-	public function elementor_links_fix( $actions, $post ) {
-		if ( empty( $actions['edit_with_elementor'] ) ) {
-			return $actions;
-		}
-		if ( ! function_exists( 'pll_get_post_language' ) ) {
-			return $actions;
+	/**
+	 * Redirect Elementor editor with post domain
+	 *
+	 * @since 2.1.0
+	 * @return void
+	 */
+	public function editor_domain_redirect() {
+
+		// Exist if not is Elementor Editor.
+		if ( ! isset( $_GET['action'] ) || 'elementor' !== $_GET['action'] ) {
+			return;
 		}
 
-		if ( pll_get_post_language( $post->ID ) != pll_default_language() ) {
-			$actions['edit']                = $this->translate_url( $actions['edit'] );
-			$actions['edit_with_elementor'] = $this->translate_url( $actions['edit_with_elementor'] );
+		$current_url = add_query_arg( $_SERVER['QUERY_STRING'], '', admin_url( 'post.php' ) );
+		$server_host = parse_url( trailingslashit( "//{$_SERVER['HTTP_HOST']}" ), PHP_URL_HOST );
+		$post_host   = parse_url( \pll_get_post_language( intval( $_GET['post'] ), 'home_url' ), PHP_URL_HOST );
+
+		if ( $server_host !== $post_host ) {
+			\wp_redirect( \str_replace( $server_host, $post_host, $current_url ) );
+			exit;
 		}
 
-		return $actions;
 	}
 }
+
