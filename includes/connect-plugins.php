@@ -65,6 +65,14 @@ class ConnectPlugins {
 			// Don't add "_elementor_css" meta.
 			add_filter( 'update_post_metadata', array( $this, 'prevent_elementor_css_meta' ), 10, 3 );
 
+			// Edit links for each language domain.
+			if ( ! empty( PLL()->options['domains'] ) && 3 === PLL()->options['force_lang'] ) {
+
+				add_filter( 'post_row_actions', array( $this, 'fix_edit_link' ), 12, 2 );
+				add_filter( 'page_row_actions', array( $this, 'fix_edit_link' ), 12, 2 );
+
+				add_filter( 'elementor/document/urls/edit', array( $this, 'fix_elementor_edit_link' ), 10, 2 );
+			}
 		}
 
 		// Elementor editor menu links to translations
@@ -86,7 +94,7 @@ class ConnectPlugins {
 	 * @param bool  $is_settings  True when displaying the list in Polylang settings
 	 * @return array The list of post type names for which Polylang manages language and translations
 	 */
-	function add_polylang_post_types( $types, $is_settings ) {
+	public function add_polylang_post_types( $types, $is_settings ) {
 
 		$relevant_types = apply_filters(
 			'cpel/filter/polylang/post_types',
@@ -121,7 +129,7 @@ class ConnectPlugins {
 	 *
 	 * @param WP_Query $query
 	 */
-	function query_all_languages( $query ) {
+	public function query_all_languages( $query ) {
 
 		$global_widget_meta_query = array(
 			'key'   => '_elementor_template_type',
@@ -151,7 +159,7 @@ class ConnectPlugins {
 	 * @param  string $meta_key
 	 * @return mixed null or empty array
 	 */
-	function elementor_conditions_empty_on_translations( $null, $post_id, $meta_key ) {
+	public function elementor_conditions_empty_on_translations( $null, $post_id, $meta_key ) {
 
 		return '_elementor_conditions' === $meta_key && cpel_is_translation( $post_id ) ? array( array() ) : $null;
 
@@ -165,7 +173,7 @@ class ConnectPlugins {
 	 * @param  array $value array of theme builder conditions
 	 * @return array  filtered array
 	 */
-	function theme_builder_conditions_remove_empty( $value ) {
+	public function theme_builder_conditions_remove_empty( $value ) {
 
 		foreach ( $value as $location => $items ) {
 			$value[ $location ] = array_filter( $items );
@@ -187,7 +195,7 @@ class ConnectPlugins {
 	 * @param  int $post_id ID of the current post
 	 * @return string Based translation, the translation ID, or the original Post ID
 	 */
-	function template_id_translation( $post_id ) {
+	public function template_id_translation( $post_id ) {
 
 		$post_id           = pll_get_post( $post_id ) ?: $post_id;
 		$this->template_id = $post_id; // Save for check sub_id
@@ -211,7 +219,7 @@ class ConnectPlugins {
 	 * @param  array $parsed_condition condition parts
 	 * @return int original sub ID or translated ID
 	 */
-	function condition_sub_id_translation( $sub_id, $parsed_condition ) {
+	public function condition_sub_id_translation( $sub_id, $parsed_condition ) {
 
 		if ( $sub_id && cpel_is_translation( $this->template_id ) ) {
 
@@ -243,7 +251,7 @@ class ConnectPlugins {
 	 * @param  mixed $taxonomy
 	 * @return void
 	 */
-	function update_conditions_on_term_change( $post_id, $terms, $tt_ids, $taxonomy ) {
+	public function update_conditions_on_term_change( $post_id, $terms, $tt_ids, $taxonomy ) {
 
 		if ( 'post_translations' === $taxonomy && 'elementor_library' === get_post_type( $post_id ) ) {
 
@@ -265,7 +273,7 @@ class ConnectPlugins {
 	 * @param  int    $post_id
 	 * @return void
 	 */
-	function hide_language_column_pre( $column, $post_id ) {
+	public function hide_language_column_pre( $column, $post_id ) {
 
 		if ( false !== strpos( $column, 'language_' ) && 'widget' === get_post_meta( $post_id, '_elementor_template_type', true ) ) {
 			echo '<span aria-hidden="true">—</span><div class="hidden" aria-hidden="true">';
@@ -284,7 +292,7 @@ class ConnectPlugins {
 	 * @param  int    $post_id
 	 * @return void
 	 */
-	function hide_language_column_pos( $column, $post_id ) {
+	public function hide_language_column_pos( $column, $post_id ) {
 
 		if ( false !== strpos( $column, 'language_' ) && 'widget' === get_post_meta( $post_id, '_elementor_template_type', true ) ) {
 			echo '</div>';
@@ -303,7 +311,7 @@ class ConnectPlugins {
 	 * @param  int    $post_id
 	 * @return void
 	 */
-	function instances_column_pre( $column, $post_id ) {
+	public function instances_column_pre( $column, $post_id ) {
 
 		if ( 'instances' === $column && cpel_is_translation( $post_id ) ) {
 
@@ -325,7 +333,7 @@ class ConnectPlugins {
 	 * @param  int    $post_id
 	 * @return void
 	 */
-	function instances_column_pos( $column, $post_id ) {
+	public function instances_column_pos( $column, $post_id ) {
 
 		if ( 'instances' === $column && cpel_is_translation( $post_id ) ) {
 			echo '</div>';
@@ -365,7 +373,7 @@ class ConnectPlugins {
 	 * @param  array $white_list
 	 * @return array
 	 */
-	function elementor_home_url_white_list( $white_list ) {
+	public function elementor_home_url_white_list( $white_list ) {
 
 		$white_list[] = array( 'file' => 'site-url.php' );
 
@@ -382,7 +390,7 @@ class ConnectPlugins {
 	 * @param  string $path
 	 * @return string
 	 */
-	function home_url_language_dir_slash( $url, $path ) {
+	public function home_url_language_dir_slash( $url, $path ) {
 
 		return empty( $path ) && ! is_admin() && $url !== get_option( 'home' )
 			&& function_exists( 'PLL' ) && 1 === PLL()->options['force_lang'] ? trailingslashit( $url ) : $url;
@@ -400,7 +408,7 @@ class ConnectPlugins {
 	 * @param  string $path
 	 * @return string
 	 */
-	function search_form_home_url_filter( $url, $path ) {
+	public function search_form_home_url_filter( $url, $path ) {
 
 		return function_exists( 'PLL' ) ? PLL()->curlang->search_url : $url;
 
@@ -414,7 +422,7 @@ class ConnectPlugins {
 	 * @param  Element_Base $element
 	 * @return void
 	 */
-	function add_search_form_home_url_filter( $element ) {
+	public function add_search_form_home_url_filter( $element ) {
 
 		if ( 'search-form' === $element->get_name() ) {
 			add_filter( 'home_url', array( $this, 'search_form_home_url_filter' ), 10, 2 );
@@ -447,7 +455,7 @@ class ConnectPlugins {
 	 *
 	 * @return void
 	 */
-	function elementor_editor_script() {
+	public function elementor_editor_script() {
 
 		global $typenow, $post;
 
@@ -464,7 +472,7 @@ class ConnectPlugins {
 					if ( isset( $translations[ $language->slug ] ) ) {
 
 						$translation_id = $translations[ $language->slug ];
-						$link           = get_edit_post_link( $translation_id, 'edit' );
+						$link           = $this->fix_url_domain( get_edit_post_link( $translation_id, 'edit' ), $translation_id );
 
 						if ( get_post_meta( $translation_id, '_elementor_edit_mode', true ) ) {
 							$link = add_query_arg( 'action', 'elementor', $link );
@@ -528,7 +536,7 @@ class ConnectPlugins {
 	 * @param  array $data
 	 * @return array
 	 */
-	function elementor_site_editor_template( $data ) {
+	public function elementor_site_editor_template( $data ) {
 
 		$post_id = $data['id'];
 
@@ -555,6 +563,57 @@ class ConnectPlugins {
 		}
 
 		return $data;
+
+	}
+
+	/**
+	 * Fix url domain
+	 *
+	 * @param  mixed $url
+	 * @param  mixed $post_id
+	 * @return void
+	 */
+	private function fix_url_domain( $url, $post_id ) {
+
+		$current_host = parse_url( pll_current_language( 'home_url' ) ?: trailingslashit( "//{$_SERVER['HTTP_HOST']}" ), PHP_URL_HOST );
+		$post_host    = parse_url( pll_get_post_language( $post_id, 'home_url' ), PHP_URL_HOST );
+
+		if ( $current_host !== $post_host ) {
+			$url = str_replace( $current_host, $post_host, $url );
+		}
+
+		return $url;
+
+	}
+
+	/**
+	 * Fix domain for Elementor edit links in posts table
+	 *
+	 * @param  array   $actions
+	 * @param  WP_Post $post
+	 * @return array
+	 */
+	public function fix_edit_link( $actions, $post ) {
+
+		if ( ! empty( $actions['edit_with_elementor'] ) ) {
+			// $actions['edit']                = $this->fix_url_domain( $actions['edit'], $post->ID );
+			$actions['edit_with_elementor'] = $this->fix_url_domain( $actions['edit_with_elementor'], $post->ID );
+		}
+
+		return $actions;
+
+	}
+
+	/**
+	 * Fix domain for Elementor edit links in Theme Builder
+	 *
+	 * @param  string                       $url
+	 * @param  Elementor\Core\Base\Document $document
+	 * @return string
+	 */
+	public function fix_elementor_edit_link( $url, $document ) {
+
+		return $this->fix_url_domain( $url, $document->get_main_id() );
 
 	}
 

@@ -88,6 +88,7 @@ You can collaborate with your language translations in [Translating WordPress](h
 The following code/classes are licensed under the GPL.
 
 * v2. refactor and upgrade by [Pacotole](https://profiles.wordpress.org/pacotole/) at [Creame](https://crea.me)
+* v2.1 Cross domain fixes based on work of [Jory Hogeveen](https://profiles.wordpress.org/keraweb/) and [nicmare](https://github.com/nicmare)
 * Support [Brad Johnson](https://profiles.wordpress.org/p4fbradjohnson/)
 * v1. released by [David Decker](https://profiles.wordpress.org/daveshine/)
 * v1. Polylang Switcher class (Elementor Widget) and its CSS based on widget from plugin "Language Switcher for Elementor" by Solitweb (GPLv2 or later)
@@ -192,6 +193,10 @@ There are quite a few:
 
 
 ## Changelog
+
+### 2.1.0
+* Fixed cross domain issues with Polylang setup with multiple domains.
+* Fix flag SVG inline with some themes.
 
 ### 2.0.8
 * Don't load integrations if Polylang languages are not defined.
