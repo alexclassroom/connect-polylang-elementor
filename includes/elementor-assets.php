@@ -16,6 +16,11 @@ class ElementorAssets {
 	protected $default_domain = '';
 	protected $all_domains    = array();
 
+	/**
+	 * Add actions if is multidomain
+	 *
+	 * @return void
+	 */
 	protected function __construct() {
 
 		if ( cpel_is_polylang_multidomain() ) {
@@ -49,11 +54,12 @@ class ElementorAssets {
 			return;
 		}
 
-		$languages = pll_the_languages( array( 'raw' => true ) );
+		$languages   = pll_the_languages( array( 'raw' => true ) );
+		$server_host = parse_url( "//{$_SERVER['HTTP_HOST']}", PHP_URL_HOST );
 
 		foreach ( $languages as $language ) {
 			$this->all_domains[] = $language['url'];
-			if ( false !== stripos( $language['url'], $_SERVER['SERVER_NAME'] ) ) {
+			if ( false !== stripos( $language['url'], $server_host ) ) {
 				$current_language = PLL()->model->get_language( $language['slug'] );
 				break;
 			}
