@@ -12,16 +12,16 @@ class ElementorAssets {
 
 	use \ConnectPolylangElementor\Util\Singleton;
 
-	protected $current_domain   = '';
-	protected $default_domain   = '';
-	protected $current_language = '';
-	protected $default_language = '';
-	protected $all_domains      = array();
+	protected $current_domain = '';
+	protected $default_domain = '';
+	protected $all_domains    = array();
 
 	protected function __construct() {
 
-		add_action( 'init', array( $this, 'init' ) );
-		add_action( 'admin_init', array( $this, 'editor_domain_redirect' ) );
+		if ( cpel_is_polylang_multidomain() ) {
+			add_action( 'init', array( $this, 'init' ) );
+			add_action( 'admin_init', array( $this, 'editor_domain_redirect' ) );
+		}
 
 	}
 
@@ -43,7 +43,7 @@ class ElementorAssets {
 		}
 
 		$is_preview = isset( $_GET['elementor_preview'] );
-		$is_editor  = ( isset( $_GET['action'] ) && 'elementor' === $_GET['action'] );
+		$is_editor  = isset( $_GET['action'] ) && 'elementor' === $_GET['action'];
 
 		if ( ! $is_editor && ! $is_preview ) {
 			return;
@@ -59,10 +59,8 @@ class ElementorAssets {
 			}
 		}
 
-		$this->current_domain   = $current_language->home_url;
-		$this->default_domain   = $default_language->home_url;
-		$this->current_language = $current_language->slug;
-		$this->default_language = $default_language->slug;
+		$this->current_domain = $current_language->home_url;
+		$this->default_domain = $default_language->home_url;
 
 		// Add filters.
 		add_filter( 'script_loader_src', array( $this, 'translate_url' ) );
@@ -165,13 +163,14 @@ class ElementorAssets {
 	 */
 	public function editor_domain_redirect() {
 
-		// Exist if not is Elementor Editor.
-		if ( ! isset( $_GET['action'] ) || 'elementor' !== $_GET['action'] ) {
+		$is_editor = isset( $_GET['action'] ) && 'elementor' === $_GET['action'];
+
+		if ( ! $is_editor ) {
 			return;
 		}
 
 		$current_url = add_query_arg( $_SERVER['QUERY_STRING'], '', admin_url( 'post.php' ) );
-		$server_host = parse_url( trailingslashit( "//{$_SERVER['HTTP_HOST']}" ), PHP_URL_HOST );
+		$server_host = parse_url( "//{$_SERVER['HTTP_HOST']}", PHP_URL_HOST );
 		$post_host   = parse_url( \pll_get_post_language( intval( $_GET['post'] ), 'home_url' ), PHP_URL_HOST );
 
 		if ( $server_host !== $post_host ) {

@@ -66,7 +66,7 @@ class ConnectPlugins {
 			add_filter( 'update_post_metadata', array( $this, 'prevent_elementor_css_meta' ), 10, 3 );
 
 			// Edit links for each language domain.
-			if ( ! empty( PLL()->options['domains'] ) && 3 === PLL()->options['force_lang'] ) {
+			if ( cpel_is_polylang_multidomain() ) {
 
 				add_filter( 'post_row_actions', array( $this, 'fix_edit_link' ), 12, 2 );
 				add_filter( 'page_row_actions', array( $this, 'fix_edit_link' ), 12, 2 );

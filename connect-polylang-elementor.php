@@ -145,9 +145,9 @@ function fix_cross_domain_assets( $url ) {
 	$pll_options = get_option( 'polylang' );
 
 	// Is a multidomain configuration.
-	if ( isset( $pll_options['force_lang'], $pll_options['domains'] ) && 3 === $pll_options['force_lang'] ) {
+	if ( isset( $pll_options['force_lang'] ) && 3 === $pll_options['force_lang'] && ! empty( $pll_options['domains'] ) ) {
 
-		$srv_host = $_SERVER['HTTP_HOST'];
+		$srv_host = parse_url( "//{$_SERVER['HTTP_HOST']}", PHP_URL_HOST );
 		$url_host = parse_url( $url, PHP_URL_HOST );
 
 		if ( $url_host ) {

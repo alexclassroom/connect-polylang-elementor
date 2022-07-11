@@ -71,6 +71,19 @@ function cpel_is_polylang_api_active() {
 }
 
 /**
+ * Is Polylang Multidomain
+ *
+ * @since  2.1.1
+ *
+ * @return bool TRUE if is polylang multi-domain configuration, FALSE otherwise.
+ */
+function cpel_is_polylang_multidomain() {
+
+	return cpel_is_polylang_api_active() && 3 === PLL()->options['force_lang'] && ! empty( PLL()->options['domains'] );
+
+}
+
+/**
  * Is post a translation in secondary language
  *
  * @since  2.0.0
