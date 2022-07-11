@@ -3,9 +3,9 @@ Contributors: daveshine, p4fbradjohnson, deckerweb, wpautobahn, pacotole, creapu
 Donate link: https://www.paypal.me/pacotole
 Tags: elementor, polylang, multilingual, language switcher, languages, templates, widget, finder, dynamic tags
 Requires at least: 5.4
-Tested up to: 5.9
+Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 2.1.0
+Stable tag: 2.1.1
 License: GPL-2.0-or-later
 License URI: https://opensource.org/licenses/GPL-2.0
 
@@ -194,6 +194,10 @@ There are quite a few:
 
 
 == Changelog ==
+
+= 2.1.1 =
+* Enable Elementor cross domain url fixes only for multidomain configurations.
+* Added Elementor tested headers.
 
 = 2.1.0 =
 * Fixed cross domain issues with Polylang setup with multiple domains.

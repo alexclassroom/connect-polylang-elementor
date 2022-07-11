@@ -194,6 +194,10 @@ There are quite a few:
 
 ## Changelog
 
+## 2.1.1
+* Enable Elementor cross domain url fixes only for multidomain configurations.
+* Added Elementor tested headers.
+
 ### 2.1.0
 * Fixed cross domain issues with Polylang setup with multiple domains.
 * Fix flag SVG inline with some themes.
