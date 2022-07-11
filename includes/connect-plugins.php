@@ -32,6 +32,9 @@ class ConnectPlugins {
 		add_filter( 'elementor/theme/get_location_templates/template_id', array( $this, 'template_id_translation' ) );
 		add_filter( 'elementor/theme/get_location_templates/condition_sub_id', array( $this, 'condition_sub_id_translation' ), 10, 2 );
 
+		// Shortcode template loading.
+		add_filter( 'pre_do_shortcode_tag', array( $this, 'template_shortcode_translate' ), 10, 3 );
+
 		// Fix home_url() for site-url Dynamic Tag and Search Form widget.
 		add_filter( 'pll_home_url_white_list', array( $this, 'elementor_home_url_white_list' ) );
 		add_filter( 'home_url', array( $this, 'home_url_language_dir_slash' ), 11, 2 );
@@ -184,7 +187,43 @@ class ConnectPlugins {
 	}
 
 	/**
-	 * Change Elementor template with their translation for the current lanaguage (if exists).
+	 * Bypass Elementor template shortocode with their translation for the current language (if exists).
+	 *
+	 * @since  2.2.0
+	 *
+	 * @uses   pll_get_post()
+	 *
+	 * @param  mixed  $false false or string with bypass output
+	 * @param  string $tag   shortcode tag
+	 * @param  array  $attr  shortcode attributes
+	 * @return false|string  false or string with bypass output
+	 */
+	public function template_shortcode_translate( $false, $tag, $attr ) {
+
+		if ( 'elementor-template' !== $tag ) {
+			return $false;
+		}
+
+		if ( isset( $attr['skip'] ) ) {
+			return $false;
+		}
+
+		// Translate post_id.
+		$attr['id'] = pll_get_post( absint( $attr['id'] ) ) ?: $attr['id'];
+		// Skip next call.
+		$attr['skip'] = 1;
+
+		$output = '';
+		foreach ( $attr as $key => $val ) {
+			$output .= " $key=\"$val\"";
+		}
+
+		return do_shortcode( '[elementor-template' . $output . ']' );
+
+	}
+
+	/**
+	 * Change Elementor template with their translation for the current language (if exists).
 	 *
 	 * @link   https://github.com/pojome/elementor/issues/4839
 	 *
