@@ -84,6 +84,19 @@ function cpel_is_polylang_multidomain() {
 }
 
 /**
+ * Is Elementor Editor
+ *
+ * @since  2.3.0
+ *
+ * @return bool TRUE if is Elementor Editor, FALSE otherwise.
+ */
+function cpel_is_elementor_editor() {
+
+	return is_admin() && isset( $_GET['action'], $_GET['post'] ) && 'elementor' === $_GET['action'];
+
+}
+
+/**
  * Is post a translation in secondary language
  *
  * @since  2.0.0

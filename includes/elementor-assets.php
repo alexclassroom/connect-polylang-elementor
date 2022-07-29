@@ -48,9 +48,8 @@ class ElementorAssets {
 		}
 
 		$is_preview = isset( $_GET['elementor_preview'] );
-		$is_editor  = isset( $_GET['action'] ) && 'elementor' === $_GET['action'];
 
-		if ( ! $is_editor && ! $is_preview ) {
+		if ( ! cpel_is_elementor_editor() && ! $is_preview ) {
 			return;
 		}
 
@@ -169,9 +168,7 @@ class ElementorAssets {
 	 */
 	public function editor_domain_redirect() {
 
-		$is_editor = isset( $_GET['action'] ) && 'elementor' === $_GET['action'];
-
-		if ( ! $is_editor ) {
+		if ( ! cpel_is_elementor_editor() ) {
 			return;
 		}
 
