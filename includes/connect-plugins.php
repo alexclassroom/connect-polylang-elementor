@@ -35,6 +35,9 @@ class ConnectPlugins {
 		// Shortcode template loading.
 		add_filter( 'pre_do_shortcode_tag', array( $this, 'template_shortcode_translate' ), 10, 3 );
 
+		// Elementor Kit template loading.
+		add_filter( 'option_elementor_active_kit', array( $this, 'elementor_kit_translation' ) );
+
 		// Fix home_url() for site-url Dynamic Tag and Search Form widget.
 		add_filter( 'pll_home_url_white_list', array( $this, 'elementor_home_url_white_list' ) );
 		add_filter( 'home_url', array( $this, 'home_url_language_dir_slash' ), 11, 2 );
@@ -219,6 +222,43 @@ class ConnectPlugins {
 		}
 
 		return do_shortcode( '[elementor-template' . $output . ']' );
+
+	}
+
+	/**
+	 * Change Elementor Kit template with their translation for the current language (if exists).
+	 *
+	 * @since  2.3.0
+	 *
+	 * @uses   pll_get_post()
+	 * @uses   pll_get_post_language()
+	 *
+	 * @param  mixed $value Value of 'elementor_active_kit' option, the ID of current Elementor Kit
+	 * @return int The translation ID, or the original Elementor Kit ID
+	 */
+	public function elementor_kit_translation( $value ) {
+
+		$translation = null;
+
+		// Is API REST '/wp-json/elementor/v1/globals'.
+		if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+			// Referrer is Elementor Editor?
+			wp_parse_str( parse_url( $_SERVER['HTTP_REFERER'], PHP_URL_QUERY ), $query );
+
+			if ( isset( $query['action'], $query['post'] ) && 'elementor' === $query['action'] ) {
+				$translation = pll_get_post( $value, pll_get_post_language( intval( $query['post'] ) ) );
+			}
+		} elseif ( cpel_is_elementor_editor() ) {
+
+			$translation = pll_get_post( $value, pll_get_post_language( intval( $_GET['post'] ) ) );
+
+		} elseif ( ! is_admin() ) {
+
+			$translation = pll_get_post( $value );
+
+		}
+
+		return $translation ?: $value;
 
 	}
 
