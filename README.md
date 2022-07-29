@@ -196,6 +196,10 @@ There are quite a few:
 
 ## Changelog
 
+## 2.3.0
+* Added dropdown controls to show on mouse hover and drop to up.
+* Added Elementor Kit translation support.
+
 ## 2.2.0
 * Added Elementor Pro template shortcode translation.
 

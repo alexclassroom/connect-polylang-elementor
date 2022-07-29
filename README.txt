@@ -5,7 +5,7 @@ Tags: elementor, polylang, multilingual, language switcher, languages, templates
 Requires at least: 5.4
 Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 2.2.0
+Stable tag: 2.3.0
 License: GPL-2.0-or-later
 License URI: https://opensource.org/licenses/GPL-2.0
 
@@ -196,6 +196,10 @@ There are quite a few:
 
 
 == Changelog ==
+
+= 2.3.0 =
+* Added dropdown controls to show on mouse hover and drop to up.
+* Added Elementor Kit translation support.
 
 = 2.2.0 =
 * Added Elementor Pro template shortcode translation.
