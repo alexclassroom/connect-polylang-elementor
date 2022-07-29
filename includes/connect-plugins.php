@@ -190,7 +190,7 @@ class ConnectPlugins {
 	}
 
 	/**
-	 * Bypass Elementor template shortocode with their translation for the current language (if exists).
+	 * Bypass Elementor template shortcode with their translation for the current language (if exists).
 	 *
 	 * @since  2.2.0
 	 *
@@ -392,13 +392,17 @@ class ConnectPlugins {
 	 */
 	public function instances_column_pre( $column, $post_id ) {
 
-		if ( 'instances' === $column && cpel_is_translation( $post_id ) ) {
+		if ( 'instances' === $column && 'widget' !== get_post_meta( $post_id, '_elementor_template_type', true ) && cpel_is_translation( $post_id ) ) {
 
-			$conditions_manager = \ElementorPro\Plugin::instance()->modules_manager->get_modules( 'theme-builder' )->get_conditions_manager();
-			$instances          = $conditions_manager->get_document_instances( pll_get_post( $post_id, pll_default_language() ) );
+			$default_post  = pll_get_post( $post_id, pll_default_language() );
+			$theme_builder = \ElementorPro\Plugin::instance()->modules_manager->get_modules( 'theme-builder' );
+			$instances     = $theme_builder->get_conditions_manager()->get_document_instances( $default_post );
+
+			if ( empty( $instances ) ) {
+				$instances = array( 'none' => esc_html__( 'None', 'elementor-pro' ) );
+			}
 
 			echo '<span style="opacity:.4">' . esc_html( implode( ', ', $instances ) ) . '</span><div class="hidden" aria-hidden="true">';
-
 		}
 
 	}
@@ -414,7 +418,7 @@ class ConnectPlugins {
 	 */
 	public function instances_column_pos( $column, $post_id ) {
 
-		if ( 'instances' === $column && cpel_is_translation( $post_id ) ) {
+		if ( 'instances' === $column && 'widget' !== get_post_meta( $post_id, '_elementor_template_type', true ) && cpel_is_translation( $post_id ) ) {
 			echo '</div>';
 		}
 
@@ -627,8 +631,9 @@ class ConnectPlugins {
 
 			$language = pll_default_language();
 
-			$conditions_manager = \ElementorPro\Plugin::instance()->modules_manager->get_modules( 'theme-builder' )->get_conditions_manager();
-			$instances          = $conditions_manager->get_document_instances( pll_get_post( $post_id, $language ) );
+			$default_post  = pll_get_post( $post_id, $language );
+			$theme_builder = \ElementorPro\Plugin::instance()->modules_manager->get_modules( 'theme-builder' );
+			$instances     = $theme_builder->get_conditions_manager()->get_document_instances( $default_post );
 
 			if ( empty( $instances ) ) {
 				$instances = array( 'no_instances' => esc_html__( 'No instances', 'elementor-pro' ) );
