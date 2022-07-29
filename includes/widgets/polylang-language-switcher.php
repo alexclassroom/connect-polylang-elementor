@@ -180,7 +180,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 				'options'      => array(
 					'horizontal' => __( 'Horizontal', 'elementor' ),
 					'vertical'   => __( 'Vertical', 'elementor' ),
-					'dropdown'   => __( 'Dropdown', 'elementor' ),
+					'dropdown'   => __( 'Dropdown', 'connect-polylang-elementor' ),
 				),
 				'default'      => 'horizontal',
 				'prefix_class' => 'cpel-switcher--layout-',
@@ -442,13 +442,52 @@ class PolylangLanguageSwitcher extends Widget_Base {
 			)
 		);
 
-		$this->add_control(
-			'heading_dropdown',
+		$this->end_controls_section();
+
+		/**
+		 * Style: Dropdown
+		 */
+
+		$this->start_controls_section(
+			'dropdown_section',
 			array(
-				'label'     => __( 'Dropdown', 'elementor-pro' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
+				'label'     => __( 'Dropdown', 'connect-polylang-elementor' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array( 'layout' => 'dropdown' ),
+			)
+		);
+
+		$this->add_control(
+			'dropdown_on',
+			array(
+				'label'        => __( 'Drop', 'connect-polylang-elementor' ),
+				'type'         => Controls_Manager::SELECT,
+				'options'      => array(
+					'click' => __( 'On Click', 'connect-polylang-elementor' ),
+					'hover' => __( 'On Mouse Hover', 'connect-polylang-elementor' ),
+				),
+				'default'      => 'click',
+				'prefix_class' => 'cpel-switcher--drop-on-',
+			)
+		);
+
+		$this->add_control(
+			'dropdown_to',
+			array(
+				'label'        => __( 'Drop Direction', 'connect-polylang-elementor' ),
+				'type'         => Controls_Manager::CHOOSE,
+				'options'      => array(
+					'down' => array(
+						'title' => __( 'Down', 'elementor' ),
+						'icon'  => 'eicon-arrow-down',
+					),
+					'up'   => array(
+						'title' => __( 'Up', 'elementor' ),
+						'icon'  => 'eicon-arrow-up',
+					),
+				),
+				'default'      => 'down',
+				'prefix_class' => 'cpel-switcher--drop-to-',
 			)
 		);
 
@@ -473,7 +512,6 @@ class PolylangLanguageSwitcher extends Widget_Base {
 					'value'   => 'fas fa-caret-down',
 					'library' => 'fa-solid',
 				),
-				'condition'              => array( 'layout' => 'dropdown' ),
 			)
 		);
 
@@ -488,7 +526,6 @@ class PolylangLanguageSwitcher extends Widget_Base {
 				'default'   => array( 'size' => '10' ),
 				'selectors' => array( '{{WRAPPER}} .cpel-switcher__icon' => 'padding-left: {{SIZE}}{{UNIT}};' ),
 				'condition' => array(
-					'layout'                => 'dropdown',
 					'dropdown_icon[value]!' => '',
 				),
 			)
@@ -678,13 +715,10 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		// Add render attributes for Elementor.
 		$this->add_render_attribute(
 			array(
-				'_wrapper' => array(
-					'class' => 'cpel-switcher--layout-' . $settings['layout'],
-				),
-				'nav'      => array(
+				'nav'  => array(
 					'class' => 'cpel-switcher__nav',
 				),
-				'icon'     => array(
+				'icon' => array(
 					'class'       => array(
 						'cpel-switcher__icon',
 						empty( $settings['dropdown_icon']['value'] ) ? '' : $settings['dropdown_icon']['value'],
