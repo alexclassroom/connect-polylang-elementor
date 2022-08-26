@@ -196,6 +196,9 @@ There are quite a few:
 
 ## Changelog
 
+## 2.3.1
+* Fix Widget initialization on Elementor 3.7.
+
 ## 2.3.0
 * Added dropdown controls to show on mouse hover and drop to up.
 * Added Elementor Kit translation support.
