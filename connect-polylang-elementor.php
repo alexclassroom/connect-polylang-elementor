@@ -1,5 +1,7 @@
 <?php
 /**
+ * Polylang Connect for Elementor
+ *
  * @package           ConnectPolylangElementor
  * @license           GPL-2.0-or-later
  * @link              https://wordpress.org/plugins/connect-polylang-elementor/
@@ -23,6 +25,7 @@
  * Copyright (c) 2021 Paco Toledo - CREAME
  * Copyright (c) 2018-2021 David Decker - DECKERWEB
  */
+
 namespace ConnectPolylangElementor;
 
 defined( 'ABSPATH' ) || exit;
@@ -46,10 +49,10 @@ define( 'CPEL_BASENAME', plugin_basename( CPEL_FILE ) );
  */
 spl_autoload_register(
 	function ( $class ) {
-		$prefix   = __NAMESPACE__; // project-specific namespace prefix
-		$base_dir = __DIR__ . '/includes'; // base directory for the namespace prefix
+		$prefix   = __NAMESPACE__; // project-specific namespace prefix.
+		$base_dir = __DIR__ . '/includes'; // base directory for the namespace prefix.
 
-		// Does the class use the namespace prefix? No, move to the next registered autoloader
+		// Does the class use the namespace prefix? No, move to the next registered autoloader.
 		$len = strlen( $prefix );
 		if ( strncmp( $prefix, $class, $len ) !== 0 ) {
 			return;
@@ -59,7 +62,7 @@ spl_autoload_register(
 
 		// Replace the namespace prefix with the base directory, replace namespace
 		// separators with directory separators in the relative class name,
-		// append with .php and transform CamelCase to lower-dashed
+		// append with .php and transform CamelCase to lower-dashed.
 		$file = str_replace( '\\', DIRECTORY_SEPARATOR, $relative_class_name );
 		$file = strtolower( preg_replace( '/([a-zA-Z])(?=[A-Z])/', '$1-', $file ) );
 		$path = $base_dir . $file . '.php';
@@ -149,8 +152,8 @@ function fix_cross_domain_assets( $url ) {
 	// Is a multidomain configuration.
 	if ( isset( $pll_options['force_lang'] ) && 3 === $pll_options['force_lang'] && ! empty( $pll_options['domains'] ) ) {
 
-		$srv_host = parse_url( "//{$_SERVER['HTTP_HOST']}", PHP_URL_HOST );
-		$url_host = parse_url( $url, PHP_URL_HOST );
+		$srv_host = wp_parse_url( "//{$_SERVER['HTTP_HOST']}", PHP_URL_HOST );
+		$url_host = wp_parse_url( $url, PHP_URL_HOST );
 
 		if ( $url_host ) {
 			foreach ( $pll_options['domains'] as $domain ) {

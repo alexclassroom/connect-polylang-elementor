@@ -54,7 +54,7 @@ class ElementorAssets {
 		}
 
 		$languages   = pll_the_languages( array( 'raw' => true ) );
-		$server_host = parse_url( "//{$_SERVER['HTTP_HOST']}", PHP_URL_HOST );
+		$server_host = wp_parse_url( "//{$_SERVER['HTTP_HOST']}", PHP_URL_HOST );
 
 		foreach ( $languages as $language ) {
 			$this->all_domains[] = $language['url'];
@@ -173,8 +173,8 @@ class ElementorAssets {
 		}
 
 		$current_url = add_query_arg( $_SERVER['QUERY_STRING'], '', admin_url( 'post.php' ) );
-		$server_host = parse_url( "//{$_SERVER['HTTP_HOST']}", PHP_URL_HOST );
-		$post_host   = parse_url( \pll_get_post_language( intval( $_GET['post'] ), 'home_url' ), PHP_URL_HOST );
+		$server_host = wp_parse_url( "//{$_SERVER['HTTP_HOST']}", PHP_URL_HOST );
+		$post_host   = wp_parse_url( \pll_get_post_language( intval( $_GET['post'] ), 'home_url' ), PHP_URL_HOST );
 
 		if ( $server_host !== $post_host ) {
 			\wp_redirect( \str_replace( $server_host, $post_host, $current_url ) );
