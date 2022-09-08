@@ -197,6 +197,9 @@ There are quite a few:
 
 == Changelog ==
 
+= 2.3.2 =
+* Fix dynamic tag image language flag don't return svg scalable file.
+
 = 2.3.1 =
 * Fix Widget initialization on Elementor 3.7
 
