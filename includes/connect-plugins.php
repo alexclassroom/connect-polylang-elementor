@@ -242,7 +242,7 @@ class ConnectPlugins {
 		$translation = null;
 
 		// Is API REST '/wp-json/elementor/v1/globals'.
-		if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+		if ( defined( 'REST_REQUEST' ) && REST_REQUEST && isset( $_SERVER['HTTP_REFERER'] ) ) {
 			// Referrer is Elementor Editor?
 			wp_parse_str( wp_parse_url( $_SERVER['HTTP_REFERER'], PHP_URL_QUERY ), $query );
 
