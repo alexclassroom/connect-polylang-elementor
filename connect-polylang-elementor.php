@@ -19,8 +19,8 @@
  * Domain Path:       /languages/
  * Requires WP:       5.4
  * Requires PHP:      5.6
- * Elementor tested up to: 3.6.7
- * Elementor Pro tested up to: 3.7.2
+ * Elementor tested up to: 3.7.7
+ * Elementor Pro tested up to: 3.7.7
  *
  * Copyright (c) 2021 Paco Toledo - CREAME
  * Copyright (c) 2018-2021 David Decker - DECKERWEB
