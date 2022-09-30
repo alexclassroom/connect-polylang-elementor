@@ -30,6 +30,7 @@
 /* Dropdown layout */
 .cpel-switcher--layout-dropdown {
     --rotate: 0deg;
+    --langs: 5;
 }
 
 .cpel-switcher--drop-to-up {
@@ -111,7 +112,7 @@
 }
 
 .cpel-switcher--layout-dropdown .cpel-switcher__toggle--on+.cpel-switcher__list {
-    max-height: 300px;
+    max-height: calc(100% * var(--langs));
     transition: max-height 400ms ease-in;
 }
 
@@ -136,7 +137,7 @@
     }
 
     .cpel-switcher--drop-on-hover .cpel-switcher__nav:hover .cpel-switcher__list {
-        max-height: 300px;
+        max-height: calc(100% * var(--langs));
         transition: max-height 400ms ease-in;
     }
 }

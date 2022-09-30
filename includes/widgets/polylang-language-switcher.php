@@ -732,6 +732,11 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$languages = pll_the_languages( array( 'raw' => 1 ) );
 		$lang_curr = strtolower( pll_current_language() );
 
+		// Max number of items in language dropdown
+		if ( 'dropdown' === $settings['layout'] ) {
+			$this->add_render_attribute( '_wrapper', 'style', '--langs:' . ( count( $languages ) - 1 ) );
+		}
+
 		if ( ! empty( $languages ) ) {
 
 			$lang_links = array();
