@@ -23,10 +23,12 @@ class ElementorAssets {
 	 */
 	protected function __construct() {
 
-		if ( cpel_is_polylang_multidomain() ) {
-			add_action( 'init', array( $this, 'init' ) );
-			add_action( 'admin_init', array( $this, 'editor_domain_redirect' ) );
+		if ( ! cpel_is_polylang_multidomain() ) {
+			return;
 		}
+
+		add_action( 'init', array( $this, 'init' ) );
+		add_action( 'admin_init', array( $this, 'editor_domain_redirect' ) );
 
 	}
 
@@ -153,8 +155,11 @@ class ElementorAssets {
 	 */
 	public function replace_src( $attr, $attachment ) {
 
-		$attr['src']    = $this->translate_url( $attr['src'] );
-		$attr['srcset'] = $this->translate_url( $attr['srcset'] );
+		$attr['src'] = $this->translate_url( $attr['src'] );
+
+		if ( isset( $attr['srcset'] ) ) {
+			$attr['srcset'] = $this->translate_url( $attr['srcset'] );
+		}
 
 		return $attr;
 
