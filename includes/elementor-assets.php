@@ -55,15 +55,10 @@ class ElementorAssets {
 			return;
 		}
 
-		$languages   = pll_the_languages( array( 'raw' => true ) );
-		$server_host = wp_parse_url( "//{$_SERVER['HTTP_HOST']}", PHP_URL_HOST );
+		$languages = pll_the_languages( array( 'raw' => true ) );
 
 		foreach ( $languages as $language ) {
-			$this->all_domains[] = $language['url'];
-			if ( false !== stripos( $language['url'], $server_host ) ) {
-				$current_language = PLL()->model->get_language( $language['slug'] );
-				break;
-			}
+			$this->all_domains[] = wp_parse_url( $language['url'], PHP_URL_HOST );
 		}
 
 		$this->current_domain = $current_language->home_url;
@@ -123,10 +118,11 @@ class ElementorAssets {
 	 */
 	public function add_allowed_origins( $origins ) {
 
-		$origins[] = $this->current_domain;
-		$origins   = array_merge( $origins, $this->all_domains );
+		foreach ( $this->all_domains as $domain ) {
+			$origins = array_merge( $origins, array( 'http://' . $domain, 'https://' . $domain ) );
+		}
 
-		return $origins;
+		return array_unique( $origins );
 
 	}
 
