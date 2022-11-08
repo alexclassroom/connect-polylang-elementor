@@ -197,6 +197,10 @@ There are quite a few:
 
 ## Changelog
 
+## 2.3.3
+* Fix PHP warning on multidomain image undefined srcset.
+* Bump tested versions WordPress 6.1 & Elementor 3.8.
+
 ## 2.3.2
 * Fix dynamic tag image language flag don't return svg scalable file.
 * Fix Language Switcher dropdown styles with many languages.
