@@ -12,7 +12,7 @@ Connect Polylang multilingual plugin with Elementor Page Builder: **Translate yo
 ### What the Plugin Does
 
 #### 📍 Template translation and show in the correct language
-Create translations for your Elementor templates especially for header, footer or archive templates with [**Elementor Pro Theme Builder**](https://be.elementor.com/visit/?bta=61741&nci=5383&utm_campaign=github) *(affiliated link)*.
+Create translations for your Elementor templates especially for header, footer or archive templates with [**Elementor Pro Theme Builder**](https://be.elementor.com/visit/?bta=61741&brand=elementor&utm_campaign=github) *(affiliated link)*.
 
 It also works and selects the correct translation when using the `[elementor-template]` shortcode.
 
@@ -106,7 +106,7 @@ Please, send your suggestions and feedback - Thank you for using or trying out t
 
 * WordPress version 4.7 or higher
 * [Elementor](https://wordpress.org/plugins/elementor/) and [Polylang](https://wordpress.org/plugins/polylang/) plugins - free versions from WordPress.org Plugin Directory
-* **Recommended:** [**Elementor Pro**](https://be.elementor.com/visit/?bta=61741&nci=5383&utm_campaign=github) *(affiliate link)* which is needed for Theme Building possibilities (header, footer, 404, archive templates, etc.) and Dynamic Tags.
+* **Recommended:** [**Elementor Pro**](https://be.elementor.com/visit/?bta=61741&brand=elementor&utm_campaign=github) *(affiliate link)* which is needed for Theme Building possibilities (header, footer, 404, archive templates, etc.) and Dynamic Tags.
 
 ### Installation
 
@@ -141,7 +141,7 @@ This plugin has NO settings page, as it does not need one. All it does works jus
 
 Technically, Elementor Pro is not required **but highly recommended**.
 
-[**Elementor Pro**](https://be.elementor.com/visit/?bta=61741&nci=5383&utm_campaign=github) *(affiliate link)* is required for these features of the plugin:
+[**Elementor Pro**](https://be.elementor.com/visit/?bta=61741&brand=elementor&utm_campaign=github) *(affiliate link)* is required for these features of the plugin:
 
 * Translate Elementor Theme Builder Templates (header, footer, 404, page, archives).
 * Translate Elementor Popups.
@@ -196,6 +196,10 @@ There are quite a few:
 
 
 ## Changelog
+
+## 2.3.4
+* Fix Elementor 3.9 hard deprecations.
+* Fix JetMenu with domains as language (thanks to [@mortenitp](https://profiles.wordpress.org/mortenitp/)).
 
 ## 2.3.3
 * Fix PHP warning on multidomain image undefined srcset.
