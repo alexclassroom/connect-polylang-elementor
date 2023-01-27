@@ -32,8 +32,10 @@ class ConnectPlugins {
 		add_filter( 'elementor/theme/get_location_templates/template_id', array( $this, 'template_id_translation' ) );
 		add_filter( 'elementor/theme/get_location_templates/condition_sub_id', array( $this, 'condition_sub_id_translation' ), 10, 2 );
 
-		// Shortcode template loading.
-		add_filter( 'pre_do_shortcode_tag', array( $this, 'template_shortcode_translate' ), 10, 3 );
+		// Shortcode [elementor-template] translate 'template_id'.
+		add_filter( 'pre_do_shortcode_tag', array( $this, 'shortcode_template_translate' ), 10, 3 );
+		// Widget Template translate 'template_id'.
+		add_action( 'elementor/frontend/widget/before_render', array( $this, 'widget_template_translate' ) );
 
 		// Elementor Kit template loading.
 		add_filter( 'option_elementor_active_kit', array( $this, 'elementor_kit_translation' ) );
@@ -83,6 +85,7 @@ class ConnectPlugins {
 
 		// Elementor editor menu links to translations.
 		add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'elementor_editor_script' ) );
+		add_action( 'elementor/editor/after_enqueue_styles', array( $this, 'elementor_editor_style' ) );
 
 		// Elementor Site Editor template tweaks.
 		add_filter( 'elementor-pro/site-editor/data/template', array( $this, 'elementor_site_editor_template' ) );
@@ -202,7 +205,7 @@ class ConnectPlugins {
 	 * @param  array  $attr  shortcode attributes.
 	 * @return false|string  false or string with bypass output
 	 */
-	public function template_shortcode_translate( $false, $tag, $attr ) {
+	public function shortcode_template_translate( $false, $tag, $attr ) {
 
 		if ( 'elementor-template' !== $tag ) {
 			return $false;
@@ -223,6 +226,28 @@ class ConnectPlugins {
 		}
 
 		return do_shortcode( '[elementor-template' . $output . ']' );
+
+	}
+
+	/**
+	 * Widget Template translate template_id
+	 *
+	 * @since  2.3.5
+	 *
+	 * @uses   pll_get_post()
+	 *
+	 * @param  \Elementor\Element_Base $element
+	 * @return void
+	 */
+	public function widget_template_translate( $element ) {
+
+		if ( 'template' !== $element->get_name() ) {
+			return;
+		}
+
+		$template_id = pll_get_post( $element->get_settings( 'template_id' ) ) ?: $element->get_settings( 'template_id' ); //phpcs:ignore WordPress.PHP.DisallowShortTernary
+
+		$element->set_settings( 'template_id', $template_id );
 
 	}
 
@@ -552,48 +577,56 @@ class ConnectPlugins {
 
 			$items = array();
 			foreach ( $languages as $language ) {
-				if ( $language->name !== $current ) {
-					if ( isset( $translations[ $language->slug ] ) ) {
+				if ( $language->name === $current ) {
+					$translation_id = $translations[ $language->slug ];
 
-						$translation_id = $translations[ $language->slug ];
-						$link           = $this->fix_url_domain( get_edit_post_link( $translation_id, 'edit' ), $translation_id );
+					$items[] = array(
+						'name'     => 'cpel-current',
+						'icon'     => 'eicon-globe',
+						'title'    => sprintf( '%s (%s)', get_the_title( $translation_id ), $language->slug ),
+						'callback' => 'function(){}',
+					);
 
-						if ( get_post_meta( $translation_id, '_elementor_edit_mode', true ) ) {
-							$link = add_query_arg( 'action', 'elementor', $link );
-						}
+				} elseif ( isset( $translations[ $language->slug ] ) ) {
 
-						$items[] = array(
-							'name'  => "cpel-{$language->slug}",
-							'icon'  => 'eicon-globe',
-							'title' => sprintf( '%s (%s)', get_the_title( $translation_id ), $language->slug ),
-							'type'  => 'link',
-							'link'  => $link,
-						);
-					} else {
+					$translation_id = $translations[ $language->slug ];
+					$link           = $this->fix_url_domain( get_edit_post_link( $translation_id, 'edit' ), $translation_id );
 
-						$args = array(
-							'post_type' => $typenow,
-							'from_post' => $post->ID,
-							'new_lang'  => $language->slug,
-							'_wpnonce'  => wp_create_nonce( 'new-post-translation' ),
-						);
-
-						$link = add_query_arg( $args, admin_url( 'post-new.php' ) );
-
-						$items[] = array(
-							'name'  => "cpel-{$language->slug}",
-							'icon'  => 'eicon-plus',
-							'title' => sprintf( __( 'Add a translation in %s', 'polylang' ), $language->name ), // phpcs:ignore WordPress.WP.I18n
-							'type'  => 'link',
-							'link'  => $link,
-						);
+					if ( get_post_meta( $translation_id, '_elementor_edit_mode', true ) ) {
+						$link = add_query_arg( 'action', 'elementor', $link );
 					}
+
+					$items[] = array(
+						'name'  => "cpel-{$language->slug}",
+						'icon'  => 'eicon-globe',
+						'title' => sprintf( '%s (%s)', get_the_title( $translation_id ), $language->slug ),
+						'type'  => 'link',
+						'link'  => $link,
+					);
+				} else {
+
+					$args = array(
+						'post_type' => $typenow,
+						'from_post' => $post->ID,
+						'new_lang'  => $language->slug,
+						'_wpnonce'  => wp_create_nonce( 'new-post-translation' ),
+					);
+
+					$link = add_query_arg( $args, admin_url( 'post-new.php' ) );
+
+					$items[] = array(
+						'name'  => "cpel-{$language->slug}",
+						'icon'  => 'eicon-plus',
+						'title' => sprintf( __( 'Add a translation in %s', 'polylang' ), $language->name ), // phpcs:ignore WordPress.WP.I18n
+						'type'  => 'link',
+						'link'  => $link,
+					);
 				}
 			}
 
 			$group = array(
 				'name'  => 'cpel',
-				'title' => sprintf( __( 'This item is in %s', 'polylang' ), $current ), // phpcs:ignore WordPress.WP.I18n
+				'title' => sprintf( __( 'Languages', 'polylang' ), $current ), // phpcs:ignore WordPress.WP.I18n
 				'items' => $items,
 			);
 
@@ -607,6 +640,51 @@ class ConnectPlugins {
 			wp_add_inline_script( 'elementor-editor', $script );
 
 		}
+
+	}
+
+	/**
+	 * Elementor editor script
+	 *
+	 * Add script with links to translations on Elementor editor panel.
+	 *
+	 * @since  2.3.5
+	 *
+	 * @return void
+	 */
+	public function elementor_editor_style() {
+
+		global $typenow;
+
+		// If is post type translatable.
+		if ( ! pll_is_translated_post_type( $typenow ) ) {
+			return;
+		}
+
+		$style = '
+			.elementor-panel .elementor-panel-menu-item.elementor-panel-menu-item-cpel-current {
+				background: #a4afb7;
+				color: #fff;
+				cursor: default;
+			}
+			.elementor-panel .elementor-panel-menu-item.elementor-panel-menu-item-cpel-current .elementor-panel-menu-item-icon {
+				color: inherit;
+			}
+			.elementor-panel .elementor-panel-menu-item.elementor-panel-menu-item-cpel-current a {
+				color: inherit;
+				cursor: default;
+			}
+		';
+
+		wp_add_inline_style( 'elementor-editor', $style );
+
+		$dark = '
+			.elementor-panel .elementor-panel-menu-item.elementor-panel-menu-item-cpel-current {
+				background: #7d7e82;
+			}
+		';
+
+		wp_add_inline_style( 'elementor-editor-dark-mode', $dark );
 
 	}
 

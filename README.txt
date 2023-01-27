@@ -5,7 +5,7 @@ Tags: elementor, polylang, multilingual, language switcher, languages, templates
 Requires at least: 5.4
 Tested up to: 6.1
 Requires PHP: 5.6
-Stable tag: 2.3.4
+Stable tag: 2.3.5
 License: GPL-2.0-or-later
 License URI: https://opensource.org/licenses/GPL-2.0
 
@@ -115,6 +115,7 @@ Please, send your suggestions and feedback - Thank you for using or trying out t
 * WordPress version 4.7 or higher
 * [Elementor](https://wordpress.org/plugins/elementor/) and [Polylang](https://wordpress.org/plugins/polylang/) plugins - free versions from WordPress.org Plugin Directory
 * **Recommended:** [**Elementor Pro**](https://be.elementor.com/visit/?bta=61741&brand=elementor&utm_campaign=wporg) *(affiliate link)* which is needed for Theme Building possibilities (header, footer, 404, archive templates, etc.) and Dynamic Tags.
+
 = Installation =
 
 1. Install using the WordPress built-in Plugin installer (via **Plugins > Add New** - search for `connect polylang elementor`), or extract the ZIP file and drop the contents in the `wp-content/plugins/` directory of your WordPress installation.
@@ -196,6 +197,10 @@ There are quite a few:
 
 
 == Changelog ==
+
+= 2.3.5 =
+* NEW Elementor Widget Template translation.
+* Change better languages links on Elementor Editor.
 
 = 2.3.4 =
 * Fix Elementor 3.9 hard deprecations.

@@ -197,6 +197,10 @@ There are quite a few:
 
 ## Changelog
 
+## 2.3.5
+* NEW Elementor Widget template translation.
+* Change better languages links on Elementor Editor.
+
 ## 2.3.4
 * Fix Elementor 3.9 hard deprecations.
 * Fix JetMenu with domains as language (thanks to [@mortenitp](https://profiles.wordpress.org/mortenitp/)).
