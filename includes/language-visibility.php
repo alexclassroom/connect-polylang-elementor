@@ -22,14 +22,16 @@ class LanguageVisibility {
 
 		// Editor add extras settings.
 		$visibility_settings = array( $this, 'visibility_settings' );
-		add_action( 'elementor/element/column/section_advanced/after_section_end', $visibility_settings, 10, 2 );
 		add_action( 'elementor/element/section/section_advanced/after_section_end', $visibility_settings, 10, 2 );
+		add_action( 'elementor/element/column/section_advanced/after_section_end', $visibility_settings, 10, 2 );
+		add_action( 'elementor/element/container/section_layout/after_section_end', $visibility_settings, 10, 2 );
 		add_action( 'elementor/element/common/_section_style/after_section_end', $visibility_settings, 10, 2 );
 
 		// Front check visibility.
 		$visibility_check = array( $this, 'visibility_check' );
 		add_filter( 'elementor/frontend/section/should_render', $visibility_check, 10, 2 );
 		add_filter( 'elementor/frontend/column/should_render', $visibility_check, 10, 2 );
+		add_filter( 'elementor/frontend/container/should_render', $visibility_check, 10, 2 );
 		add_filter( 'elementor/frontend/widget/should_render', $visibility_check, 10, 2 );
 
 	}
@@ -54,14 +56,8 @@ class LanguageVisibility {
 	 */
 	public function visibility_settings( $element, $section_id ) {
 
-		$languages = pll_the_languages( array( 'raw' => 1 ) );
-		$dropdown  = array();
-
-		if ( is_array( $languages ) ) {
-			foreach ( $languages as $language ) {
-				$dropdown[ $language['slug'] ] = $language['name'];
-			}
-		}
+		$languages = pll_languages_list( array( 'fields' => '' ) );
+		$dropdown  = wp_list_pluck( $languages, 'name', 'slug' );
 
 		$element->start_controls_section(
 			'cpel_lv_section',
