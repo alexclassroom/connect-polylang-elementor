@@ -574,6 +574,7 @@ class ConnectPlugins {
 			$languages    = pll_languages_list( array( 'fields' => '' ) );
 			$translations = pll_get_post_translations( $post->ID );
 			$current      = pll_get_post_language( $post->ID, 'name' );
+			$use_emojis   = apply_filters( 'cpel/filter/use_emojis', true );
 
 			$items = array();
 			foreach ( $languages as $language ) {
@@ -582,8 +583,12 @@ class ConnectPlugins {
 
 					$items[] = array(
 						'name'     => 'cpel-current',
-						'icon'     => 'eicon-globe',
-						'title'    => sprintf( '%s (%s)', get_the_title( $translation_id ), $language->slug ),
+						'icon'     => 'eicon-document-file',
+						'title'    => sprintf(
+							'%s — %s',
+							get_the_title( $translation_id ),
+							$use_emojis ? cpel_flag_emoji( $language->flag_code ) : $language->name
+						),
 						'callback' => 'function(){}',
 					);
 
@@ -598,8 +603,12 @@ class ConnectPlugins {
 
 					$items[] = array(
 						'name'  => "cpel-{$language->slug}",
-						'icon'  => 'eicon-globe',
-						'title' => sprintf( '%s (%s)', get_the_title( $translation_id ), $language->slug ),
+						'icon'  => 'eicon-document-file',
+						'title' => sprintf(
+							'%s — %s',
+							get_the_title( $translation_id ),
+							$use_emojis ? cpel_flag_emoji( $language->flag_code ) : $language->name
+						),
 						'type'  => 'link',
 						'link'  => $link,
 					);
@@ -617,7 +626,9 @@ class ConnectPlugins {
 					$items[] = array(
 						'name'  => "cpel-{$language->slug}",
 						'icon'  => 'eicon-plus',
-						'title' => sprintf( __( 'Add a translation in %s', 'polylang' ), $language->name ), // phpcs:ignore WordPress.WP.I18n
+						'title' => $use_emojis
+							? sprintf( __( 'Add a translation — %s', 'connect-polylang-elementor' ), cpel_flag_emoji( $language->flag_code ) ) // phpcs:ignore WordPress.WP.I18n
+							: sprintf( __( 'Add a translation in %s', 'polylang' ), $language->name ), // phpcs:ignore WordPress.WP.I18n
 						'type'  => 'link',
 						'link'  => $link,
 					);
@@ -626,7 +637,7 @@ class ConnectPlugins {
 
 			$group = array(
 				'name'  => 'cpel',
-				'title' => sprintf( __( 'Languages', 'polylang' ), $current ), // phpcs:ignore WordPress.WP.I18n
+				'title' => __( 'Languages', 'polylang' ), // phpcs:ignore WordPress.WP.I18n
 				'items' => $items,
 			);
 
@@ -703,7 +714,11 @@ class ConnectPlugins {
 		$post_id = $data['id'];
 
 		// Add lang info to title.
-		$data['title'] = sprintf( '%s / %s', $data['title'], strtoupper( pll_get_post_language( $post_id ) ) );
+		if ( apply_filters( 'cpel/filter/use_emojis', true ) ) {
+			$data['title'] = sprintf( '%s — %s', $data['title'], cpel_flag_emoji( pll_get_post_language( $post_id, 'flag_code' ) ) );
+		} else {
+			$data['title'] = sprintf( '%s — %s', $data['title'], pll_get_post_language( $post_id, 'name' ) );
+		}
 
 		// Show default language instances in translations (and recalc isActive).
 		if ( cpel_is_translation( $post_id ) ) {

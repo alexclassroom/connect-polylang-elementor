@@ -149,3 +149,19 @@ function cpel_flag_svg( $flag_code ) {
 	return false;
 
 }
+
+/**
+ * Flag emoji
+ *
+ * @since 2.4.0
+ *
+ * @param  string $flag_code flag code.
+ * @return string|false  flag emoji or false
+ */
+function cpel_flag_emoji( $flag_code ) {
+
+	$emojis = include __DIR__ . '/util/emojis.php';
+
+	return apply_filters( 'cpel/filter/flag_emoji', isset( $emojis[ $flag_code ] ) ? $emojis[ $flag_code ] : false, $flag_code );
+
+}
