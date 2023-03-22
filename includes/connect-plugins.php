@@ -1,7 +1,7 @@
 <?php
 namespace ConnectPolylangElementor;
 
-use Elementor\Controls_Manager;
+use Elementor\Core\Settings\Manager as SettingsManager;
 
 
 defined( 'ABSPATH' ) || exit;
@@ -672,30 +672,28 @@ class ConnectPlugins {
 			return;
 		}
 
-		$style = '
-			.elementor-panel .elementor-panel-menu-item.elementor-panel-menu-item-cpel-current {
-				background: #a4afb7;
-				color: #fff;
-				cursor: default;
-			}
-			.elementor-panel .elementor-panel-menu-item.elementor-panel-menu-item-cpel-current .elementor-panel-menu-item-icon {
-				color: inherit;
-			}
-			.elementor-panel .elementor-panel-menu-item.elementor-panel-menu-item-cpel-current a {
-				color: inherit;
-				cursor: default;
-			}
-		';
+		$style = '' .
+			".elementor-panel .elementor-panel-menu-item.elementor-panel-menu-item-cpel-current {\n" .
+			"	background: #eceeef;\n" .
+			"	cursor: default;\n" .
+			'}';
 
 		wp_add_inline_style( 'elementor-editor', $style );
 
-		$dark = '
-			.elementor-panel .elementor-panel-menu-item.elementor-panel-menu-item-cpel-current {
-				background: #7d7e82;
-			}
-		';
+		$ui_theme = SettingsManager::get_settings_managers( 'editorPreferences' )->get_model()->get_settings( 'ui_theme' );
 
-		wp_add_inline_style( 'elementor-editor-dark-mode', $dark );
+		if ( 'light' !== $ui_theme ) {
+			$ui_theme_media_queries = 'auto' === $ui_theme ? '(prefers-color-scheme: dark)' : 'all';
+
+			$dark = '' .
+				"@media $ui_theme_media_queries {\n" .
+				"	.elementor-panel .elementor-panel-menu-item.elementor-panel-menu-item-cpel-current {\n" .
+				"		background: #7d7e82;\n" .
+				"	}\n" .
+				'}';
+
+			wp_add_inline_style( 'elementor-editor-dark-mode', $dark );
+		}
 
 	}
 
