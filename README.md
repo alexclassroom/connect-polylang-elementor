@@ -14,7 +14,9 @@ Connect Polylang multilingual plugin with Elementor Page Builder: **Translate yo
 #### 📍 Template translation and show in the correct language
 Create translations for your Elementor templates especially for header, footer or archive templates with [**Elementor Pro Theme Builder**](https://be.elementor.com/visit/?bta=61741&brand=elementor&utm_campaign=github) *(affiliated link)*.
 
-It also works and selects the correct translation when using the `[elementor-template]` shortcode.
+* Automatically selects the correct translation for ["Template Widget"](https://elementor.com/help/template-widget-pro/).
+* Automatically selects the correct translation for `[elementor-template id="1234"]` shortcodes.
+* Allow Elementor Kit translation for different settings for each language.
 
 #### 🔄 Language Switcher
 A native Elementor Widget to easily build a nice and fully customizable language switcher:
@@ -196,6 +198,12 @@ There are quite a few:
 
 
 ## Changelog
+
+## 2.4.0
+* NEW language visibility conditions now also works for Flexbox containers.
+* NEW Flag emojis on Elementor Editor and Theme Builder.
+* Change languages styles on Elementor Editor.
+* Change code improvements.
 
 ## 2.3.5
 * NEW Elementor Widget template translation.

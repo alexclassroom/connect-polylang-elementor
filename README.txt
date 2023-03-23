@@ -5,7 +5,7 @@ Tags: elementor, polylang, multilingual, language switcher, languages, templates
 Requires at least: 5.4
 Tested up to: 6.1
 Requires PHP: 5.6
-Stable tag: 2.3.5
+Stable tag: 2.4.0
 License: GPL-2.0-or-later
 License URI: https://opensource.org/licenses/GPL-2.0
 
@@ -22,7 +22,9 @@ Connect Polylang multilingual plugin with Elementor Page Builder: **Translate yo
 #### 📍 Template translation and show in the correct language
 Create translations for your Elementor templates especially for header, footer or archive templates with [**Elementor Pro Theme Builder**](https://be.elementor.com/visit/?bta=61741&brand=elementor&utm_campaign=wporg) *(affiliated link)*.
 
-It also works and selects the correct translation when using the `[elementor-template]` shortcode.
+* Automatically selects the correct translation for ["Template Widget"](https://elementor.com/help/template-widget-pro/).
+* Automatically selects the correct translation for `[elementor-template id="1234"]` shortcodes.
+* Allow Elementor Kit translation for different settings for each language.
 
 #### 🔄 Language Switcher
 A native Elementor Widget to easily build a nice and fully customizable language switcher:
@@ -197,6 +199,12 @@ There are quite a few:
 
 
 == Changelog ==
+
+= 2.4.0 =
+* NEW language visibility conditions now also works for Flexbox containers.
+* NEW Flag emojis on Elementor Editor and Theme Builder.
+* Change languages styles on Elementor Editor.
+* Change code improvements.
 
 = 2.3.5 =
 * NEW Elementor Widget Template translation.
