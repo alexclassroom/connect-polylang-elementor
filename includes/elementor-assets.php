@@ -55,10 +55,10 @@ class ElementorAssets {
 			return;
 		}
 
-		$languages = pll_the_languages( array( 'raw' => true ) );
+		$domains = pll_languages_list( array( 'fields' => 'home_url' ) );
 
-		foreach ( $languages as $language ) {
-			$this->all_domains[] = wp_parse_url( $language['url'], PHP_URL_HOST );
+		foreach ( $domains as $domain ) {
+			$this->all_domains[] = wp_parse_url( $domain, PHP_URL_HOST );
 		}
 
 		$this->current_domain = $current_language->home_url;
