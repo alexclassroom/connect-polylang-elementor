@@ -88,9 +88,11 @@ class PolylangCategory extends Base_Category {
 
 		foreach ( $languages as $lang_data ) {
 
+			$url = method_exists( $lang_data, 'get_home_url' ) ? $lang_data->get_home_url() : $lang_data->home_url;
+
 			$items[ 'website-language-' . $lang_data->slug ] = array(
 				'title'       => $lang_data->name,
-				'url'         => esc_url( $lang_data->home_url ),
+				'url'         => esc_url( $url ),
 				'icon'        => 'eye',
 				'keywords'    => array(
 					'polylang',
