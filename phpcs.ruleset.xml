@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <ruleset name="CPEL">
-	<description>Polylang Connect for Elementor</description>
+	<description>Connect Polylang for Elementor</description>
 
 	<file>.</file>
 

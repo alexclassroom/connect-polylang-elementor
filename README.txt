@@ -1,11 +1,11 @@
-=== Polylang Connect for Elementor - Templates Translation & Language Switcher ===
+=== Connect Polylang for Elementor ===
 Contributors: daveshine, p4fbradjohnson, deckerweb, wpautobahn, pacotole, creapuntome
 Donate link: https://www.paypal.me/pacotole
 Tags: elementor, polylang, multilingual, language switcher, languages, templates, widget, finder, dynamic tags
 Requires at least: 5.4
-Tested up to: 6.1
+Tested up to: 6.2
 Requires PHP: 5.6
-Stable tag: 2.4.0
+Stable tag: 2.4.2
 License: GPL-2.0-or-later
 License URI: https://opensource.org/licenses/GPL-2.0
 
@@ -88,7 +88,7 @@ Site languages:
 * [**Plugin's support forum**](https://wordpress.org/support/plugin/connect-polylang-elementor) here on WordPress.org
 * [Github plugin repo](https://github.com/creame/connect-polylang-elementor)
 * [Polylang User Community Group at Facebook](https://www.facebook.com/groups/polylang.users/)
-* **What is covered by our support?** - All regarding **THIS plugin** ("Polylang Connect for Elementor"), plus the relation to *Polylang*, *Polylang Pro*, *Elementor* and *Elementor Pro* of course.
+* **What is covered by our support?** - All regarding **THIS plugin** ("Connect Polylang for Elementor"), plus the relation to *Polylang*, *Polylang Pro*, *Elementor* and *Elementor Pro* of course.
 * **What is NOT covered by support?** - Anything general regarding multilingual topics and WordPress. Explicitely we **DO NOT** offer any "WPML", "WPBakery" or "Visual Composer" support, and also not for your theme etc.!!!
 
 ### Translations
@@ -163,7 +163,7 @@ For the other features of the plugin the free version of Elementor is sufficient
 = Is Polylang Pro required? =
 Polylang Pro is not required.
 
-All features of "Polylang Connect for Elementor" work with both, *Polylang* and *Polylang Pro*.
+All features of "Connect Polylang for Elementor" work with both, *Polylang* and *Polylang Pro*.
 
 
 = Are custom flags supported? =
@@ -199,6 +199,13 @@ There are quite a few:
 
 
 == Changelog ==
+
+= 2.4.2 =
+* Fix deprecation notices for Polylang 3.4.
+* Bump tested versions WordPress 6.3 & Elementor 3.13.
+
+= 2.4.1 =
+* Fix plugin submission to wordpress.org.
 
 = 2.4.0 =
 * NEW language visibility conditions now also works for Flexbox containers.
