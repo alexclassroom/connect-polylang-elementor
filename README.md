@@ -200,8 +200,8 @@ There are quite a few:
 ## Changelog
 
 ## 2.4.3
-* Automatically generate CSS file on bulk translation (thanks to [https://github.com/Elisa3232](@Elisa3232)).
-* Fix PHP error when PLL()->curlang not defined (thanks to [https://wordpress.org/support/users/timsgr/](@timsgr)).
+* Automatically generate CSS file on bulk translation (thanks to [@Elisa3232](https://github.com/Elisa3232)).
+* Fix PHP error when PLL()->curlang not defined (thanks to [@timsgr](https://wordpress.org/support/users/timsgr/)).
 
 ## 2.4.2
 * Fix deprecation notices for Polylang 3.4.
