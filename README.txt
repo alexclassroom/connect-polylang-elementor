@@ -5,7 +5,7 @@ Tags: elementor, polylang, multilingual, language switcher, languages, templates
 Requires at least: 5.4
 Tested up to: 6.2
 Requires PHP: 5.6
-Stable tag: 2.4.2
+Stable tag: 2.4.3
 License: GPL-2.0-or-later
 License URI: https://opensource.org/licenses/GPL-2.0
 
@@ -199,6 +199,10 @@ There are quite a few:
 
 
 == Changelog ==
+
+= 2.4.3 =
+* Automatically generate CSS file on bulk translation (thanks to @Elisa3232).
+* Fix PHP error when PLL()->curlang not defined (thanks to @timsgr).
 
 = 2.4.2 =
 * Fix deprecation notices for Polylang 3.4.

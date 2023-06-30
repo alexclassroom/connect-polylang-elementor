@@ -2,7 +2,7 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Connect Polylang for Elementor 2.4.2\n"
+"Project-Id-Version: Connect Polylang for Elementor 2.4.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/connect-polylang-elementor\n"
 "Last-Translator: Pacotole <pacotole@crea.me>\n"
 "Language-Team: Creame <hola@crea.me>\n"

@@ -199,6 +199,10 @@ There are quite a few:
 
 ## Changelog
 
+## 2.4.3
+* Automatically generate CSS file on bulk translation (thanks to [https://github.com/Elisa3232](@Elisa3232)).
+* Fix PHP error when PLL()->curlang not defined (thanks to [https://wordpress.org/support/users/timsgr/](@timsgr)).
+
 ## 2.4.2
 * Fix deprecation notices for Polylang 3.4.
 * Bump tested versions WordPress 6.3 & Elementor 3.13.
