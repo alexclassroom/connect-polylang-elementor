@@ -519,7 +519,7 @@ class ConnectPlugins {
 	 */
 	public function search_form_home_url_filter( $url, $path ) {
 
-		if ( ! function_exists( 'PLL' ) ) {
+		if ( ! function_exists( 'PLL' ) || ! is_a( PLL()->curlang, 'PLL_Language', true ) ) {
 			return $url;
 		}
 
