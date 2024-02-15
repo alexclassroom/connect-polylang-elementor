@@ -4,11 +4,7 @@ namespace ConnectPolylangElementor\Widgets;
 use Elementor\Controls_Manager;
 use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
-use Elementor\Core\Schemes\Color;
-use Elementor\Core\Schemes\Typography;
-use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
-use Elementor\Icons_Manager;
 use Elementor\Widget_Base;
 
 defined( 'ABSPATH' ) || exit;
@@ -331,7 +327,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'typography_menu_item_hover',
-				'scheme'   => Typography::TYPOGRAPHY_1,
+				'global'   => array( 'default' => Global_Typography::TYPOGRAPHY_PRIMARY ),
 				'selector' => '{{WRAPPER}} .cpel-switcher__lang a:hover, {{WRAPPER}} .cpel-switcher__lang a:focus',
 			)
 		);
@@ -378,7 +374,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'typography_menu_item_active',
-				'scheme'   => Typography::TYPOGRAPHY_1,
+				'global'   => array( 'default' => Global_Typography::TYPOGRAPHY_PRIMARY ),
 				'selector' => '{{WRAPPER}} .cpel-switcher__lang.cpel-switcher__lang--active a',
 			)
 		);

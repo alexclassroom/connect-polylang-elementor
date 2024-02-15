@@ -201,8 +201,9 @@ There are quite a few:
 == Changelog ==
 
 = 2.4.4 =
-* NEW WordPress Widget "Elementor Library" translation.
+* NEW WordPress Widget "Elementor Library" translation (suggested by [@lennertdaniels](https://github.com/creame/connect-polylang-elementor/issues/14#issue-1970978478)).
 * Fix PHP errors (thanks to [ChristianSchaffner](https://github.com/creame/connect-polylang-elementor/issues/16#issue-2044749726) and [brandon-hatch](https://github.com/creame/connect-polylang-elementor/issues/17#issue-2102975661)).
+* Fix remove deprecated Elementor's classes.
 
 = 2.4.3 =
 * Automatically generate CSS file on bulk translation (thanks to @Elisa3232).
