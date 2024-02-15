@@ -152,6 +152,7 @@ class ConnectPlugins {
 
 		$is_global_widget = isset( $query->query_vars['post_type'], $query->query_vars['meta_query'] )
 			&& 'elementor_library' === $query->query_vars['post_type']
+			&& is_array( $query->query_vars['meta_query'] )
 			&& in_array( $global_widget_meta_query, $query->query_vars['meta_query'], true );
 
 		if ( $is_elementor_conditions || $is_global_widget ) {
