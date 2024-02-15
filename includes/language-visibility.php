@@ -131,7 +131,7 @@ class LanguageVisibility {
 		$settings  = $element->get_settings();
 		$enabled   = ! empty( $settings['cpel_lv_enabled'] ) ? $settings['cpel_lv_enabled'] : false;
 		$enabled   = filter_var( $enabled, FILTER_VALIDATE_BOOLEAN );
-		$languages = (array) $settings['cpel_lv_languages'];
+		$languages = isset( $settings['cpel_lv_languages'] ) ? (array) $settings['cpel_lv_languages'] : array();
 		$show      = isset( $settings['cpel_lv_action'] ) ? 'hide' !== $settings['cpel_lv_action'] : true;
 
 		if ( ! $enabled || empty( $languages ) ) {
