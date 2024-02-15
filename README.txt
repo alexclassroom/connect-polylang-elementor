@@ -3,9 +3,9 @@ Contributors: daveshine, p4fbradjohnson, deckerweb, wpautobahn, pacotole, creapu
 Donate link: https://www.paypal.me/pacotole
 Tags: elementor, polylang, multilingual, language switcher, languages, templates, widget, finder, dynamic tags
 Requires at least: 5.4
-Tested up to: 6.2
+Tested up to: 6.4
 Requires PHP: 5.6
-Stable tag: 2.4.3
+Stable tag: 2.4.4
 License: GPL-2.0-or-later
 License URI: https://opensource.org/licenses/GPL-2.0
 
