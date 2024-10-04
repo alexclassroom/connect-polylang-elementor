@@ -46,6 +46,9 @@ class ConnectPlugins {
 		add_filter( 'pll_home_url_white_list', array( $this, 'elementor_home_url_white_list' ) );
 		add_filter( 'home_url', array( $this, 'home_url_language_dir_slash' ), 11, 2 );
 
+		// Translate Elementor order resume page (thankyou page).
+		add_filter( 'option_elementor_woocommerce_purchase_summary_page_id', 'pll_get_post' );
+
 		// Fix search url for Search Form widget.
 		add_action( 'elementor/frontend/widget/before_render', array( $this, 'add_search_form_home_url_filter' ) );
 		add_action( 'elementor/frontend/widget/after_render', array( $this, 'remove_search_form_home_url_filter' ) );

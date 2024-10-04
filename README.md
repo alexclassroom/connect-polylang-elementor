@@ -199,6 +199,9 @@ There are quite a few:
 
 ## Changelog
 
+## 2.4.5
+* NEW Elementor Pro custom Thank You page for WooCommerce translation.
+
 ## 2.4.4
 * NEW WordPress Widget "Elementor Library" translation (suggested by [@lennertdaniels](https://github.com/creame/connect-polylang-elementor/issues/14#issue-1970978478)).
 * Fix PHP errors (thanks to [@ChristianSchaffner](https://github.com/creame/connect-polylang-elementor/issues/16#issue-2044749726) and [@brandon-hatch](https://github.com/creame/connect-polylang-elementor/issues/17#issue-2102975661)).
