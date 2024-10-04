@@ -1,11 +1,11 @@
 === Connect Polylang for Elementor ===
 Contributors: daveshine, p4fbradjohnson, deckerweb, wpautobahn, pacotole, creapuntome
-Donate link: https://www.paypal.me/pacotole
+Donate link: https://github.com/sponsors/creame
 Tags: elementor, polylang, multilingual, language switcher, languages, templates, widget, finder, dynamic tags
 Requires at least: 5.4
-Tested up to: 6.4
+Tested up to: 6.6
 Requires PHP: 5.6
-Stable tag: 2.4.4
+Stable tag: 2.4.5
 License: GPL-2.0-or-later
 License URI: https://opensource.org/licenses/GPL-2.0
 
@@ -201,6 +201,7 @@ There are quite a few:
 == Changelog ==
 
 = 2.4.5 =
+* Bump tested versions WordPress 6.6 & Elementor 3.24.
 * NEW Elementor Pro custom Thank You page for WooCommerce translation.
 
 = 2.4.4 =
