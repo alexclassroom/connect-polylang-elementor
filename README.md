@@ -199,6 +199,10 @@ There are quite a few:
 
 ## Changelog
 
+## 2.4.6
+* Bump tested versions WordPress 6.7 & Elementor 3.27.
+
+
 ## 2.4.5
 * Bump tested versions WordPress 6.6 & Elementor 3.24.
 * NEW Elementor Pro custom Thank You page for WooCommerce translation.
