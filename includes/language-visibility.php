@@ -22,14 +22,16 @@ class LanguageVisibility {
 
 		// Editor add extras settings.
 		$visibility_settings = array( $this, 'visibility_settings' );
-		add_action( 'elementor/element/column/section_advanced/after_section_end', $visibility_settings, 10, 2 );
 		add_action( 'elementor/element/section/section_advanced/after_section_end', $visibility_settings, 10, 2 );
+		add_action( 'elementor/element/column/section_advanced/after_section_end', $visibility_settings, 10, 2 );
+		add_action( 'elementor/element/container/section_layout/after_section_end', $visibility_settings, 10, 2 );
 		add_action( 'elementor/element/common/_section_style/after_section_end', $visibility_settings, 10, 2 );
 
 		// Front check visibility.
 		$visibility_check = array( $this, 'visibility_check' );
 		add_filter( 'elementor/frontend/section/should_render', $visibility_check, 10, 2 );
 		add_filter( 'elementor/frontend/column/should_render', $visibility_check, 10, 2 );
+		add_filter( 'elementor/frontend/container/should_render', $visibility_check, 10, 2 );
 		add_filter( 'elementor/frontend/widget/should_render', $visibility_check, 10, 2 );
 
 	}
@@ -54,14 +56,8 @@ class LanguageVisibility {
 	 */
 	public function visibility_settings( $element, $section_id ) {
 
-		$languages = pll_the_languages( array( 'raw' => 1 ) );
-		$dropdown  = array();
-
-		if ( is_array( $languages ) ) {
-			foreach ( $languages as $language ) {
-				$dropdown[ $language['slug'] ] = $language['name'];
-			}
-		}
+		$languages = pll_languages_list( array( 'fields' => '' ) );
+		$dropdown  = wp_list_pluck( $languages, 'name', 'slug' );
 
 		$element->start_controls_section(
 			'cpel_lv_section',
@@ -75,7 +71,7 @@ class LanguageVisibility {
 			'cpel_lv_enabled',
 			array(
 				'type'           => Controls_Manager::SWITCHER,
-				'label'          => __( 'Enable', 'elementor' ),
+				'label'          => __( 'Enable', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
 				'render_type'    => 'template',
 				'prefix_class'   => 'cpel-lv--',
 				'style_transfer' => false,
@@ -85,15 +81,15 @@ class LanguageVisibility {
 		$element->add_control(
 			'cpel_lv_action',
 			array(
-				'label'     => __( 'Visibility', 'elementor' ),
+				'label'     => __( 'Visibility', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => array(
 					'show' => array(
-						'title' => __( 'Show', 'elementor' ),
+						'title' => __( 'Show', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
 						'icon'  => 'eicon-preview-medium',
 					),
 					'hide' => array(
-						'title' => __( 'Hide', 'elementor' ),
+						'title' => __( 'Hide', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
 						'icon'  => 'eicon-ban',
 					),
 				),
@@ -135,14 +131,14 @@ class LanguageVisibility {
 		$settings  = $element->get_settings();
 		$enabled   = ! empty( $settings['cpel_lv_enabled'] ) ? $settings['cpel_lv_enabled'] : false;
 		$enabled   = filter_var( $enabled, FILTER_VALIDATE_BOOLEAN );
-		$languages = (array) $settings['cpel_lv_languages'];
+		$languages = isset( $settings['cpel_lv_languages'] ) ? (array) $settings['cpel_lv_languages'] : array();
 		$show      = isset( $settings['cpel_lv_action'] ) ? 'hide' !== $settings['cpel_lv_action'] : true;
 
 		if ( ! $enabled || empty( $languages ) ) {
 			return $should_render;
 		}
 
-		return in_array( pll_current_language(), $languages ) ? $show : ! $show;
+		return in_array( pll_current_language(), $languages, true ) ? $show : ! $show;
 
 	}
 

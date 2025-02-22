@@ -14,14 +14,9 @@ trait TagTrait {
 
 	protected function register_controls() {
 
-		$languages = pll_the_languages( array( 'raw' => 1 ) );
-		$options   = array( 'current' => __( 'Current Language', 'connect-polylang-elementor' ) );
-
-		if ( is_array( $languages ) ) {
-			foreach ( $languages as $language ) {
-				$options[ $language['slug'] ] = $language['name'];
-			}
-		}
+		$languages = pll_languages_list( array( 'fields' => '' ) );
+		$options   = wp_list_pluck( $languages, 'name', 'slug' );
+		$options   = array( 'current' => __( 'Current Language', 'connect-polylang-elementor' ) ) + $options;
 
 		$this->add_control(
 			'language',
@@ -46,12 +41,7 @@ trait TagTrait {
 
 		if ( is_array( $languages ) ) {
 			if ( 'current' === $language ) {
-				foreach ( $languages as $lang ) {
-					if ( $lang['current_lang'] ) {
-						$value = $lang[ $field ];
-						break;
-					}
-				}
+				$value = $languages[ pll_current_language() ][ $field ];
 			} elseif ( isset( $languages[ $language ] ) ) {
 				$value = $languages[ $language ][ $field ];
 			}

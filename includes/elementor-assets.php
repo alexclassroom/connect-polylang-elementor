@@ -12,13 +12,20 @@ class ElementorAssets {
 
 	use \ConnectPolylangElementor\Util\Singleton;
 
-	protected $current_domain   = '';
-	protected $default_domain   = '';
-	protected $current_language = '';
-	protected $default_language = '';
-	protected $all_domains      = array();
+	protected $current_domain = '';
+	protected $default_domain = '';
+	protected $all_domains    = array();
 
+	/**
+	 * Add actions if is multidomain
+	 *
+	 * @return void
+	 */
 	protected function __construct() {
+
+		if ( ! cpel_is_polylang_multidomain() ) {
+			return;
+		}
 
 		add_action( 'init', array( $this, 'init' ) );
 		add_action( 'admin_init', array( $this, 'editor_domain_redirect' ) );
@@ -43,26 +50,24 @@ class ElementorAssets {
 		}
 
 		$is_preview = isset( $_GET['elementor_preview'] );
-		$is_editor  = ( isset( $_GET['action'] ) && 'elementor' === $_GET['action'] );
 
-		if ( ! $is_editor && ! $is_preview ) {
+		if ( ! cpel_is_elementor_editor() && ! $is_preview ) {
 			return;
 		}
 
-		$languages = pll_the_languages( array( 'raw' => true ) );
+		$domains = pll_languages_list( array( 'fields' => 'home_url' ) );
 
-		foreach ( $languages as $language ) {
-			$this->all_domains[] = $language['url'];
-			if ( false !== stripos( $language['url'], $_SERVER['SERVER_NAME'] ) ) {
-				$current_language = PLL()->model->get_language( $language['slug'] );
-				break;
-			}
+		foreach ( $domains as $domain ) {
+			$this->all_domains[] = wp_parse_url( $domain, PHP_URL_HOST );
 		}
 
-		$this->current_domain   = $current_language->home_url;
-		$this->default_domain   = $default_language->home_url;
-		$this->current_language = $current_language->slug;
-		$this->default_language = $default_language->slug;
+		if ( method_exists( $current_language, 'get_home_url' ) ) {
+			$this->current_domain = $current_language->get_home_url();
+			$this->default_domain = $default_language->get_home_url();
+		} else {
+			$this->current_domain = $current_language->home_url;
+			$this->default_domain = $default_language->home_url;
+		}
 
 		// Add filters.
 		add_filter( 'script_loader_src', array( $this, 'translate_url' ) );
@@ -118,10 +123,11 @@ class ElementorAssets {
 	 */
 	public function add_allowed_origins( $origins ) {
 
-		$origins[] = $this->current_domain;
-		$origins   = array_merge( $origins, $this->all_domains );
+		foreach ( $this->all_domains as $domain ) {
+			$origins = array_merge( $origins, array( 'http://' . $domain, 'https://' . $domain ) );
+		}
 
-		return $origins;
+		return array_unique( $origins );
 
 	}
 
@@ -150,8 +156,11 @@ class ElementorAssets {
 	 */
 	public function replace_src( $attr, $attachment ) {
 
-		$attr['src']    = $this->translate_url( $attr['src'] );
-		$attr['srcset'] = $this->translate_url( $attr['srcset'] );
+		$attr['src'] = $this->translate_url( $attr['src'] );
+
+		if ( isset( $attr['srcset'] ) ) {
+			$attr['srcset'] = $this->translate_url( $attr['srcset'] );
+		}
 
 		return $attr;
 
@@ -165,16 +174,15 @@ class ElementorAssets {
 	 */
 	public function editor_domain_redirect() {
 
-		// Exist if not is Elementor Editor.
-		if ( ! isset( $_GET['action'] ) || 'elementor' !== $_GET['action'] ) {
+		if ( ! cpel_is_elementor_editor() ) {
 			return;
 		}
 
 		$current_url = add_query_arg( $_SERVER['QUERY_STRING'], '', admin_url( 'post.php' ) );
-		$server_host = parse_url( trailingslashit( "//{$_SERVER['HTTP_HOST']}" ), PHP_URL_HOST );
-		$post_host   = parse_url( \pll_get_post_language( intval( $_GET['post'] ), 'home_url' ), PHP_URL_HOST );
+		$server_host = wp_parse_url( "//{$_SERVER['HTTP_HOST']}", PHP_URL_HOST );
+		$post_host   = wp_parse_url( \pll_get_post_language( intval( $_GET['post'] ), 'home_url' ), PHP_URL_HOST );
 
-		if ( $server_host !== $post_host ) {
+		if ( null !== $post_host && $server_host !== $post_host ) {
 			\wp_redirect( \str_replace( $server_host, $post_host, $current_url ) );
 			exit;
 		}

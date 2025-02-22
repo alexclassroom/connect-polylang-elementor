@@ -26,14 +26,9 @@ class LanguageFlag extends Data_Tag {
 
 	protected function register_controls() {
 
-		$languages = pll_the_languages( array( 'raw' => 1 ) );
-		$options   = array( 'current' => __( 'Current Language', 'connect-polylang-elementor' ) );
-
-		if ( is_array( $languages ) ) {
-			foreach ( $languages as $language ) {
-				$options[ $language['slug'] ] = $language['name'];
-			}
-		}
+		$languages = pll_languages_list( array( 'fields' => '' ) );
+		$options   = wp_list_pluck( $languages, 'name', 'slug' );
+		$options   = array( 'current' => __( 'Current Language', 'connect-polylang-elementor' ) ) + $options;
 
 		$this->add_control(
 			'language',
@@ -67,8 +62,9 @@ class LanguageFlag extends Data_Tag {
 		);
 
 		if ( 'yes' === $settings['svg_flag'] ) {
-			$flag_svg          = cpel_flag_svg( $image_data['url'] );
-			$image_data['url'] = isset( $flag_svg['url'] ) ? $flag_svg['url'] : $image_data['url'];
+			$flag_code         = cpel_flag_code( $image_data['url'] );
+			$flag_svg          = $flag_code ? cpel_flag_svg( $flag_code ) : false;
+			$image_data['url'] = $flag_svg ? $flag_svg['url'] : $image_data['url'];
 		}
 
 		return $image_data;

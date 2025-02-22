@@ -1,14 +1,16 @@
 <?php
 /**
+ * Connect Polylang for Elementor
+ *
  * @package           ConnectPolylangElementor
  * @license           GPL-2.0-or-later
  * @link              https://wordpress.org/plugins/connect-polylang-elementor/
  *
  * @wordpress-plugin
- * Plugin Name:       Polylang Connect for Elementor
+ * Plugin Name:       Connect Polylang for Elementor
  * Plugin URI:        https://github.com/creame/connect-polylang-elementor
  * Description:       Connect Polylang with Elementor. Display templates in the correct language, language switcher widget, language visibility conditions and dynamic tags.
- * Version:           2.1.0
+ * Version:           2.4.6
  * Author:            Creame
  * Author URI:        https://crea.me/
  * License:           GPL-2.0-or-later
@@ -17,10 +19,13 @@
  * Domain Path:       /languages/
  * Requires WP:       5.4
  * Requires PHP:      5.6
+ * Elementor tested up to: 3.27.6
+ * Elementor Pro tested up to: 3.27.4
  *
  * Copyright (c) 2021 Paco Toledo - CREAME
  * Copyright (c) 2018-2021 David Decker - DECKERWEB
  */
+
 namespace ConnectPolylangElementor;
 
 defined( 'ABSPATH' ) || exit;
@@ -31,7 +36,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 2.0.0
  */
-define( 'CPEL_PLUGIN_VERSION', '2.1.0' );
+define( 'CPEL_PLUGIN_VERSION', '2.4.6' );
 define( 'CPEL_FILE', __FILE__ );
 define( 'CPEL_DIR', plugin_dir_path( CPEL_FILE ) );
 define( 'CPEL_BASENAME', plugin_basename( CPEL_FILE ) );
@@ -44,10 +49,10 @@ define( 'CPEL_BASENAME', plugin_basename( CPEL_FILE ) );
  */
 spl_autoload_register(
 	function ( $class ) {
-		$prefix   = __NAMESPACE__; // project-specific namespace prefix
-		$base_dir = __DIR__ . '/includes'; // base directory for the namespace prefix
+		$prefix   = __NAMESPACE__; // project-specific namespace prefix.
+		$base_dir = __DIR__ . '/includes'; // base directory for the namespace prefix.
 
-		// Does the class use the namespace prefix? No, move to the next registered autoloader
+		// Does the class use the namespace prefix? No, move to the next registered autoloader.
 		$len = strlen( $prefix );
 		if ( strncmp( $prefix, $class, $len ) !== 0 ) {
 			return;
@@ -57,7 +62,7 @@ spl_autoload_register(
 
 		// Replace the namespace prefix with the base directory, replace namespace
 		// separators with directory separators in the relative class name,
-		// append with .php and transform CamelCase to lower-dashed
+		// append with .php and transform CamelCase to lower-dashed.
 		$file = str_replace( '\\', DIRECTORY_SEPARATOR, $relative_class_name );
 		$file = strtolower( preg_replace( '/([a-zA-Z])(?=[A-Z])/', '$1-', $file ) );
 		$path = $base_dir . $file . '.php';
@@ -145,10 +150,10 @@ function fix_cross_domain_assets( $url ) {
 	$pll_options = get_option( 'polylang' );
 
 	// Is a multidomain configuration.
-	if ( isset( $pll_options['force_lang'], $pll_options['domains'] ) && 3 === $pll_options['force_lang'] ) {
+	if ( isset( $pll_options['force_lang'] ) && 3 === $pll_options['force_lang'] && ! empty( $pll_options['domains'] ) ) {
 
-		$srv_host = $_SERVER['HTTP_HOST'];
-		$url_host = parse_url( $url, PHP_URL_HOST );
+		$srv_host = wp_parse_url( "//{$_SERVER['HTTP_HOST']}", PHP_URL_HOST );
+		$url_host = wp_parse_url( $url, PHP_URL_HOST );
 
 		if ( $url_host ) {
 			foreach ( $pll_options['domains'] as $domain ) {
