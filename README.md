@@ -199,6 +199,12 @@ There are quite a few:
 
 ## Changelog
 
+## 2.4.7
+* Added: Implemented new method for handling language switcher controls in page settings for Elementor 3.25.0 and later. 
+This utilizes Elementor 3.25.0's updated approach to managing Page Settings Panel Controls.
+* Fix Language Switcher controls in page settings not working in Elementor 3.25.0 and greater.
+* Bump tested versions WordPress 6.7.2 & Elementor 3.27.6
+
 ## 2.4.6
 * Bump tested versions WordPress 6.7 & Elementor 3.27.
 
