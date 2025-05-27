@@ -763,7 +763,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 					'yes' === $settings['uppercase_language_code'] ? strtoupper( $language['slug'] ) : strtolower( $language['slug'] ),
 					$settings['after_language_code'] ? $settings['after_language_code'] : ''
 				);
-
+				
 				// Language flag.
 				$language_flag = '';
 				if ( $settings['show_country_flag'] ) {
@@ -782,7 +782,8 @@ class PolylangLanguageSwitcher extends Widget_Base {
 
 						$language_flag = \PLL_Language::get_flag_html( $flag_svg, '', $language['name'] );
 					} elseif ( $flag_code ) {
-						$language_flag = \PLL_Language::get_flag_html( \PLL_Language::get_flag_informations( $flag_code ), '', $language['name'] );
+						$flag_information = method_exists( '\PLL_Language', 'get_flag_information' ) ? \PLL_Language::get_flag_information( $flag_code ) : \PLL_Language::get_flag_informations( $flag_code );
+						$language_flag = \PLL_Language::get_flag_html( $flag_information, '', $language['name'] );
 					} else {
 						$language_flag = '<img src="' . esc_url( $language['flag'] ) . '" alt="' . esc_attr( $language['name'] ) . '" />';
 					}
