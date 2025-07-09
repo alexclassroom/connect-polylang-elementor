@@ -3,9 +3,9 @@ Contributors: daveshine, p4fbradjohnson, deckerweb, wpautobahn, pacotole, creapu
 Donate link: https://github.com/sponsors/creame
 Tags: elementor, polylang, multilingual, language switcher, languages, templates, widget, finder, dynamic tags
 Requires at least: 5.4
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 5.6
-Stable tag: 2.4.7
+Stable tag: 2.4.8
 License: GPL-2.0-or-later
 License URI: https://opensource.org/licenses/GPL-2.0
 
@@ -199,6 +199,12 @@ There are quite a few:
 
 
 == Changelog ==
+
+= 2.4.8 =
+* Added: Implemented new method for handling language switcher controls in page settings for Elementor 3.25.0 and later. 
+This utilizes Elementor 3.25.0's updated approach to managing Page Settings Panel Controls.
+* Fix Language Switcher controls in page settings not working in Elementor 3.25.0 and greater.
+* Bump tested versions WordPress 6.7.2 & Elementor 3.27.6
 
 = 2.4.7 =
 * Quick fix for fatal error with Polylang >=3.7 [Issue](https://wordpress.org/support/topic/critical-error-on-this-website-due-to-plugin-conflict/) (thanks to [@narinder9](https://github.com/narinder9)
