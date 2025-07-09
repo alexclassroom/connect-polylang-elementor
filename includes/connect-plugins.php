@@ -89,17 +89,17 @@ class ConnectPlugins {
 			}
 		}
 
-		// Check if Elementor is installed and its version is greater than 3.25.0 
+		// Check if Elementor is installed and its version is greater than 3.25.0
 		if ( defined( 'ELEMENTOR_VERSION' ) && version_compare( ELEMENTOR_VERSION, '3.25.0', '>' ) ) {
 			// Elementor 3.25.0 introduced a new way to handle language switcher controls.
 			add_action( 'elementor/documents/register_controls', array( $this, 'register_language_switcher_controls' ) );
 		} else {
-			// deprecated way to handle language switcher controls .
+			// Deprecated way to handle language switcher controls.
 			// Elementor editor menu links to translations.
 			add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'elementor_editor_script' ) );
 			add_action( 'elementor/editor/after_enqueue_styles', array( $this, 'elementor_editor_style' ) );
 		}
-		
+
 		// Elementor Site Editor template tweaks.
 		add_filter( 'elementor-pro/site-editor/data/template', array( $this, 'elementor_site_editor_template' ) );
 
@@ -873,9 +873,6 @@ class ConnectPlugins {
 		// Get translations for the current post (returns an array of post IDs mapped by language slug)
 		$translations = pll_get_post_translations( $post_id );
 
-		// Get the current language of the post in a human-readable format
-		$current_lang = pll_get_post_language( $post_id, 'name' );
-
 		// Check if emojis should be used for language representation (default: true)
 		$use_emojis = apply_filters( 'cpel/filter/use_emojis', true );
 
@@ -883,7 +880,7 @@ class ConnectPlugins {
 		$document->start_controls_section(
 			'cpel_language_section',
 			[
-				'label' => esc_html__( 'Languages', 'textdomain' ),
+				'label' => esc_html__( 'Languages', 'polylang' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_SETTINGS,
 			]
 		);
@@ -894,7 +891,7 @@ class ConnectPlugins {
 			if ( isset( $translations[ $language->slug ] ) ) {
 				// Get the post ID of the translated post
 				$translation_id = $translations[ $language->slug ];
-				
+
 				// Get the standard WordPress edit link for the translated post
 				$edit_link = get_edit_post_link( $translation_id, 'edit' );
 
@@ -903,17 +900,27 @@ class ConnectPlugins {
 					$edit_link = add_query_arg( 'action', 'elementor', $edit_link );
 				}
 
+				if ( $translation_id === $post_id ) {
+					$raw_html = sprintf(
+						'<strong class="elementor-control-title"><i class="eicon-document-file"></i> %s — %s</strong>',
+						get_the_title( $translation_id ),
+						$use_emojis ? cpel_flag_emoji( $language->flag_code ) : esc_html( $language->name )
+					);
+				} else {
+					$raw_html = sprintf(
+						'<a href="%s" target="_blank"><i class="eicon-document-file"></i> %s — %s</a>',
+						esc_url( $edit_link ),
+						get_the_title( $translation_id ),
+						$use_emojis ? cpel_flag_emoji( $language->flag_code ) : esc_html( $language->name )
+					);
+				}
+
 				// Add a control in Elementor panel with a clickable edit link for the translation
 				$document->add_control(
 					"cpel_lang_{$language->slug}",
 					[
 						'type'    => \Elementor\Controls_Manager::RAW_HTML,
-						'raw'     => sprintf(
-							'<a href="%s" target="_blank"><i class="eicon-document-file"></i> %s — %s</a>',
-							esc_url( $edit_link ),
-							get_the_title( $translation_id ),
-							$use_emojis ? cpel_flag_emoji( $language->flag_code ) : esc_html( $language->name )
-						),
+						'raw'     => $raw_html,
 						'content_classes' => 'elementor-control-field',
 					]
 				);
@@ -925,7 +932,7 @@ class ConnectPlugins {
 					'new_lang'  => $language->slug, // Specify the target language slug
 					'_wpnonce'  => wp_create_nonce( 'new-post-translation' ), // Security nonce
 				];
-				
+
 				// Generate the create translation link
 				$create_link = add_query_arg( $args, admin_url( 'post-new.php' ) );
 
@@ -941,7 +948,7 @@ class ConnectPlugins {
 								? sprintf( __( 'Add a translation — %s', 'textdomain' ), cpel_flag_emoji( $language->flag_code ) )
 								: sprintf( __( 'Add a translation in %s', 'textdomain' ), esc_html( $language->name ) )
 						),
-						'content_classes' => 'elementor-control-field',
+						'content_classes' => 'elementor-descriptor',
 					]
 				);
 			}
