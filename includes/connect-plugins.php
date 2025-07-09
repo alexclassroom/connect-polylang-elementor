@@ -859,21 +859,20 @@ class ConnectPlugins {
 	 *
 	 */
 	public function register_language_switcher_controls( $document ) {
-		// Ensure the document supports Elementor elements (PageBase types like Pages, Posts, etc.)
-		if ( ! $document instanceof \Elementor\Core\DocumentTypes\PageBase || ! $document::get_property( 'has_elements' ) ) {
+
+		global $typenow, $post;
+
+		// Exit if is not translatable.
+		if ( ! pll_is_translated_post_type( $typenow ) ) {
 			return;
 		}
 
-		// Get the current post ID being edited in Elementor
-		$post_id = $document->get_main_id();
+		// Get the current post ID being edited in Elementor.
+		$post_id = $post->ID;
 
 		// Retrieve available languages from Polylang
 		$languages = pll_languages_list( [ 'fields' => '' ] );
-
-		// Get translations for the current post (returns an array of post IDs mapped by language slug)
 		$translations = pll_get_post_translations( $post_id );
-
-		// Check if emojis should be used for language representation (default: true)
 		$use_emojis = apply_filters( 'cpel/filter/use_emojis', true );
 
 		// Start adding a new section in Elementor settings panel
@@ -902,7 +901,7 @@ class ConnectPlugins {
 
 				if ( $translation_id === $post_id ) {
 					$raw_html = sprintf(
-						'<strong class="elementor-control-title"><i class="eicon-document-file"></i> %s — %s</strong>',
+						'<strong><i class="eicon-document-file"></i> %s — %s</strong>',
 						get_the_title( $translation_id ),
 						$use_emojis ? cpel_flag_emoji( $language->flag_code ) : esc_html( $language->name )
 					);
