@@ -856,7 +856,6 @@ class ConnectPlugins {
 	 *
 	 * @param \Elementor\Base\Document $document The Elementor document object.
 	 * @since  2.4.7
-	 *
 	 */
 	public function register_language_switcher_controls( $document ) {
 
@@ -871,17 +870,17 @@ class ConnectPlugins {
 		$post_id = $post->ID;
 
 		// Retrieve available languages from Polylang
-		$languages = pll_languages_list( [ 'fields' => '' ] );
+		$languages    = pll_languages_list( array( 'fields' => '' ) );
 		$translations = pll_get_post_translations( $post_id );
-		$use_emojis = apply_filters( 'cpel/filter/use_emojis', true );
+		$use_emojis   = apply_filters( 'cpel/filter/use_emojis', true );
 
 		// Start adding a new section in Elementor settings panel
 		$document->start_controls_section(
 			'cpel_language_section',
-			[
+			array(
 				'label' => esc_html__( 'Languages', 'polylang' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_SETTINGS,
-			]
+			)
 		);
 
 		// Loop through each available language
@@ -917,20 +916,20 @@ class ConnectPlugins {
 				// Add a control in Elementor panel with a clickable edit link for the translation
 				$document->add_control(
 					"cpel_lang_{$language->slug}",
-					[
-						'type'    => \Elementor\Controls_Manager::RAW_HTML,
-						'raw'     => $raw_html,
+					array(
+						'type'            => \Elementor\Controls_Manager::RAW_HTML,
+						'raw'             => $raw_html,
 						'content_classes' => 'elementor-control-field',
-					]
+					)
 				);
 			} else {
 				// If no translation exists, generate a link to create a new translation
-				$args = [
+				$args = array(
 					'post_type' => get_post_type( $post_id ), // Preserve original post type
 					'from_post' => $post_id, // Reference the current post ID
 					'new_lang'  => $language->slug, // Specify the target language slug
 					'_wpnonce'  => wp_create_nonce( 'new-post-translation' ), // Security nonce
-				];
+				);
 
 				// Generate the create translation link
 				$create_link = add_query_arg( $args, admin_url( 'post-new.php' ) );
@@ -938,17 +937,17 @@ class ConnectPlugins {
 				// Add a button to create a new translation
 				$document->add_control(
 					"cpel_add_lang_{$language->slug}",
-					[
-						'type'    => \Elementor\Controls_Manager::RAW_HTML,
-						'raw'     => sprintf(
+					array(
+						'type'            => \Elementor\Controls_Manager::RAW_HTML,
+						'raw'             => sprintf(
 							'<a href="%s" target="_blank"><i class="eicon-plus"></i> %s</a>',
 							esc_url( $create_link ),
 							$use_emojis
-								? sprintf( __( 'Add a translation — %s', 'textdomain' ), cpel_flag_emoji( $language->flag_code ) )
-								: sprintf( __( 'Add a translation in %s', 'textdomain' ), esc_html( $language->name ) )
+								? sprintf( __( 'Add a translation — %s', 'connect-polylang-elementor' ), cpel_flag_emoji( $language->flag_code ) ) // phpcs:ignore WordPress.WP.I18n
+								: sprintf( __( 'Add a translation in %s', 'connect-polylang-elementor' ), esc_html( $language->name ) ) // phpcs:ignore WordPress.WP.I18n
 						),
 						'content_classes' => 'elementor-descriptor',
-					]
+					)
 				);
 			}
 		}
