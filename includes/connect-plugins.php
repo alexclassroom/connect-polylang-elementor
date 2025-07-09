@@ -855,7 +855,7 @@ class ConnectPlugins {
 	 * This function adds a "Languages" section where users can manage translations for the current post.
 	 *
 	 * @param \Elementor\Base\Document $document The Elementor document object.
-	 * @since  2.4.7
+	 * @since  2.5.0
 	 */
 	public function register_language_switcher_controls( $document ) {
 
