@@ -763,7 +763,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 					'yes' === $settings['uppercase_language_code'] ? strtoupper( $language['slug'] ) : strtolower( $language['slug'] ),
 					$settings['after_language_code'] ? $settings['after_language_code'] : ''
 				);
-
+				
 				// Language flag.
 				$language_flag = '';
 				if ( $settings['show_country_flag'] ) {
